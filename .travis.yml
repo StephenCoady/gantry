@@ -25,7 +25,7 @@ env:
   - COMMIT=${TRAVIS_COMMIT::8}
 script:
 - docker-compose up -d
-- docker exec -it lifecyclemanagementfordocker_app_1 bash -c 'npm test'
+- docker exec -it lifecyclemanagementfordocker_app_1 npm test
 after_success:
 - sonar-scanner -Dsonar.login=$SONAR_TOKEN
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
