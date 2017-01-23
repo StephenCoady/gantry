@@ -1,5 +1,5 @@
 app:
-  image: node:6.9.1-slim
+  image: mhart/alpine-node:7.4
   ports:
       - "3000:3000"
   working_dir: /code
