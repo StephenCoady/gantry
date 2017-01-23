@@ -1,0 +1,47 @@
+sudo: required
+language: java
+jdk:
+- oraclejdk8
+services:
+- docker
+branches:
+  only:
+  - master
+  - "(?:(0\\.|([1-9]+\\d*)\\.))+(?:(0\\.|([1-9]+\\d*)\\.))+((0|([1-9]+\\d*)))"
+before_install:
+- nvm install 6.8.1
+- nvm use 6.8.1
+- npm install -g npm@'>=3'
+install:
+- npm install
+addons:
+  sonarqube: true
+env:
+  global:
+  - secure: P7a9AFKqAhzYNcz6GE8j9/3iIlFrNQrtHaMEPdwi56gcP3ppVuRt7D0T9gE/mq7j5YFPbdHB4ptdpjCL43ET/90KcfApPNoq/WroaIbH2NO3Ucbj4417fzb/CyzAVh67iA4vhpw+RSrHgVvZMiqp+wPnrLg+ULPNjAoFBgj23pbzO+z74JTeuMcJcgpBz5V4YW3MljuI+FxkqIQUEZylMyBAd/fU+TV+dLDIbsO8GlifiBAHXocnVlck8JX4dYKDRBgVEuN+EdI6ta/afm2T0SII8f9OWreoE1aPzfm2vxkdVJM+8jicIggc0+vCRIiNGq1uqkVH8vvpOZzXTpqvYedc08OdMhONIKOTXOMvfVDHTGe+2CicVcw9VapU9JDIQuQL1nPWZvVvd3odX2UfzjMog6UphNdYewmvbuHkzv39n+hhlgfDN0XKRSqQKGXHZx/Mbn9gc7BUSAbugx1wE3eVO09MI5o+Xk1ODEXfCN42e2Z+TAFKL11kSwfvI/8I/pUY3YP+u9T88huWfTXVSE3f64lJBGhCH281296D0OsMQ+KHUMvhfW0NPHZ0L1t/EriDPPknCtOTGCBZ47QYu68OoAY3ZsABRh/UYFCnby/GQQtLYkuYL4+1RFI85OTaMJTthcJIFK03jZsABVplxxsNd7YKOAN2wLv54GKc89A=
+  - secure: hPGpkXkJcg0xVlXPJoZkjaR+YT/hmWXgze10p0og0C3Q+qY4IIGIWj/iXufvqBW0An9tmnLeflK5QJ1/0WzUI9uMOxl+AggUMtYEBjElcmW1igHrY3oypWpRih5tqfoehSuPF12grMg7wQu+NeOXn9c7x52Vy6dljh8oZz6xw1hJ8pYwrsvGDYyzc+kpwXgyMez4TlvRTc8Jua2K/PvSH2ftSJ4ITHHMjPbsrV1IxtrwxHXVUDSPHe7lLBU6ezcE5dnjjok9e8IVZ0RRWY2QH5BAkxPVIt2nYbImBZt7J70FabyTv0+TPuHE63R+vhkg66C8GBqfrNyhFppHgC0YSihe+Is7vLWstOFMbSXWeIyIecgce8+5NdVKyru6iPSQxvwoKPVYNqxORil/wUxQ5XdIGHDHTkvY3Fd+GNZKfOnMMH+WJYtXdxGTmEMB/Y1l4XE8wChx4k6q0SMdC4rE49r37d0gwSqjD6u8x4sUjcKC132JT/PJM0D+7YZ6CvTJjZgUGdnhkMBYehjsORwgjGK016kCtpNgC8PUGjbFeOGTNkmY4fuv+S5CYdoCVz2OrISjk9dYQGUyYeZVuKYhdF/CwlSUpUlHHxC9JZ3vuIo6zdYiJ213lCHjRKagvdwt/pINpO6xq59isWxZY4IWBcgOK7nx5lVRHdo0lDf1Uvw=
+  - secure: uo6p4OroWa0q04TF7jXqyqTw4N2k/b3N7pjjHXjvnp8hxamszbDW36Zznrpfa9++/L4ajNRTmUqBPwNqWHSJYVsHdAnGqhUHBhUZJ/jcKlH6vP2UMEObwSnkKx2wp/WzS0piXGGpwykkW0WmZ729b5CdUvEbkGs4ZG6gPbcwSCTpWf5eM3ARP0lj86gG8MyKPcgLbbDBxRfNPAaSGa8BIa4nUrnarZLPaUzm1ysYt+98YinrkgSBdRlyFRpJ1dCyfcF8UlC38V/zhAKpcKqV6PjNf8IYl9eqAHE4RpZ8lnjB408CyAxxsSPd1STrwFDJaB6rJtgYDZ3YvOGvPd+YVbAceDZQMeoI8MpuMIf/ekvXC7QLV7UiuPirnDB0yq3lefVYWuoCXDj6QiIzPUrt5YUs/cV7ki6r/quk+HTBzy+SAbNvnqDnqNjIxlA46Yp4XMzhRPAefY4nKtjK8xyHJ5l4YbbnynjpIGVTgssK5qqe0j7uzwaT/QP8artzwGH3M1bUNb+FVnSPip8kE0CNUaXx5ldQi8xa9MBB486z6bS9YCBkaaSj0Nkz9yCRT35FxKOQvOAIFPnCQJ103Ro69GkesK7BSHXCG42eJ/yxL/Vo7kACQx7DWZpFsEdkTbEF5Dp9Pm6NXfGkGN+zgJQVs8DWeLdDt6GLoNtwzvk2y6k=
+  - secure: rFYvLuVHV0Q4PNn6OI7B4ybqF0cmgjv7qlEUbtkYuXQUAft2sY1fVTtHhbUQnmsc+ng+/qKpKcFDEG80M0FdiIunnwTHHtMGxI0bqjxtHe7+bq8pvtOqDFPMa3DEqaPF/a4wbnu2kdHkr7HlhYHQm1dzknbqpT1XadluYn/U5Cth+w3MqktFsQ48TeHOXXHbzrjMQuCovr/yTxLTXH8jkb1ui/4Ib4CCKDaQcw+mha3AC5JV1fB0HvNN/hQG3vLzHIN5LFflLGi1J8nw05ro9MRhGuGvkfYDIIQdWQqAV8OgHJy1Cfzauj17bV3WDv5tbVa8G9UYkNiRpap5n8QC3SowsPNXmjXk1eWudQFtUTOCVVr8NY3IB4BElG6pXiu2a1UK8275Y20M1VzYT/qlPE8DZ8BJvurL/r74VdIOIqYiQ6LNGOrPuZQSuR89MWxg7ergg0PgqG+itWTMCIeF7zC9O/MP5+IhiC2SRZuGsvXmtZZo/lxrVBL9c8HDCBFITxDf9A5dGdh1QcS8FulCmDA1cWqZTbHSVNOGgvvtELqNQSPdtfq0uXBnzrWAYR1CTLIBxpxfNdQ7720HI7qoZqkkO4IMp/eFMyg4xJ64Aqgh+V7NCan9rbftIZhlITpmO5aORZOtJpKrxFXwGRBtUdrMTVF0d+umWtOfTy/PuP4=
+  - COMMIT=${TRAVIS_COMMIT::8}
+script:
+- docker-compose up -d
+- docker exec -it lifecyclemanagementfordocker_app_1 bash -c 'npm test'
+after_success:
+- sonar-scanner -Dsonar.login=$SONAR_TOKEN
+- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- export REPO=scoady2/lifecycle-management-for-docker
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
+- docker build -f Dockerfile -t $REPO:$COMMIT .
+- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker push $REPO
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+  slack:
+    on_success: always
+    on_failure: always
+    on_start: always
+    secure: NC5GvF7Ux7CJaeZYCd4sOKMcXy/i+/J6HaV5fMWJzAFz5fA1eFwlEbY5FOh5ENdG//ln3qFqt3pH2UaBIErkY8LhxiVh2FqqDjkVzxSb4OhApM7J/fj8m40Ku84hjWEb6LtApe8UdFTV7ZzUw4ylHMl3BcndNiw+1v2lgTiKNwRVP8YbcbNNI+cyaKSYTIYaaHpSk1Hv5ZZx90irZe501XofE/+eR/b8lmWAfklIwTZS6sQmE8myqYthbAwQwfnWXti93zEoH+2eeX7JbJ5joAzAvn6pP9O2LSG0A1/1sI8/sDbog0vL19LA+61BD7j1TjXrLwuQMxMDN7G0lVCZye3KmJG2A7NWO9w5ttCzh7QKoJb2INWMLHP794f0Dp1y1ToL1HMoPD7Ucb3xLNSZZLUurvoyMryxnNK0EIpFpvScZ8X62ytVg1cux35qUNixHflqU8lMjFzYzOAYkiuvWBSBxwYsWfOHiaqUEe/DnoTE4aEsPTMA/7aBNKZPuR65GtVA6No98yteaOtEOxXOm+R7cvGWHbOCnPGLMIX2SGDtsPLOodJEhDFj8MiB8b0jWxEHai3yJBYU90klLJXuhDHw8c/PYYtS13Nx50LvmpeiXlwxjy/YvIEX27IqCoKc99NPH1imQXl54jxdUkpOrvm95/iJUn3LSHt18Y3LkhA=
