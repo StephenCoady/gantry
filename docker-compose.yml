@@ -1,0 +1,11 @@
+app:
+  image: mhart/alpine-node:7.4
+  ports:
+      - "3000:3000"
+  working_dir: /code
+  volumes:
+    - ./:/code
+    - /var/run/docker.sock:/var/run/docker.sock
+  environment:
+    - ENV=ci
+  command: npm start
