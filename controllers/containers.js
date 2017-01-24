@@ -9,7 +9,7 @@ exports.listContainers = (req, res, next) => {
   docker.listContainers({
     'all': 1
   }, (err, data) => {
-    if (data === null) {
+    if (data.length === 0 || data == null) {
       res.status(404).json({
         message: "No containers found",
         error: err
@@ -24,10 +24,9 @@ exports.listContainers = (req, res, next) => {
 
 exports.listRunningContainers = (req, res, next) => {
   docker.listContainers((err, data) => {
-    if (data === null) {
+    if (data.length === 0 || data == null) {
       res.status(404).json({
-        message: "No running containers found",
-        error: err
+        message: "No running containers found"
       })
     } else {
       res.status(200).json({
@@ -42,8 +41,7 @@ exports.listSpecificContainer = (req, res, next) => {
   let container = docker.getContainer(id);
 
   container.inspect((err, data) => {
-
-    if (data === null) {
+    if (data == null) {
       res.status(404).json({
         message: "Container not found",
         error: err
@@ -62,7 +60,7 @@ exports.startContainer = (req, res, next) => {
 
   container.start((err, data) => {
 
-    if (data === null) {
+    if (data == null) {
       res.status(409).json({
         message: "Container cannot be started",
         error: err
@@ -80,7 +78,7 @@ exports.stopContainer = (req, res, next) => {
   let container = docker.getContainer(id);
 
   container.stop((err, data) => {
-    if (data === null) {
+    if (data == null) {
       res.status(409).json({
         message: "Container cannot be stopped",
         error: err
@@ -98,7 +96,7 @@ exports.restartContainer = (req, res, next) => {
   let container = docker.getContainer(id);
 
   container.restart((err, data) => {
-    if (data === null) {
+    if (data == null) {
       res.status(409).json({
         message: "Container cannot be restarted",
         error: err
@@ -116,7 +114,7 @@ exports.removeContainer = (req, res, next) => {
   let container = docker.getContainer(id);
 
   container.remove((err, data) => {
-    if (data === null) {
+    if (data == null) {
       res.status(409).json({
         message: "Container cannot be removed",
         error: err
@@ -134,7 +132,7 @@ exports.pauseContainer = (req, res, next) => {
   let container = docker.getContainer(id);
 
   container.pause((err, data) => {
-    if (data === null) {
+    if (data == null) {
       res.status(409).json({
         message: "Container cannot be paused",
         error: err
@@ -152,7 +150,7 @@ exports.unpauseContainer = (req, res, next) => {
   let container = docker.getContainer(id);
 
   container.unpause((err, data) => {
-    if (data === null) {
+    if (data == null) {
       res.status(409).json({
         message: "Container cannot be unpaused",
         error: err
@@ -161,35 +159,6 @@ exports.unpauseContainer = (req, res, next) => {
       res.status(200).json({
         message: "Container unpaused successfully"
       })
-    }
-  });
-}
-
-exports.getContainerLogs = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
-
-  let opts = {
-    follow: false,
-    stdout: true,
-    stderr: true
-  }
-
-  container.logs(opts, (err, data) => {
-    if (data === null) {
-      res.status(404).json({
-        message: "Container not found",
-        error: err
-      })
-    } else {
-      const StringDecoder = require('string_decoder').StringDecoder;
-      const decoder = new StringDecoder('utf8');
-      
-      data.on('data', function(chunk) {
-        res.status(200).json({
-          message: decoder.write(chunk)
-        })
-      });
     }
   });
 }
