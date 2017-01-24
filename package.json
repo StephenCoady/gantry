@@ -13,6 +13,7 @@
     "chai": "^3.5.0",
     "eslint": "^3.1.1",
     "eslint-config-xo-space": "^0.15.0",
+    "expect.js": "^0.3.1",
     "grunt-sonar-runner": "^2.4.8",
     "gulp": "^3.9.0",
     "gulp-eslint": "^3.0.1",
@@ -28,6 +29,7 @@
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "mocha": "^3.1.2",
+    "node-cmd": "^1.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "supertest": "^2.0.1"
   },

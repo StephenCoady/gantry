@@ -5,22 +5,15 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
-exports.listNetworks = (req, res, next) => {
+exports.listNetworks = (req, res) => {
   docker.listNetworks((err, data) => {
-    if (data === null) {
-      res.status(404).json({
-        response: "No networks found",
-        error: err
-      })
-    } else {
-      res.status(200).json({
-        response: data
-      })
-    }
+    res.status(200).json({
+      networks: data
+    })
   });
 }
 
-exports.listSpecificNetwork = (req, res, next) => {
+exports.listSpecificNetwork = (req, res) => {
   let id = req.params.id;
   let network = docker.getNetwork(id);
 
@@ -28,12 +21,12 @@ exports.listSpecificNetwork = (req, res, next) => {
 
     if (data === null) {
       res.status(404).json({
-        response: "Network not found",
+        network: "Network not found",
         error: err
       })
     } else {
       res.status(200).json({
-        response: data
+        network: data
       })
     }
   });

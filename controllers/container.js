@@ -5,40 +5,27 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
-exports.listContainers = (req, res, next) => {
+exports.listContainers = (req, res) => {
   docker.listContainers({
     'all': 1
   }, (err, data) => {
-    if (data.length === 0 || data == null) {
-      res.status(404).json({
-        message: "No containers found",
-        error: err
-      })
-    } else {
       res.status(200).json({
         containers: data
-      })
-    }
+      });
   });
 }
 
-exports.listRunningContainers = (req, res, next) => {
+exports.listRunningContainers = (req, res) => {
   docker.listContainers((err, data) => {
-    if (data.length === 0 || data == null) {
-      res.status(404).json({
-        message: "No running containers found"
-      })
-    } else {
       res.status(200).json({
         containers: data
       })
-    }
   });
 }
 
-exports.listSpecificContainer = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.listSpecificContainer = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
   container.inspect((err, data) => {
     if (data == null) {
@@ -54,9 +41,9 @@ exports.listSpecificContainer = (req, res, next) => {
   });
 }
 
-exports.startContainer = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.startContainer = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
   container.start((err, data) => {
 
@@ -73,9 +60,9 @@ exports.startContainer = (req, res, next) => {
   });
 }
 
-exports.stopContainer = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.stopContainer = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
   container.stop((err, data) => {
     if (data == null) {
@@ -91,9 +78,9 @@ exports.stopContainer = (req, res, next) => {
   });
 }
 
-exports.restartContainer = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.restartContainer = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
   container.restart((err, data) => {
     if (data == null) {
@@ -109,9 +96,9 @@ exports.restartContainer = (req, res, next) => {
   });
 }
 
-exports.removeContainer = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.removeContainer = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
   container.remove((err, data) => {
     if (data == null) {
@@ -127,9 +114,9 @@ exports.removeContainer = (req, res, next) => {
   });
 }
 
-exports.pauseContainer = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.pauseContainer = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
   container.pause((err, data) => {
     if (data == null) {
@@ -145,9 +132,9 @@ exports.pauseContainer = (req, res, next) => {
   });
 }
 
-exports.unpauseContainer = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.unpauseContainer = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
   container.unpause((err, data) => {
     if (data == null) {
