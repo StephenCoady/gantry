@@ -1,33 +1,33 @@
-let express	= require('express');
-let controllers = require('./controllers');
+const express	= require('express');
+const controllers = require('./controllers');
 
-let containers = controllers.containers,
-		images = controllers.images,
-		networks = controllers.networks;
+const container = controllers.container,
+		image = controllers.image,
+		network = controllers.network;
 
-let router = express.Router();
+const router = express.Router();
 
 
 /* Container Routes */
-router.get('/api/containers/running', containers.listRunningContainers);
-router.get('/api/containers/all', containers.listContainers);
-router.get('/api/containers/:id/', containers.listSpecificContainer);
-router.post('/api/containers/:id/start', containers.startContainer);
-router.post('/api/containers/:id/stop', containers.stopContainer);
-router.post('/api/containers/:id/pause', containers.pauseContainer);
-router.post('/api/containers/:id/unpause', containers.unpauseContainer);
-router.post('/api/containers/:id/restart', containers.restartContainer);
-router.delete('/api/containers/:id/remove', containers.removeContainer);
+router.get('/api/containers/running', container.listRunningContainers);
+router.get('/api/containers/all', container.listContainers);
+router.get('/api/containers/:id/', container.listSpecificContainer);
+router.post('/api/containers/:id/start', container.startContainer);
+router.post('/api/containers/:id/stop', container.stopContainer);
+router.post('/api/containers/:id/pause', container.pauseContainer);
+router.post('/api/containers/:id/unpause', container.unpauseContainer);
+router.post('/api/containers/:id/restart', container.restartContainer);
+router.delete('/api/containers/:id/remove', container.removeContainer);
 
 /* Image Routes */
-router.get('/api/images', images.listImages);
-router.get('/api/images/:id', images.listSpecificImage);
-router.delete('/api/images/:id', images.removeImage);
-router.get('/api/images/:id/history', images.imageHistory);
+router.get('/api/images', image.listImages);
+router.get('/api/images/:id', image.listSpecificImage);
+router.delete('/api/images/:id', image.removeImage);
+router.get('/api/images/:id/history', image.imageHistory);
 
 /* Network Routes */
-router.get('/api/networks', networks.listNetworks);
-router.get('/api/networks/:id', networks.listSpecificNetwork);
+router.get('/api/networks', network.listNetworks);
+router.get('/api/networks/:id', network.listSpecificNetwork);
 
 
 module.exports = router;

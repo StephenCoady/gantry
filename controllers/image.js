@@ -1,22 +1,22 @@
 "use strict";
-let Docker = require('dockerode');
+const Docker = require('dockerode');
 
 
-let docker = new Docker({
+const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
-exports.listImages = (req, res, next) => {
-  docker.listImages((err, images) => {
+exports.listImages = (req, res) => {
+  docker.listImages((err, data) => {
     res.status(200).json({
-      images: images
+      images: data
     })
   });
 }
 
-exports.listSpecificImage = (req, res, next) => {
-  let id = req.params.id;
-  let image = docker.getImage(id);
+exports.listSpecificImage = (req, res) => {
+  const id = req.params.id;
+  const image = docker.getImage(id);
 
   image.inspect((err, data) => {
     if (data === null) {
@@ -32,9 +32,9 @@ exports.listSpecificImage = (req, res, next) => {
   });
 }
 
-exports.removeImage = (req, res, next) => {
-  let id = req.params.id;
-  let image = docker.getImage(id);
+exports.removeImage = (req, res) => {
+  const id = req.params.id;
+  const image = docker.getImage(id);
 
   image.remove((err, data) => {
     if (data == null) {
@@ -50,9 +50,9 @@ exports.removeImage = (req, res, next) => {
   });
 }
 
-exports.imageHistory = (req, res, next) => {
-  let id = req.params.id;
-  let image = docker.getImage(id);
+exports.imageHistory = (req, res) => {
+  const id = req.params.id;
+  const image = docker.getImage(id);
 
   image.history((err, data) => {
     if (data === null) {
