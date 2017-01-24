@@ -9,10 +9,9 @@ let router = express.Router();
 
 
 /* Container Routes */
-router.get('/api/containers', containers.listRunningContainers);
+router.get('/api/containers/running', containers.listRunningContainers);
 router.get('/api/containers/all', containers.listContainers);
 router.get('/api/containers/:id/', containers.listSpecificContainer);
-router.get('/api/containers/:id/logs', containers.getContainerLogs);
 router.post('/api/containers/:id/start', containers.startContainer);
 router.post('/api/containers/:id/stop', containers.stopContainer);
 router.post('/api/containers/:id/pause', containers.pauseContainer);

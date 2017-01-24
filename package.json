@@ -10,6 +10,7 @@
   "main": "app.js",
   "keywords": [],
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^3.1.1",
     "eslint-config-xo-space": "^0.15.0",
     "grunt-sonar-runner": "^2.4.8",
@@ -26,7 +27,9 @@
     "karma": "^1.3.0",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
-    "phantomjs-prebuilt": "^2.1.14"
+    "mocha": "^3.1.2",
+    "phantomjs-prebuilt": "^2.1.14",
+    "supertest": "^2.0.1"
   },
   "eslintConfig": {
     "extends": "xo-space",
@@ -40,7 +43,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 20000 --delay",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -R ./test/*",
     "test": "mocha ./test"
   },
   "license": "MIT",
@@ -49,7 +52,6 @@
     "angularjs-toaster": "^2.1.0",
     "dockerode": "^2.3.1",
     "express": "^4.14.0",
-    "mocha": "^3.1.2",
     "moment": "^2.17.1"
   },
   "bugs": {
