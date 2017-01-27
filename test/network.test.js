@@ -5,6 +5,8 @@ var assert = require('assert'),
   controllers = require('../controllers'),
   app = require('../app'),
   chai = require('chai');
+  
+process.env.NODE_ENV = 'dev';
 
 const expect = chai.expect;
 

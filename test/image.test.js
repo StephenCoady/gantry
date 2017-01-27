@@ -5,6 +5,8 @@ var assert = require('assert'),
   controllers = require('../controllers'),
   app = require('../app'),
   chai = require('chai');
+  
+process.env.NODE_ENV = 'dev';
 
 const expect = chai.expect;
 
@@ -14,11 +16,48 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
-var testImage = 'ubuntu:14.04';
+var testImage = 'alpine:3.1';
 
 describe('#image', () => {
 
   describe('#list', () => {
+  
+    // one image with one tag
+    var repoTag = testImage;
+
+    function locateImage(image, callback) {
+      docker.listImages(function(err, list) {
+        if (err) return callback(err);
+
+        // search for the image in the RepoTags
+        var image;
+        for (var i = 0, len = list.length; i < len; i++) {
+          if (list[i].RepoTags.indexOf(repoTag) !== -1) {
+            // ah ha! repo tags
+            return callback(null, docker.getImage(list[i].Id));
+          }
+        }
+
+        return callback();
+      });
+    }
+
+    it('should pull image from remote source', function(done) {
+      function handler() {
+        locateImage(repoTag, function(err, image) {
+          if (err) return done(err);
+          // found the image via list images
+          expect(image).to.be.ok;
+          done();
+        });
+      }
+
+      docker.pull(repoTag, function(err, stream) {
+        if (err) return done(err);
+         stream.pipe(process.stdout);
+         stream.once('end', handler);
+      });
+    }).timeout(120000);
 
     it('should list images', (done) => {
       request(app)
@@ -75,7 +114,7 @@ describe('#image', () => {
   });
 
   describe('#remove', () => {
-    it('should not remove image', (done) => {
+    it('should not remove non-existent image', (done) => {
       request(app)
         .delete('/api/images/madeUpImage')
         .expect('Content-Type', /json/)

@@ -2,8 +2,10 @@
 let express = require('express'),
   routes = require('./routes'),
   app = express(),
+  morgan = require('morgan'),
   path = require('path'),
   ENVIRONMENT = process.env.ENV;
+
 
 
 app.use((req, res, next) => {
@@ -14,9 +16,14 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
+if (ENVIRONMENT !== 'dev') {
+  app.use(morgan('dev'));
+}
 /* GET Api index page */
 app.get('*', (req, res) => {
-    res.sendFile('index.html', { root: ('./public') });
+  res.sendFile('index.html', {
+    root: ('./public')
+  });
 });
 
 

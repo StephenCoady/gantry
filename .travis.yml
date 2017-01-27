@@ -7,7 +7,6 @@ services:
 branches:
   only:
   - master
-  - "(?:(0\\.|([1-9]+\\d*)\\.))+(?:(0\\.|([1-9]+\\d*)\\.))+((0|([1-9]+\\d*)))"
 before_install:
 - nvm install 6.8.1
 - nvm use 6.8.1
@@ -25,9 +24,7 @@ env:
   - secure: Kp6ina+boGJ8UJmVuwz28qBi124Y3eWfgy+AEm2X8eutQqE6VeNbL6qVkrfUbtsXXZAFjzt05FYn8+TKA08tc7YdzRUNdpON5YdcC21wCRqotP+KqHoG/FTNm5tJJ55UlmrtJfxFw33suSrw95HHUNV0dYE8uSJd7aCrJN482hWfN0usNF2ew8XDdFLtqvux1tBSF29b66MZIbH6/S7k180P1xjfNl7Ah5nnrqUgWB2glSsMi/qPwuGKZTIasKiNm/qVUkiLCY2mMPk9e2C4Wh9EfcL4hJBkjTzBanyiBAgVs244geWqeQ/KBUTZuQzz9tQFH7UyUge6MADw0C+Bb4mBhIWtAhSokS9nsGvFWIKZuPJgO1waDc5TStEXXZYyDvaCiibfBVCFyf51dmIJ174gvE+CxlZ+uVOSafoBdOaAcHP+AyG9mP6YRZHZYYVPiyrXHqyGYlf9WnTzA5U1xK1MPca2Nr4PJpt9IYnZ6QsJIYYpe+E4stNGxH59z0oUx5psjfC2pFVP4lG7IMDcHWfOmJen0ZXbLJrSDe7yhijzXIBkF3YgW4Meysfa6164GTd0hPvW4zjIkVe54z1r3FtpXxccAdvBiolY+UqhRe7H+AOXyORn5eYZ0FPt3OhPARjYB3YWwgxRDuo0+uWNQ5/ZmVaqQbrbFlTKQB2A3/c=
 script:
 - docker pull ubuntu:latest
-- docker pull ubuntu:14.04
 - npm test
-- docker pull ubuntu:14.04
 - npm run coverage
 after_success:
 - sonar-scanner -Dsonar.login=$SONAR_TOKEN
