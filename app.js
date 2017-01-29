@@ -19,6 +19,13 @@ app.use(routes);
 if (ENVIRONMENT !== 'dev') {
   app.use(morgan('dev'));
 }
+
+// Swagger API docs.
+app.use('/docs', express.static(path.join(__dirname, './docs')));
+app.get('/docs', (req, res) => {
+    res.sendFile(path.join(__dirname, './docs/index.html'));
+});
+
 /* GET Api index page */
 app.get('*', (req, res) => {
   res.sendFile('index.html', {
