@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.4.0 - 06-02-17 ***Released***
+	- swagger implemented for api endpoints
+	- restart containers endpoint added
+	- remove containers endpoint added
+
 ### 0.3.0 - 26-01-17 ***Released***
 	- sonarqube integration added
 	- docker push on tests success
