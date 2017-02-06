@@ -1,0 +1,892 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the API documentation for the lifecycle management for Docker application. ",
+    "version": "0.3.0",
+    "title": "API Docs",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "scoady2@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://raw.githubusercontent.com/StephenCoady/lifecycle-management-for-docker/master/LICENCE"
+    }
+  },
+  "basePath": "/api",
+  "tags": [{
+      "name": "container",
+      "description": "Control containers on the host"
+    },
+    {
+      "name": "image",
+      "description": "Control images on the host"
+    },
+    {
+      "name": "network",
+      "description": "Control networks on the host"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/containers/running": {
+      "get": {
+        "tags": [
+          "container"
+        ],
+        "summary": "get all running containers",
+        "description": "",
+        "operationId": "listRunningContainers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Containers"
+            }
+          }
+        }
+      }
+    },
+    "/containers/all": {
+      "get": {
+        "tags": [
+          "container"
+        ],
+        "summary": "get all containers",
+        "description": "",
+        "operationId": "listContainers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Containers"
+            }
+          }
+        }
+      }
+    },
+    "/containers/{id}": {
+      "get": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Find container by id",
+        "description": "",
+        "operationId": "listSpecificContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "container ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Container"
+              }
+            }
+          },
+          "404": {
+            "description": "Container not found"
+          }
+        }
+      }
+    },
+    "/containers/{id}/start": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Start any container on the host",
+        "description": "",
+        "operationId": "startContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "container ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "Container started successfully"
+          },
+          "409": {
+            "description": "Container cannot be started"
+          }
+        }
+      }
+    },
+    "/containers/{id}/stop": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Stop any container on the host",
+        "description": "",
+        "operationId": "stopContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "container ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "Container stopped successfully"
+          },
+          "409": {
+            "description": "Container cannot be stopped"
+          }
+        }
+      }
+    },
+    "/containers/{id}/pause": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Pause any container on the host",
+        "description": "",
+        "operationId": "pauseContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "container ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "Container paused successfully"
+          },
+          "409": {
+            "description": "Container cannot be paused"
+          }
+        }
+      }
+    },
+    "/containers/{id}/unpause": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Unpause any container on the host",
+        "description": "",
+        "operationId": "unpauseContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "container ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "Container unpaused successfully"
+          },
+          "409": {
+            "description": "Container cannot be unpaused"
+          }
+        }
+      }
+    },
+    "/containers/{id}/restart": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Restart any container on the host",
+        "description": "",
+        "operationId": "restartContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "container ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "Container restarted successfully"
+          },
+          "409": {
+            "description": "Container cannot be restarted"
+          }
+        }
+      }
+    },
+    "/containers/{id}/remove": {
+      "delete": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Removes a container",
+        "description": "",
+        "operationId": "removeContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Container id to delete",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
+        "responses": {
+          "200": {
+            "description": "Container removed successfully"
+          },
+          "409": {
+            "description": "Container cannot be removed"
+          }
+        }
+      }
+    },
+    "/images/": {
+      "get": {
+        "tags": [
+          "image"
+        ],
+        "summary": "List all images on the host",
+        "description": "",
+        "operationId": "listImages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Images"
+            }
+          }
+        }
+      }
+    },
+    "/images/{id}": {
+      "get": {
+        "tags": [
+          "image"
+        ],
+        "summary": "List an image on the host",
+        "description": "",
+        "operationId": "listSpecificImage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "image ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "404": {
+            "description": "No such image"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "image"
+        ],
+        "summary": "Delete an image on the host",
+        "description": "",
+        "operationId": "removeImage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "image ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "Image removed successfully"
+          },
+          "409": {
+            "description": "Image cannot be removed"
+          }
+        }
+      }
+    },
+    "/images/{id}/history": {
+      "get": {
+        "tags": [
+          "image"
+        ],
+        "summary": "List the history of an image on the host",
+        "description": "",
+        "operationId": "imageHistory",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "image ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ImageHistory"
+            }
+          },
+          "404": {
+            "description": "No such image"
+          }
+        }
+      }
+    },
+    "/networks": {
+      "get": {
+        "tags": [
+          "network"
+        ],
+        "summary": "List the networks on the host",
+        "description": "",
+        "operationId": "listNetworks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Networks"
+            }
+          }
+        }
+      }
+    },
+    "/networks/{id}": {
+      "get": {
+        "tags": [
+          "network"
+        ],
+        "summary": "List a specific network on the host",
+        "description": "",
+        "operationId": "listSpecificNetwork",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "network ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "single"
+        }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Network"
+            }
+          },
+          "404": {
+            "description": "No such network"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Images": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Containers": {
+                "type": "string"
+              },
+              "Created": {
+                "type": "integer"
+              },
+              "Id": {
+                "type": "string"
+              },
+              "Labels": {
+                "type": "string"
+              },
+              "ParentId": {
+                "type": "integer"
+              },
+              "RepoDigests": {
+                "type": "array",
+                "items": {
+
+                }
+              },
+              "RepoTags": {
+                "type": "array",
+                "items": {
+
+                }
+              },
+              "SharedSize": {
+                "type": "integer"
+              },
+              "Size": {
+                "type": "integer"
+              },
+              "VirtualSize": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Containers": {
+      "type": "object",
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "string"
+              },
+              "Names": {
+                "type": "array",
+                "items": {}
+              },
+              "Image": {
+                "type": "string"
+              },
+              "ImageID": {
+                "type": "string"
+              },
+              "Command": {
+                "type": "string"
+              },
+              "Created": {
+                "type": "integer"
+              },
+              "Ports": [],
+              "Labels": {},
+              "State": {
+                "type": "string"
+              },
+              "Status": {
+                "type": "string"
+              },
+              "HostConfig": {
+                "type": "object"
+              },
+              "NetworkSettings": {
+                "type": "object"
+              },
+              "Mounts": {
+                "type": "array",
+                "items": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string"
+            },
+            "RepoTags": {
+              "type": "string"
+            },
+            "RepoDigests": {
+              "type": "string"
+            },
+            "Parent": {
+              "type": "string"
+            },
+            "Comment": {
+              "type": "string"
+            },
+            "Created": {
+              "type": "string"
+            },
+            "Container": {
+              "type": "string"
+            },
+            "ContainerConfig": {
+              "type": "object"
+            },
+            "DockerVersion": {
+              "type": "string"
+            },
+            "Author": {
+              "type": "string"
+            },
+            "Config": {
+              "type": "object"
+            },
+            "Architecture": {
+              "type": "string"
+            },
+            "Os": {
+              "type": "string"
+            },
+            "Size": {
+              "type": "integer"
+            },
+            "VirtualSize": {
+              "type": "integer"
+            },
+            "GraphDriver": {
+              "type": "object"
+            },
+            "RootFS": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "ImageHistory": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "object"
+              },
+              "Created": {
+                "type": "integer"
+              },
+              "CreatedBy": {
+                "type": "string"
+              },
+              "Tags": {
+                "type": "array",
+                "properties": {}
+              },
+              "Size": {
+                "type": "integer"
+              },
+              "Comment": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Container": {
+      "type": "object",
+      "properties": {
+        "container": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string"
+            },
+            "Created": {
+              "type": "string"
+            },
+            "Path": {
+              "type": "string"
+            },
+            "Args": {
+              "type": "string"
+            },
+            "State": {
+              "type": "object"
+            },
+            "Image": {
+              "type": "string"
+            },
+            "ResolvConfPath": {
+              "type": "string"
+            },
+            "HostnamePath": {
+              "type": "string"
+            },
+            "HostsPath": {
+              "type": "string"
+            },
+            "LogPath": {
+              "type": "string"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "RestartCount": {
+              "type": "integer"
+            },
+            "Driver": {
+              "type": "string"
+            },
+            "MountLabel": {
+              "type": "string"
+            },
+            "ProcessLabel": {
+              "type": "string"
+            },
+            "AppArmorProfile": {
+              "type": "string"
+            },
+            "ExecIDs": {
+              "type": "string"
+            },
+            "HostConfig": {
+              "type": "object"
+            },
+            "GraphDriver": {
+              "type": "object"
+            },
+            "Mounts": {
+              "type": "object"
+            },
+            "Config": {
+              "type": "object"
+            },
+            "NetworkSettings": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "Networks": {
+      "type": "object",
+      "properties": {
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "Id": {
+                "type": "string"
+              },
+              "Created": {
+                "type": "string"
+              },
+              "Scope": {
+                "type": "string"
+              },
+              "Driver": {
+                "type": "string"
+              },
+              "EnableIPv6": {
+                "type": "boolean"
+              },
+              "IPAM": {
+                "type": "object"
+              },
+              "Internal": {
+                "type": "boolean"
+              },
+              "Attachable": {
+                "type": "boolean"
+              },
+              "Containers": {
+                "type": "object"
+              },
+              "Options": {
+                "type": "object"
+              },
+              "Labels": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Network": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "type": "object",
+          "properties": {
+            "Name": {
+              "type": "string"
+            },
+            "Id": {
+              "type": "string"
+            },
+            "Created": {
+              "type": "string"
+            },
+            "Scope": {
+              "type": "string"
+            },
+            "Driver": {
+              "type": "string"
+            },
+            "EnableIPv6": {
+              "type": "boolean"
+            },
+            "IPAM": {
+              "type": "object"
+            },
+            "Internal": {
+              "type": "boolean"
+            },
+            "Attachable": {
+              "type": "boolean"
+            },
+            "Containers": {
+              "type": "object"
+            },
+            "Options": {
+              "type": "object"
+            },
+            "Labels": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
