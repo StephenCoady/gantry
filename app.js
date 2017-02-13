@@ -1,17 +1,23 @@
 'use strict';
-let express = require('express'),
-  routes = require('./routes'),
-  app = express(),
-  morgan = require('morgan'),
-  path = require('path'),
-  ENVIRONMENT = process.env.ENV;
-
-
+let express = require('express');
+let routes = require('./routes');
+let bodyParser = require('body-parser');
+let app = express();
+let morgan = require('morgan');
+let path = require('path');
+let ENVIRONMENT = process.env.ENV;
 
 app.use((req, res, next) => {
   req.start = Date.now();
   next();
 });
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
@@ -23,7 +29,7 @@ if (ENVIRONMENT !== 'dev') {
 // Swagger API docs.
 app.use('/docs', express.static(path.join(__dirname, './docs')));
 app.get('/docs', (req, res) => {
-    res.sendFile(path.join(__dirname, './docs/index.html'));
+  res.sendFile(path.join(__dirname, './docs/index.html'));
 });
 
 /* GET Api index page */
@@ -33,9 +39,8 @@ app.get('*', (req, res) => {
   });
 });
 
-
 app.listen(3000, () => {
-  console.log('Express server is listening on port 3000')
+  console.log('Express server is listening on port 3000');
 });
 
 module.exports = app;

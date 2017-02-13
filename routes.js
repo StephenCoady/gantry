@@ -1,12 +1,11 @@
 const express	= require('express');
 const controllers = require('./controllers');
 
-const container = controllers.container,
-		image = controllers.image,
-		network = controllers.network;
+const container = controllers.container;
+const image = controllers.image;
+const network = controllers.network;
 
 const router = express.Router();
-
 
 /* Container Routes */
 router.get('/api/containers/running', container.listRunningContainers);
@@ -24,10 +23,10 @@ router.get('/api/images', image.listImages);
 router.get('/api/images/:id', image.listSpecificImage);
 router.delete('/api/images/:id', image.removeImage);
 router.get('/api/images/:id/history', image.imageHistory);
+router.post('/api/images/pull/', image.pullImage);
 
 /* Network Routes */
 router.get('/api/networks', network.listNetworks);
 router.get('/api/networks/:id', network.listSpecificNetwork);
-
 
 module.exports = router;
