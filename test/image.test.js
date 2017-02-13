@@ -38,11 +38,11 @@ describe('#image', () => {
 
     it('should list specific image', done => {
       request(app)
-        .get('/api/images/' + image.repo)
+        .get('/api/images/' + image.name + ':' + image.tag)
         .expect('Content-Type', /json/)
         .end(function (err, res) {
           expect(res.status).to.be.equal(200);
-          console.log(res.body);
+          expect(res.body.image.RepoTags[0]).to.be.equal(image.name + ':' + image.tag);
           done();
         });
     });
@@ -61,7 +61,7 @@ describe('#image', () => {
   describe('#history', () => {
     it('should list history of image', done => {
       request(app)
-        .get('/api/images/' + image.name + '/history')
+        .get('/api/images/' + image.name + ':' + image.tag + '/history')
         .expect('Content-Type', /json/)
         .end(function (err, res) {
           expect(res.status).to.be.equal(200);
@@ -93,7 +93,7 @@ describe('#image', () => {
 
     it('should remove image', done => {
       request(app)
-        .delete('/api/images/' + image.name)
+        .delete('/api/images/' + image.name + ':' + image.tag)
         .expect('Content-Type', /json/)
         .end(function (err, res) {
           expect(res.status).to.be.equal(200);

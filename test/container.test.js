@@ -1,11 +1,10 @@
 'use strict';
 
-var assert = require('assert'),
-  request = require('supertest'),
-  controllers = require('../controllers'),
-  app = require('../app'),
-  chai = require('chai');
-  
+let assert = require('assert');
+let request = require('supertest');
+let app = require('../app');
+let chai = require('chai');
+
 process.env.NODE_ENV = 'dev';
 
 const expect = chai.expect;
@@ -16,12 +15,10 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
-
-describe('#container', function() {
-
+describe('#container', function () {
   var testContainer;
 
-  before(function(done) {
+  before(function (done) {
     docker.createContainer({
       Image: 'ubuntu',
       AttachStdin: false,
@@ -31,8 +28,10 @@ describe('#container', function() {
       Cmd: ['/bin/bash', '-c', 'tail -f /var/log/dmesg'],
       OpenStdin: false,
       StdinOnce: false
-    }, function(err, container) {
-      if (err) done(err);
+    }, function (err, container) {
+      if (err) {
+        done(err);
+      }
       testContainer = container.id;
       done();
     });

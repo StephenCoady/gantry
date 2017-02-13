@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.5.0 - 06-02-17 ***Released***
+	- pull functionality added to images
+	- swagger docs updated
+	- tests re-factored to use new pull function instead of hard coded pull
+
 ### 0.4.0 - 06-02-17 ***Released***
 	- swagger implemented for api endpoints
 	- restart containers endpoint added
