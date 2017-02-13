@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.5.0 - 06-02-17 ***Released***
+### 0.5.0 - 13-02-17 ***Released***
 	- pull functionality added to images
 	- swagger docs updated
 	- tests re-factored to use new pull function instead of hard coded pull
