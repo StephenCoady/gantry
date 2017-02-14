@@ -3,7 +3,7 @@
 var assert = require('assert'),
   request = require('supertest'),
   controllers = require('../controllers'),
-  app = require('../app'),
+  app = require('../../index'),
   chai = require('chai');
   
 process.env.NODE_ENV = 'dev';

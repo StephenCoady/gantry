@@ -1,7 +1,7 @@
 'use strict';
 
 let request = require('supertest');
-let app = require('../app');
+let app = require('../../index');
 let chai = require('chai');
 process.env.NODE_ENV = 'dev';
 

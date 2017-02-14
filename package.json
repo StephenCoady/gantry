@@ -44,9 +44,9 @@
     "url": "git+https://github.com/StephenCoady/lifecycle-management-for-docker.git"
   },
   "scripts": {
-    "start": "node app.js",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -R ./test/*",
-    "test": "mocha ./test"
+    "start": "node index.js",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -R ./api/test/*",
+    "test": "mocha ./api/test --timeout 20000"
   },
   "license": "MIT",
   "dependencies": {

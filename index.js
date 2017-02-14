@@ -1,6 +1,6 @@
 'use strict';
 let express = require('express');
-let routes = require('./routes');
+let routes = require('./api/routes');
 let bodyParser = require('body-parser');
 let app = express();
 let morgan = require('morgan');
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './app')));
 app.use(routes);
 
 if (ENVIRONMENT !== 'dev') {
@@ -27,7 +27,7 @@ if (ENVIRONMENT !== 'dev') {
 }
 
 // Swagger API docs.
-app.use('/docs', express.static(path.join(__dirname, './docs')));
+app.use('/docs', express.static(path.join(__dirname, './api/docs')));
 app.get('/docs', (req, res) => {
   res.sendFile(path.join(__dirname, './docs/index.html'));
 });
@@ -35,7 +35,7 @@ app.get('/docs', (req, res) => {
 /* GET Api index page */
 app.get('*', (req, res) => {
   res.sendFile('index.html', {
-    root: ('./public')
+    root: ('./app')
   });
 });
 
