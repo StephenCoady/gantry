@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.5.1 - 14-02-17 ***Released***
+	- re-structured folders to make it easier for front end development
+	
 ### 0.5.0 - 13-02-17 ***Released***
 	- pull functionality added to images
 	- swagger docs updated

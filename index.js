@@ -32,11 +32,15 @@ app.get('/docs', (req, res) => {
   res.sendFile(path.join(__dirname, './docs/index.html'));
 });
 
-/* GET Api index page */
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile('index.html', {
     root: ('./app')
   });
+});
+
+/* GET Api index page */
+app.get('*', (req, res) => {
+  res.send('404 page not found!', 404);
 });
 
 app.listen(3000, () => {
