@@ -15,8 +15,12 @@ docker run -d -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock scoady2/
 #### Using Node.js
 Note: The Docker API must be listening on /var/run/docker.sock
 ```
-$ node app.js
+node index.js
 ```
+
+## Documentation
+To view the API documentation for the application navigate to http://`<hostname>`:3000/docs
+
 ## License
 
 MIT © [Stephen Coady]()

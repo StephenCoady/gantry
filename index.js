@@ -25,12 +25,10 @@ app.use(routes);
 if (ENVIRONMENT !== 'dev') {
   app.use(morgan('dev'));
 }
+app.use('/scripts', express.static('node_modules/angular-simple-sidebar'));
 
 // Swagger API docs.
 app.use('/docs', express.static(path.join(__dirname, './api/docs')));
-app.get('/docs', (req, res) => {
-  res.sendFile(path.join(__dirname, './docs/index.html'));
-});
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', {

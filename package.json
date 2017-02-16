@@ -14,6 +14,8 @@
     "eslint": "^3.1.1",
     "eslint-config-xo-space": "^0.15.0",
     "expect.js": "^0.3.1",
+    "grunt": "^1.0.1",
+    "grunt-bower-install": "^1.6.0",
     "grunt-sonar-runner": "^2.4.8",
     "gulp": "^3.9.0",
     "gulp-eslint": "^3.0.1",
@@ -51,6 +53,8 @@
   "license": "MIT",
   "dependencies": {
     "angular": "^1.6.1",
+    "angular-sidebar": "^1.1.0",
+    "angular-simple-sidebar": "^1.3.1",
     "angularjs-toaster": "^2.1.0",
     "body-parser": "^1.16.1",
     "dockerode": "^2.3.1",

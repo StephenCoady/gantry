@@ -1,0 +1,21 @@
+{
+  "name": "lifecycle-management-for-docker",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Stephen Coady <scoady2@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/StephenCoady/lifecycle-management-for-docker",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "AngularJS-Toaster": "angularjs-toaster#^2.1.0"
+  }
+}
