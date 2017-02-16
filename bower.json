@@ -15,7 +15,9 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^3.1.1",
-    "AngularJS-Toaster": "angularjs-toaster#^2.1.0"
+    "AngularJS-Toaster": "angularjs-toaster#^2.1.0",
+    "angular-animate": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "alertify.js": "^0.3.11"
   }
 }

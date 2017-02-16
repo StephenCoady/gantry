@@ -8,7 +8,7 @@
 	<meta name="author" content="">
 
 	<link rel="icon" type="image/png" href="support/images/favicon.ico" />
-	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="support/styles/bootstrap.min.css" rel="stylesheet">
 	<link href="bower_components/alertify.js/themes/alertify.core.css" rel="stylesheet">
 	<link href="bower_components/alertify.js/themes/alertify.default.css" rel="stylesheet">
 	<link href="bower_components/alertify.js/themes/alertify.bootstrap.css" rel="stylesheet">
@@ -16,19 +16,12 @@
 	<link href="bower_components/AngularJS-Toaster/toaster.min.css" rel="stylsheet">
 	<link href="support/styles/bootstrap.min.css" rel="stylesheet">
 	<link href="support/styles/simple-sidebar.css" rel="stylesheet">
-
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="support/scripts/bootstrap.min.js"></script>
-	<script src="bower_components/alertify.js/lib/alertify.min.js"></script>
-	<script src="bower_components/angular/angular.min.js"></script>
-	<script src="bower_components/angular-route/angular-route.min.js"></script>
-	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-	<script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
+	<link href="support/styles/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
-<body ng-app="uiForDocker">
+<!-- <body ng-app="uiForDocker"> -->
 
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-md-12">
 			<div class="btn-group">
 				<a ng-href="/" class="btn btn-default">Home</a>
@@ -43,8 +36,83 @@
 
 	<script src="app.js"></script>
 	<script src="components/main/mainController.js"></script>
-	<script src="components/containers/containersController.js"></script>
+	<script src="components/containers/containersController.js"></script> -->
 
+<!-- </body> -->
+
+<body ng-app="uiForDocker">
+<nav class="navbar navbar-default no-margin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brand">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
+                      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i> Docker</a>
+                </div><!-- navbar-header-->
+ 
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                            </ul>
+                </div><!-- bs-example-navbar-collapse-1 -->
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+ 
+                <li class="active">
+                    <a href="/"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
+                </li>
+                <li>
+                    <a href="/containers"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Containers</a>
+                </li>
+                <li>
+                    <a href="/images"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Images</a>
+                </li>
+                <li>
+                    <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+                </li>
+            </ul>
+        </div><!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                <div class="row">
+                    <div class="col-lg-12">
+											<div ng-view></div>
+											<toaster-container></toaster-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+		
+		
+		
+		<script src="support/scripts/jquery-3.1.1.min.js"></script>
+		<script src="support/scripts/bootstrap.min.js"></script>
+		<script src="support/scripts/sidebar_menu.js"></script>
+		<script src="bower_components/alertify.js/lib/alertify.min.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-route/angular-route.min.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+		<script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
+		
+		<script src="app.js"></script>
+		<script src="components/main/mainController.js"></script>
+		<script src="components/containers/containersController.js"></script> 
 </body>
 
 </html>
