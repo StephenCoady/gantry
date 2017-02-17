@@ -30,15 +30,10 @@ app.use('/scripts', express.static('node_modules/angular-simple-sidebar'));
 // Swagger API docs.
 app.use('/docs', express.static(path.join(__dirname, './api/docs')));
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile('index.html', {
     root: ('./app')
   });
-});
-
-/* GET Api index page */
-app.get('*', (req, res) => {
-  res.send('404 page not found!', 404);
 });
 
 app.listen(3000, () => {

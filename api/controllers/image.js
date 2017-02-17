@@ -6,7 +6,7 @@ const docker = new Docker({
 });
 
 exports.listImages = (req, res) => {
-  docker.listImages(data => {
+  docker.listImages((err, data) => {
     res.status(200).json({
       images: data
     });

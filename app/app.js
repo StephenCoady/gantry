@@ -1,21 +1,38 @@
 angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate'])
-  .controller('LandingCtrl', function($scope, containerApi, imageApi, toaster, $route) {
-    $scope.isActive = function (viewLocation) { 
-      console.log(viewLocation);
-    return viewLocation === $location.path();
-};
+  .controller('LandingCtrl', function($scope, $route, $location) {
+    $scope.isActive = function(route) {
+        return route === $location.path();
+    }
   })
   .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        controller: 'MainCtrl',
-        templateUrl: 'components/main/main.html',
-        activetab: 'dashboard'
+        controller: 'DashCtrl',
+        templateUrl: 'components/dashboard/dashboard.html'
       })
       .when('/containers', {
         controller: 'ContainersCtrl',
-        templateUrl: 'components/containers/containers.html',
-        activetab: 'containers'
+        templateUrl: 'components/containers/containers.html'
+      })
+      .when('/images', {
+        controller: 'ImagesCtrl',
+        templateUrl: 'components/images/images.html'
+      })
+      .when('/networks', {
+        controller: 'NetworksCtrl',
+        templateUrl: 'components/networks/networks.html'
+      })
+      .when('/host', {
+        controller: 'HostCtrl',
+        templateUrl: 'components/host/host.html'
+      })
+      .when('/docker', {
+        controller: 'DockerCtrl',
+        templateUrl: 'components/docker/docker.html'
+      })
+      .when('/settings', {
+        controller: 'SettingsCtrl',
+        templateUrl: 'components/settings/settings.html'
       })
       .otherwise({
         redirectTo: '/'
