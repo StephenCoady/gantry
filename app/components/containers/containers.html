@@ -1,1 +1,102 @@
-
+<div class="row">
+	<div ng-cloak>
+		<md-content>
+			<md-tabs md-dynamic-height md-border-bottom>
+				<md-tab label="All">
+					<md-content class="md-padding">
+						<div class="row">
+							<!-- Split button -->
+							<div class="btn-group">
+								<button type="button" class="btn btn-success" ng-click="start(containers)"><i class="fa fa-play fa-1x"></i> Start</button>
+								<button type="button" class="btn btn-primary" ng-click="restart(containers)"><i class="fa fa-refresh fa-1x"></i> Restart</button>
+								<button type="button" class="btn btn-primary" ng-click="stop(containers)"><i class="fa fa-stop fa-1x"></i> Stop</button>
+								<button type="button" class="btn btn-primary" ng-click="pause(containers)"><i class="fa fa-pause fa-1x"></i> Pause</button>
+								<button type="button" class="btn btn-primary" ng-click="unpause(containers)"><i class="fa fa-play fa-1x"></i> Unpause</button>
+								<button type="button" class="btn btn-danger" ng-click="remove(containers)"><i class="fa fa-trash fa-1x"></i> Delete</button>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<table class="table table-striped">
+								<thead class="thead-inverse">
+									<tr>
+										<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
+										<th>Name</th>
+										<th>State</th>
+										<th>Status</th>
+										<th>Ports</th>
+										<th>Image</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="container in containers">
+										<th><input type="checkbox" ng-click="containerSelect(container)" ng-model="container.select"></th>
+										<td><a href="/containers/{{container.Id}}">{{container.Names[0]}}</a></td>
+										<td ng-if="container.State == 'running'"><span class="label label-success">running</span></td>
+										<td ng-if="container.State == 'paused'"><span class="label label-info">paused</span></td>
+										<td ng-if="container.State == 'exited'"><span class="label label-danger">stopped</span></td>
+										<td>{{container.Status}}</td>
+										<td><p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{port.IP}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p></td>
+										<td>{{container.Image}}</td>
+										<td><a href="/containers/{{container.Id}}"><i class="fa fa-arrow-circle-o-right fa-1x"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</md-content>
+				</md-tab>
+				<md-tab label="Running">
+					<md-content class="md-padding">
+						<div class="row">
+							<!-- Split button -->
+							<div class="btn-group">
+								<button type="button" class="btn btn-success" ng-click="start(runningContainers)"><i class="fa fa-play fa-1x"></i> Start</button>
+								<button type="button" class="btn btn-primary" ng-click="restart(runningContainers)"><i class="fa fa-refresh fa-1x"></i> Restart</button>
+								<button type="button" class="btn btn-primary" ng-click="stop(runningContainers)"><i class="fa fa-stop fa-1x"></i> Stop</button>
+								<button type="button" class="btn btn-primary" ng-click="pause(runningContainers)"><i class="fa fa-pause fa-1x"></i> Pause</button>
+								<button type="button" class="btn btn-primary" ng-click="unpause(runningContainers)"><i class="fa fa-play fa-1x"></i> Unpause</button>
+								<button type="button" class="btn btn-danger" ng-click="remove(runningContainers)"><i class="fa fa-trash fa-1x"></i> Delete</button>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<table class="table table-striped">
+								<thead class="thead-inverse">
+									<tr>
+										<th><input type="checkbox" ng-model="selectAllRunning" ng-click="checkAllRunning()" /></th>
+										<th>Name</th>
+										<th>State</th>
+										<th>Created</th>
+										<th>Ports</th>
+										<th>Image</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="container in runningContainers">
+										<th><input type="checkbox" ng-click="runningContainerSelect(container)" ng-model="container.select"></th>
+										<td><a href="/containers/{{container.Id}}">{{container.Names[0]}}</a></td>
+										<td ng-if="container.State == 'running'"><span class="label label-success">running</span></td>
+										<td ng-if="container.State == 'paused'"><span class="label label-info">paused</span></td>
+										<td ng-if="container.State == 'exited'"><span class="label label-danger">stopped</span></td>
+										<td>{{container.Status}}</td>
+										<td><p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null">{{port.PrivatePort}}:{{port.PublicPort}}</p></td>
+										<td>{{container.Image}}</td>
+										<td><a ng-href="/containers/{{container.Id}}"><i class="fa fa-arrow-circle-o-right fa-1x"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</md-content>
+				</md-tab>
+				<md-tab label="Create New">
+					<md-content class="md-padding">
+						<h1 class="md-display-2">Tab Three</h1>
+						Nothing yet.
+					</md-content>
+				</md-tab>
+			</md-tabs>
+		</md-content>
+	</div>
+</div>

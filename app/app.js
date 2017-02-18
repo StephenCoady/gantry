@@ -1,38 +1,43 @@
-angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate'])
+angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial'])
   .controller('LandingCtrl', function($scope, $route, $location) {
     $scope.isActive = function(route) {
-        return route === $location.path();
+      return route === $location.path();
     }
   })
   .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        controller: 'DashCtrl',
-        templateUrl: 'components/dashboard/dashboard.html'
+        templateUrl: 'components/dashboard/dashboard.html',
+        controller: 'DashCtrl'
       })
       .when('/containers', {
-        controller: 'ContainersCtrl',
-        templateUrl: 'components/containers/containers.html'
+        templateUrl: 'components/containers/containers.html',
+        controller: 'ContainersCtrl'
+      })
+      .when('/containers/:Id', {
+        templateUrl: 'components/container/container.html'
+        controller: 'ContainerCtrl'
       })
       .when('/images', {
-        controller: 'ImagesCtrl',
-        templateUrl: 'components/images/images.html'
+        templateUrl: 'components/images/images.html',
+        controller: 'ImagesCtrl'
       })
       .when('/networks', {
-        controller: 'NetworksCtrl',
-        templateUrl: 'components/networks/networks.html'
+        templateUrl: 'components/networks/networks.html',
+        controller: 'NetworksCtrl'
       })
       .when('/host', {
-        controller: 'HostCtrl',
-        templateUrl: 'components/host/host.html'
+        templateUrl: 'components/host/host.html',
+        controller: 'HostCtrl'
       })
       .when('/docker', {
-        controller: 'DockerCtrl',
-        templateUrl: 'components/docker/docker.html'
+        templateUrl: 'components/docker/docker.html',
+        controller: 'DockerCtrl'
+      
       })
       .when('/settings', {
-        controller: 'SettingsCtrl',
-        templateUrl: 'components/settings/settings.html'
+        templateUrl: 'components/settings/settings.html',
+        controller: 'SettingsCtrl'
       })
       .otherwise({
         redirectTo: '/'

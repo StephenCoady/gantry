@@ -13,12 +13,14 @@
 	<link href="bower_components/alertify.js/themes/alertify.default.css" rel="stylesheet">
 	<link href="bower_components/alertify.js/themes/alertify.bootstrap.css" rel="stylesheet">
 	<link href="bower_components/alertify.js/themes/alertify.bootstrap.css" rel="stylesheet">
-	<link href="bower_components/AngularJS-Toaster/toaster.min.css" rel="stylsheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 	<link href="support/styles/bootstrap.min.css" rel="stylesheet">
 	<link href="support/styles/simple-sidebar.css" rel="stylesheet">
 	<link href="support/styles/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
 	<link href="support/styles/fontcustom/fontcustom.css" rel="stylesheet">
+	<link href="support/styles/custom.css" rel="stylesheet">
 </head>
 
 <body ng-app="uiForDocker">
@@ -27,12 +29,12 @@
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header fixed-brand">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
-                      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
                     </button>
 				<a class="navbar-brand" href="/"><i class="fa fa-rocket fa-4"></i> Docker</a>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+						<li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button></li>
 					</ul>
 				</div>
 			</div>
@@ -96,11 +98,14 @@
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-	<script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+	<script src="bower_components/angular-material/angular-material.min.js"></script>
 
 	<script src="app.js"></script>
 	<script src="components/dashboard/dashboardController.js"></script>
 	<script src="components/containers/containersController.js"></script>
+	<script src="components/container/containerController.js"></script>
 	<script src="components/images/imagesController.js"></script>
 	<script src="components/networks/networksController.js"></script>
 	<script src="components/host/hostController.js"></script>
