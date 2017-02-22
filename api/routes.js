@@ -16,6 +16,7 @@ router.post('/api/containers/:id/stop', container.stopContainer);
 router.post('/api/containers/:id/pause', container.pauseContainer);
 router.post('/api/containers/:id/unpause', container.unpauseContainer);
 router.post('/api/containers/:id/restart', container.restartContainer);
+router.post('/api/containers/create', container.createContainer);
 router.delete('/api/containers/:id/remove', container.removeContainer);
 
 /* Image Routes */
@@ -24,6 +25,7 @@ router.get('/api/images/:id', image.listSpecificImage);
 router.delete('/api/images/:id', image.removeImage);
 router.get('/api/images/:id/history', image.imageHistory);
 router.post('/api/images/pull/', image.pullImage);
+router.post('/api/images/:id/tag', image.tagImage);
 
 /* Network Routes */
 router.get('/api/networks', network.listNetworks);

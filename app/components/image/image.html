@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					Tags
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row" ng-repeat="tag in image.RepoTags">
+				  <div class="col-md-12">
+				     {{tag}} <span class="badge"><i class="fa fa-upload fa-1x"></i></span> <span class="badge" ng-click="remove(tag)"><i class="fa fa-trash-o fa-1x"></i></span>
+				  </div>
+				</div>
+			</div>
+		</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					Add a Tag
+				</h3>
+			</div>
+			<div class="panel-body">
+				<form class="form-inline">
+					<div class="form-group col-md-4 control-label">
+						<div class="row">
+							<label for="repo" class="control-label">Repo:  </label>
+						</div>
+						<div class="row">
+							<input type="text" class="form-control" id="repo" placeholder="e.g: imageName" ng-model="tag.repo">
+						</div>
+					</div>
+					<div class="form-group col-md-4 control-label">
+						<div class="row">
+							<label for="tag" class="control-label">Tag:  </label>
+						</div>
+						<div class="row">
+							<input type="text" class="form-control" id="tag" placeholder="e.g: imageTag" ng-model="tag.tag">
+						</div>
+					</div>
+					<div class="form-group col-md-4 ">
+						<div class="row">
+							<div class="col-sm-4">
+								<button type="button" class="btn btn-primary" ng-click="tagImage(tag)"><i class="fa fa-tag fa-1x"></i> Tag</button>
+							</div>
+							<div class="col-sm-8">
+								<p>Note: If tag is left empty then latest will be used.</p>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					Image Information
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+				  <div class="col-md-12">
+						<table class="table table-striped">
+						  <tr>
+						  	<td>Created</td>
+								<td>{{image.Created | date:'HH:mm dd-MM-yyyy'}}</td>
+						  </tr>
+							<tr>
+								<td>Docker Version</td>
+								<td>{{image.DockerVersion}}</td>
+							</tr>
+							<tr>
+								<td>Working Directory</td>
+								<td>{{image.ContainerConfig.WorkingDir}}</td>
+							</tr>
+							<tr>
+								<td>Environment Variables</td>
+								<td>
+									<table class="table table-striped">
+									  <tr ng-repeat="env in image.ContainerConfig.Env">
+											<td>{{env}}</td>
+									  </tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>Commands</td>
+								<td>
+									<table class="table table-striped">
+										<tr ng-repeat="cmd in image.ContainerConfig.Cmd">
+											<td>{{cmd}}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+				  </div>
+				</div>
+			</div>
+		</div>
+  </div>
+</div>

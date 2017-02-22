@@ -19,6 +19,7 @@
     "angular-animate": "^1.6.2",
     "angular-route": "^1.6.2",
     "alertify.js": "^0.3.11",
-    "angular-material": "^1.1.3"
+    "angular-material": "^1.1.3",
+    "angular-loading-bar": "^0.9.0"
   }
 }

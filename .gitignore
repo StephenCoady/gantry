@@ -1,5 +1,4 @@
 node_modules/
 .sonar
 coverage/
-bower_components/
 npm-debug.log

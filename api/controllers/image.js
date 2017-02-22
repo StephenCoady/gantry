@@ -68,7 +68,6 @@ exports.imageHistory = (req, res) => {
 };
 
 exports.pullImage = (req, res) => {
-  const repo = req.body.repo;
   const name = req.body.name;
   let tag = '';
 
@@ -78,7 +77,7 @@ exports.pullImage = (req, res) => {
     tag = req.body.tag;
   }
 
-  const repoTag = repo + '/' + name + ':' + tag;
+  const repoTag = name + ':' + tag;
   docker.pull(repoTag, (err, stream) => {
     docker.modem.followProgress(stream, onFinished);
 
@@ -93,6 +92,26 @@ exports.pullImage = (req, res) => {
           response: 'Image successfully pulled'
         });
       }
+    }
+  });
+};
+
+exports.tagImage = (req, res) => {
+  const id = req.params.id;
+  const image = docker.getImage(id);
+  const tag = req.body;
+  console.log(req.body);
+
+  image.tag(tag, (err, data) => {
+    if (data === null) {
+      res.status(404).json({
+        message: 'No such image',
+        error: err
+      });
+    } else {
+      res.status(200).json({
+        image: data
+      });
     }
   });
 };

@@ -1,4 +1,4 @@
-angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial'])
+angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 'angular-loading-bar'])
   .controller('LandingCtrl', function($scope, $route, $location) {
     $scope.isActive = function(route) {
       return route === $location.path();
@@ -15,12 +15,16 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial'])
         controller: 'ContainersCtrl'
       })
       .when('/containers/:Id', {
-        templateUrl: 'components/container/container.html'
+        templateUrl: 'components/container/container.html',
         controller: 'ContainerCtrl'
       })
       .when('/images', {
         templateUrl: 'components/images/images.html',
         controller: 'ImagesCtrl'
+      })
+      .when('/images/:Id', {
+        templateUrl: 'components/image/image.html',
+        controller: 'ImageCtrl'
       })
       .when('/networks', {
         templateUrl: 'components/networks/networks.html',
@@ -42,8 +46,5 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial'])
       .otherwise({
         redirectTo: '/'
       });
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
+      $locationProvider.hashPrefix('');
   }]);

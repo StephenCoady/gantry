@@ -37,6 +37,10 @@ angular.module('uiForDocker')
     containers.remove = function(id) {
       return $http.delete('/api/containers/' + id + '/remove');
     };
+    
+    containers.create = function(options) {
+      return $http.post('/api/containers/create', options);
+    };
 
     return containers;
   });

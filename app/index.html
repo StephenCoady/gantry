@@ -13,63 +13,66 @@
 	<link href="bower_components/alertify.js/themes/alertify.default.css" rel="stylesheet">
 	<link href="bower_components/alertify.js/themes/alertify.bootstrap.css" rel="stylesheet">
 	<link href="bower_components/alertify.js/themes/alertify.bootstrap.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet"/>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 	<link href="support/styles/bootstrap.min.css" rel="stylesheet">
 	<link href="support/styles/simple-sidebar.css" rel="stylesheet">
 	<link href="support/styles/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+	<link href="bower_components/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet">
 	<link href="support/styles/fontcustom/fontcustom.css" rel="stylesheet">
 	<link href="support/styles/custom.css" rel="stylesheet">
 </head>
 
 <body ng-app="uiForDocker">
 	<div ng-controller="LandingCtrl">
-		<nav class="navbar navbar-default no-margin">
+		<nav class="navbar navbar-default no-margin navbar-fixed-top">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header fixed-brand">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
                       <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
                     </button>
-				<a class="navbar-brand" href="/"><i class="fa fa-rocket fa-4"></i> Docker</a>
+				<a class="navbar-brand" href="#/"><i class="fa fa-rocket fa-4"></i> Docker</a>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button></li>
 					</ul>
 				</div>
 			</div>
+			<ul class="nav navbar-nav pull-right">
+				<li><a href="#">Logout</a></li>
+			</ul>
 			<!-- navbar-header-->
 
-			
+
 			<!-- bs-example-navbar-collapse-1 -->
 		</nav>
 		<div id="wrapper">
 			<!-- Sidebar -->
 			<div id="sidebar-wrapper">
 				<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-
 					<li ng-class="{active:isActive('/')}">
-						<a href="/"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
+						<a href="#/"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
 					</li>
 					<li ng-class="{active:isActive('/containers')}">
-						<a href="/containers"><span class="fa-stack fa-lg pull-left"><i class="fa fa-archive fa-stack-1x "></i></span>Containers</a>
+						<a href="#/containers"><span class="fa-stack fa-lg pull-left"><i class="fa fa-archive fa-stack-1x "></i></span>Containers</a>
 					</li>
 					<li ng-class="{active:isActive('/images')}">
-						<a href="/images"><span class="fa-stack fa-lg pull-left"><i class="fa fa-image fa-stack-1x "></i></span>Images</a>
+						<a href="#/images"><span class="fa-stack fa-lg pull-left"><i class="fa fa-image fa-stack-1x "></i></span>Images</a>
 					</li>
 					<li ng-class="{active:isActive('/networks')}">
-						<a href="/networks"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-plug fa-stack-1x "></i></span>Networks</a>
+						<a href="#/networks"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-plug fa-stack-1x "></i></span>Networks</a>
 					</li>
-					<hr style="border: 1px dashed rgb(200,200,200);" />
+					<hr style="border: 1px dashed rgb(120,120,120);" />
 					<li ng-class="{active:isActive('/host')}">
-						<a href="/host"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span>Host</a>
+						<a href="#/host"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span>Host</a>
 					</li>
 					<li ng-class="{active:isActive('/docker')}">
-						<a href="/docker"><span class="fa-stack fa-lg pull-left"><i class="fa fa-area-chart fa-stack-1x "></i></span>Docker</a>
+						<a href="#/docker"><span class="fa-stack fa-lg pull-left"><i class="fa fa-area-chart fa-stack-1x "></i></span>Docker</a>
 					</li>
-					<hr style="border: 1px dashed rgb(200,200,200);" />
+					<hr style="border: 1px dashed rgb(120,120,120);" />
 					<li ng-class="{active:isActive('/settings')}">
-						<a href="/settings"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span>App Settings</a>
+						<a href="#/settings"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span>App Settings</a>
 					</li>
 				</ul>
 			</div>
@@ -101,12 +104,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
 	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
 	<script src="bower_components/angular-material/angular-material.min.js"></script>
+	<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+
 
 	<script src="app.js"></script>
 	<script src="components/dashboard/dashboardController.js"></script>
 	<script src="components/containers/containersController.js"></script>
 	<script src="components/container/containerController.js"></script>
 	<script src="components/images/imagesController.js"></script>
+	<script src="components/image/imageController.js"></script>
 	<script src="components/networks/networksController.js"></script>
 	<script src="components/host/hostController.js"></script>
 	<script src="components/settings/settingsController.js"></script>

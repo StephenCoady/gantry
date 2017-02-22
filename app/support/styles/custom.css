@@ -1,3 +1,8 @@
 #dashboard {
     font-size: 24px;
 }
+
+#container-name {
+  font-size: 28px;
+  font-weight: bold;
+}

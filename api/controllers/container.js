@@ -149,3 +149,18 @@ exports.unpauseContainer = (req, res) => {
     }
   });
 }
+
+exports.createContainer = (req, res) => {
+  docker.createContainer(req.body, (err, data) => {
+    if (data == null) {
+      res.status(500).json({
+        message: "Container cannot be created",
+        error: err
+      })
+    } else {
+      res.status(201).json({
+        message: "Container created successfully"
+      })
+    }
+  });
+}

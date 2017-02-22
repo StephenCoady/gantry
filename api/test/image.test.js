@@ -14,23 +14,24 @@ let image = {
 };
 
 describe('#image', () => {
-  describe('#list', () => {
+  describe('#pull', () => {
     // one image with one tag
     it('should pull image from remote source', done => {
       request(app)
         .post('/api/images/pull')
         .send(image)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
         });
     }).timeout(120000);
-
+  });
+  describe('#list', () => {
     it('should list images', done => {
       request(app)
         .get('/api/images/')
         .expect('Content-Type', /json/)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
         });
@@ -40,7 +41,7 @@ describe('#image', () => {
       request(app)
         .get('/api/images/' + image.name + ':' + image.tag)
         .expect('Content-Type', /json/)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           expect(res.body.image.RepoTags[0]).to.be.equal(image.name + ':' + image.tag);
           done();
@@ -51,19 +52,18 @@ describe('#image', () => {
       request(app)
         .get('/api/images/madeUpImage')
         .expect('Content-Type', /json/)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(404);
           done();
         });
     });
   });
-
   describe('#history', () => {
     it('should list history of image', done => {
       request(app)
         .get('/api/images/' + image.name + ':' + image.tag + '/history')
         .expect('Content-Type', /json/)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
         });
@@ -73,7 +73,7 @@ describe('#image', () => {
       request(app)
         .get('/api/images/madeUpImage/history')
         .expect('Content-Type', /json/)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(404);
           done();
         });
@@ -85,7 +85,7 @@ describe('#image', () => {
       request(app)
         .delete('/api/images/madeUpImage')
         .expect('Content-Type', /json/)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(409);
           done();
         });
@@ -95,7 +95,7 @@ describe('#image', () => {
       request(app)
         .delete('/api/images/' + image.name + ':' + image.tag)
         .expect('Content-Type', /json/)
-        .end(function (err, res) {
+        .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
         });

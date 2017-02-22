@@ -1,6 +1,7 @@
 /* Toggle Styles */
  
  #wrapper {
+   padding-top: 65px; 
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -10,17 +11,17 @@
 }
  
 #wrapper.toggled {
-    padding-left: 250px;
+    padding-left: 200px;
     overflow: scroll;
 }
  
 #sidebar-wrapper {
     z-index: 1000;
-    position: absolute; 
-    left: 250px;
+    position: fixed; 
+    left: 200px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-left: -200px;
     overflow-y: auto;
     background: #000;
     -webkit-transition: all 0.5s ease;
@@ -29,10 +30,11 @@
     transition: all 0.5s ease;
 }
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 200px;
 }
  
 #page-content-wrapper {
+  padding-top: 65px; 
     position: absolute;
     padding: 15px;
     width: 100%;  
@@ -53,7 +55,7 @@
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 200px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -103,28 +105,28 @@
  
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
+        padding-left: 200px;
     }
     .fixed-brand{
-        width: 250px;
+        width: 200px;
     }
     #wrapper.toggled {
         padding-left: 0;
     }
  
     #sidebar-wrapper {
-        width: 250px;
+        width: 200px;
     }
  
     #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
+        width: 200px;
     }
     #wrapper.toggled-2 #sidebar-wrapper {
         width: 50px;
     }
-    #wrapper.toggled-2 #sidebar-wrapper:hover {
-        width: 250px;
-    }
+    /*#wrapper.toggled-2 #sidebar-wrapper:hover {
+        width: 200px;
+    }*/
  
  
     #page-content-wrapper {
@@ -139,12 +141,12 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
-        padding-left: 250px;
+        padding-left: 200px;
     }
     #wrapper.toggled-2 #page-content-wrapper {
         position: relative;
         margin-right: 0;
-        margin-left: -200px;
+        margin-left: -150px;
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
