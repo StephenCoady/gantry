@@ -1,77 +1,97 @@
 <div class="row">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+				<b>Containers</b>
+			</div>
+			<div class="card-block">
+				<div class="row">
+					<div class="col-md-12">
+						<canvas id="doughnut" class="chart chart-doughnut" chart-data="containerData" chart-labels="containerLabels" height="{{height_chart}}" chart-colors="containerColours" chart-options="options">
+						</canvas>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+				<b>Disk Usage</b>
+			</div>
+			<div class="card-block">
+				<div class="row">
+					<div class="col-md-12">
+						<canvas id="doughnut" class="chart chart-pie" chart-data="imageData" chart-labels="imageLabels" height="{{height_chart}}" chart-colors="imageColours" chart-options="options">
+						</canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+				<b>Networks</b>
+			</div>
+			<div class="card-block">
+				<div class="row">
+					<div class="col-md-12">
+						<canvas id="bar" class="chart chart-bar"
+						  chart-data="netData" chart-labels="netLabels">
+						</canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+				<b>Volumes</b>
+			</div>
+			<div class="card-block">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 align="center">{{volumes.length}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-12">
-		<h2>Dashboard</h2>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-6">
 		<div class="card">
 			<div class="card-header">
-				<h3>Containers</h3>
+				<b>Host Information</b>
 			</div>
 			<div class="card-block">
 				<div class="row">
-					<div class="col-md-5">
-						<p id="dashboard"><i class="fa fa-archive fa-1x" style="color:#2361AE"></i> {{ containers.length}} total </p>
-					</div>
-					<div class="col-md-7">
-						<div class="row">
-							<div class="col-md-4">
-								<p><i class="fa fa-heartbeat fa-1x" style="color:green"></i> {{ running }} running</p>
-							</div>
-							<div class="col-md-4">
-								<p><i class="fa fa-heartbeat fa-1x" style="color:red"></i> {{ stopped }} stopped</p>
-							</div>
-							<div class="col-md-4">
-								<p><i class="fa fa-heartbeat fa-1x" style="color:blue"></i> {{ paused }} paused</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card-footer text-muted">
-				<a ng-href="#/containers" class="btn btn-primary">View All</a>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="card">
-			<div class="card-header">
-				<h3>Images</h3>
-			</div>
-			<div class="card-block">
-				<div class="row">
-					<div class="col-md-6">
-						<p id="dashboard"><i class="fa fa-image fa-1x" style="color:#2361AE"></i> {{ images.length}} total </p>
-					</div>
-					<div class="col-md-6">
-						<i class="fa fa-pie-chart fa-1x" style="color:green"></i> {{ imagesSize }} GB
+					<div class="col-md-12">
+						<table class="table table-striped">
+						  <tr>
+						  	<td><b>Architecture</b></td>
+								<td>{{architecture}}</td>
+						  </tr>
+							<tr>
+								<td><b>Operating System</b></td>
+								<td>{{os}}</td>
+							</tr>
+							<tr>
+						  	<td><b>CPUs</b></td>
+								<td>{{cpus}}</td>
+						  </tr>
+							<tr>
+								<td><b>Server Version</b></td>
+								<td>{{ serverVersion }}</td>
+							</tr>
+						</table>
 					</div>
 				</div>
-			</div>
-			<div class="card-footer text-muted">
-				<a ng-href="#/images" class="btn btn-primary">View All</a>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-6">
-		<div class="card">
-			<div class="card-header">
-				<h3>Networks</h3>
-			</div>
-			<div class="card-block">
-				<div class="row">
-					<div class="col-md-6">
-						<p id="dashboard"><i class="fa fa-plug fa-1x" style="color:#2361AE"></i> {{ networks.length }} total </p>
-					</div>
-					<div class="col-md-6">
-					</div>
-				</div>
-			</div>
-			<div class="card-footer text-muted">
-				<a ng-href="#/networks" class="btn btn-primary">View All</a>
 			</div>
 		</div>
 	</div>

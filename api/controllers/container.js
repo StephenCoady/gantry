@@ -159,7 +159,8 @@ exports.createContainer = (req, res) => {
       })
     } else {
       res.status(201).json({
-        message: "Container created successfully"
+        message: "Container created successfully",
+        data: data
       })
     }
   });

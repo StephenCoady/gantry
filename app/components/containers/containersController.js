@@ -1,9 +1,9 @@
 angular.module('uiForDocker')
   .controller('ContainersCtrl', ContainersCtrl);
 
-ContainersCtrl.$inject = ['$scope', '$http', '$location', 'containerApi', 'toaster', '$route', '$filter'];
+ContainersCtrl.$inject = ['$scope', '$http', '$location', 'containerApi', 'imageApi', 'toaster', '$route', '$filter'];
 
-function ContainersCtrl($scope, $http, $location, containerApi, toaster, $route, $filter) {
+function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaster, $route, $filter) {
   $scope.isActive = function(route) {
     return route === $location.path();
   }
@@ -21,8 +21,7 @@ function ContainersCtrl($scope, $http, $location, containerApi, toaster, $route,
       Binds: [],
       NetworkMode: "bridge",
       Privileged: false
-    },
-    Labels: {}
+    }
   };
 
   $scope.addPortBinding = function() {
@@ -91,15 +90,39 @@ function ContainersCtrl($scope, $http, $location, containerApi, toaster, $route,
   $scope.createContainer = function() {
     preparePortBindings($scope.options);
     prepareVolumes();
-    containerApi.create($scope.options)
-      .then(function(response) {
-        toaster.pop('success', "Success", "Container " + $scope.options.name + " created.");
-        $route.reload();
-      })
-      .catch(function(e) {
-        console.log(e);
-        toaster.pop('error', "Error", "Container " + $scope.options.name + " cannot be created.");
-      })
+    let image = {};
+    image.name = $scope.options.Image;
+    if($scope.options.tag === undefined){
+      image.tag = 'latest'
+    }
+    else{
+      image.tag = $scope.options.tag;
+    }
+    imageApi.pull(image)
+    .then(function(response) {
+      toaster.pop('success', "Success", "Image " + $scope.options.Image + " pulled.");
+    })
+    .then(function(response) {
+      containerApi.create($scope.options)
+        .then(function(response) {
+          toaster.pop('success', "Success", "Container " + $scope.options.name + " created.");
+          $route.reload();
+          return response;
+        })
+        .then(function(response) {
+          containerApi.start(response.data.data.id)
+            .then(function(response) {
+              toaster.pop('success', "Success", "Container " + $scope.options.name + " started.");
+              $route.reload();
+            })
+            .catch(function(e) {
+              toaster.pop('error', "Error", "Container " + $scope.options.name + " cannot be started.");
+            })
+        })
+    })
+    .catch(function(e) {
+      toaster.pop('error', "Error", "Image " + $scope.options.Image + " cannot be pulled. Is the account named included?");
+    })
   };
 
   containerApi.getAll().then(function(response) {

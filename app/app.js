@@ -1,4 +1,4 @@
-angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 'angular-loading-bar'])
+angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 'angular-loading-bar', 'chart.js'])
   .controller('LandingCtrl', function($scope, $route, $location) {
     $scope.isActive = function(route) {
       return route === $location.path();

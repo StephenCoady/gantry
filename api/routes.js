@@ -4,6 +4,8 @@ const controllers = require('./controllers');
 const container = controllers.container;
 const image = controllers.image;
 const network = controllers.network;
+const volume = controllers.volume;
+const docker = controllers.docker;
 
 const router = express.Router();
 
@@ -30,5 +32,12 @@ router.post('/api/images/:id/tag', image.tagImage);
 /* Network Routes */
 router.get('/api/networks', network.listNetworks);
 router.get('/api/networks/:id', network.listSpecificNetwork);
+
+/* Volume Routes */
+router.get('/api/volumes', volume.listVolumes);
+router.get('/api/volumes/:id', volume.listSpecificVolume);
+
+/* Docker System Routes */
+router.get('/api/docker/info', docker.getInfo);
 
 module.exports = router;

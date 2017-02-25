@@ -29,6 +29,10 @@ if (ENVIRONMENT !== 'dev') {
 // Swagger API docs.
 app.use('/docs', express.static(path.join(__dirname, './api/docs')));
 
+// serve up node modules to front end
+app.use('/node_modules', express.static(path.join(__dirname, './node_modules')));
+
+
 app.get('/', (req, res) => {
   res.sendFile('index.html', {
     root: ('./app')
