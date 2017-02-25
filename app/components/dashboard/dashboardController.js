@@ -35,7 +35,7 @@ function DashCtrl($scope, $http, $route, $location, containerApi, imageApi, netw
 
     $scope.containerLabels = ["Running", "Paused", "Stopped"];
     $scope.containerData = [$scope.running, $scope.paused, $scope.stopped];
-    $scope.imageData[1] = $scope.memTotal;
+    $scope.imageData[1] = ($scope.memTotal - $scope.imageData[0]).toFixed(1);
 
   }, function(error) {});
 
