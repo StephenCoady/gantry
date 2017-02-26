@@ -32,10 +32,13 @@ router.post('/api/images/:id/tag', image.tagImage);
 /* Network Routes */
 router.get('/api/networks', network.listNetworks);
 router.get('/api/networks/:id', network.listSpecificNetwork);
+router.delete('/api/networks/:id', network.removeNetwork);
 
 /* Volume Routes */
 router.get('/api/volumes', volume.listVolumes);
 router.get('/api/volumes/:id', volume.listSpecificVolume);
+router.delete('/api/volumes/:id', volume.removeVolume);
+
 
 /* Docker System Routes */
 router.get('/api/docker/info', docker.getInfo);

@@ -9,5 +9,10 @@ angular.module('uiForDocker')
 		volumes.getAll = function(id) {
       return $http.get('/api/volumes/');
     };
+    
+    volumes.remove = function(id) {
+      return $http.delete('/api/volumes/' + id);
+    };
+    
     return volumes;
   });

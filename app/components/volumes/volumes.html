@@ -1,14 +1,14 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			Networks
+			Volumes
 		</h3>
 	</div>
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="btn-group btn">
-					<button type="button" class="btn btn-danger" ng-click="remove(networks)"><i class="fa fa-trash fa-1x"></i> Remove</button>
+					<button type="button" class="btn btn-danger" ng-click="remove(volumes)"><i class="fa fa-trash fa-1x"></i> Remove</button>
 				</div>
 			</div>
 			<div class="col-sm-6">
@@ -24,22 +24,16 @@
 							<tr>
 								<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
 								<th>Name</th>
-								<th>Id</th>
-								<th>Created</th>
 								<th>Driver</th>
-								<th>Containers</th>
+								<th>Scope</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="network in networks | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
-								<th><input type="checkbox" ng-click="networkSelect(network)" ng-model="network.select"></th>
-								<td>{{network.Name}}</td>
-								<td><a ng-href="#/networks/{{network.Id}}">{{network.Id  | limitTo : 15 : 0}}</a></td>
-								<td>{{network.Created | date:'HH:mm dd-MM-yyyy'}}</td>
-								<td>{{network.Driver}}</td>
-								<td>
-									<p ng-repeat="(key, container) in network.Containers"><a href="/containers/{{key}}">{{container.Name}}</a></p>
-								</td>
+							<tr ng-repeat="volume in volumes | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+								<th><input type="checkbox" ng-click="volumeSelect(volume)" ng-model="volume.select"></th>
+								<td><a ng-href="#/volumes/{{volume.Name}}">{{volume.Name  | limitTo : 15 : 0}}</a></td>
+								<td>{{volume.Driver}}</td>
+								<td>{{volume.Scope}}</td>
 							</tr>
 						</tbody>
 					</table>

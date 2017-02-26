@@ -6,19 +6,19 @@
 					<md-content class="md-padding">
 						<div class="row">
 							<div class="btn-group-sm col-sm-9 button-wrapper">
-								<button type="button" class="btn btn-success btn-responsive" ng-click="start(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i> Start</button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="stop(containers)"><i class="fa fa-stop fa-1x space-right" aria-hidden="true"></i> Stop</button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="restart(containers)"><i class="fa fa-refresh fa-1x space-right" aria-hidden="true"></i> Restart</button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="pause(containers)"><i class="fa fa-pause fa-1x space-right" aria-hidden="true"></i> Pause</button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="unpause(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i> Unpause</button>
-								<button type="button" class="btn btn-danger btn-responsive" ng-click="remove(containers)"><i class="fa fa-trash fa-1x space-right" aria-hidden="true"></i> Delete</button>
+								<button type="button" class="btn btn-success btn-responsive" ng-click="start(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Start</span></button>
+								<button type="button" class="btn btn-primary btn-responsive" ng-click="stop(containers)"><i class="fa fa-stop fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Stop</span></button>
+								<button type="button" class="btn btn-primary btn-responsive" ng-click="restart(containers)"><i class="fa fa-refresh fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Restart</span></button>
+								<button type="button" class="btn btn-primary btn-responsive" ng-click="pause(containers)"><i class="fa fa-pause fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Pause</span></button>
+								<button type="button" class="btn btn-primary btn-responsive" ng-click="unpause(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Unpause</span></button>
+								<button type="button" class="btn btn-danger btn-responsive" ng-click="remove(containers)"><i class="fa fa-trash fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
 							</div>
 							<div class="col-sm-3">
 								<input ng-model="q" id="search" class="form-control" placeholder="Filter">
 							</div>
 						</div>
 						<hr>
-						<div class="row">
+						<div class="row panel panel-default table-responsive">
 							<table class="table table-striped">
 								<thead class="thead-inverse">
 									<tr>

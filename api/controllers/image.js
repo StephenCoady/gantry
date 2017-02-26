@@ -43,7 +43,7 @@ exports.removeImage = (req, res) => {
       });
     } else {
       res.status(200).json({
-        messagemessage: 'Image removed successfully'
+        message: 'Image removed successfully'
       });
     }
   });

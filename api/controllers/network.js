@@ -31,3 +31,21 @@ exports.listSpecificNetwork = (req, res) => {
     }
   });
 }
+
+exports.removeNetwork = (req, res) => {
+  const id = req.params.id;
+  const network = docker.getNetwork(id);
+
+  network.remove((err, data) => {
+    if (data === null) {
+      res.status(409).json({
+        message: 'Network cannot be removed',
+        error: err
+      });
+    } else {
+      res.status(200).json({
+        message: 'Network removed successfully'
+      });
+    }
+  });
+};

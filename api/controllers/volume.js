@@ -31,3 +31,21 @@ exports.listSpecificVolume = (req, res) => {
     }
   });
 }
+
+exports.removeVolume = (req, res) => {
+  const id = req.params.id;
+  const volume = docker.getVolume(id);
+
+  volume.remove((err, data) => {
+    if (data === null) {
+      res.status(409).json({
+        message: 'Volume cannot be removed',
+        error: err
+      });
+    } else {
+      res.status(200).json({
+        message: 'Volume removed successfully'
+      });
+    }
+  });
+};

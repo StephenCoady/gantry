@@ -30,6 +30,14 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 
         templateUrl: 'components/networks/networks.html',
         controller: 'NetworksCtrl'
       })
+      .when('/networks/:Id', {
+        templateUrl: 'components/network/network.html',
+        controller: 'NetworkCtrl'
+      })
+      .when('/volumes', {
+        templateUrl: 'components/volumes/volumes.html',
+        controller: 'VolumesCtrl'
+      })
       .when('/host', {
         templateUrl: 'components/host/host.html',
         controller: 'HostCtrl'
@@ -37,7 +45,6 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 
       .when('/docker', {
         templateUrl: 'components/docker/docker.html',
         controller: 'DockerCtrl'
-      
       })
       .when('/settings', {
         templateUrl: 'components/settings/settings.html',
