@@ -36,7 +36,7 @@ after_success:
   login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS ; docker build -f Dockerfile
   -t $REPO:$COMMIT . ; docker tag $REPO:$COMMIT $REPO:$TAG ; docker tag $REPO:$COMMIT
   $REPO:travis-$TRAVIS_BUILD_NUMBER ; docker push $REPO ;
-  openssl aes-256-cbc aes-256-cbc -K $encrypted_f06e4d6d6f2c_key -iv $encrypted_f06e4d6d6f2c_iv -in stephen.key.enc -out /tmp/stephen.key -d ;
+  openssl aes-256-cbc -K $encrypted_f06e4d6d6f2c_key -iv $encrypted_f06e4d6d6f2c_iv -in stephen.key.enc -out /tmp/stephen.key -d ;
   eval "$(ssh-agent -s)" ;
   chmod 600 /tmp/stephen.key ;
   ssh-add /tmp/stephen.key ;
