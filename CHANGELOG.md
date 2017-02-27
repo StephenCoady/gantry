@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.5.2 - 27-02-17 
+	- First skeleton front end application created
+
 ### 0.5.1 - 14-02-17 ***Released***
 	- re-structured folders to make it easier for front end development
 	

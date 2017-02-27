@@ -37,6 +37,7 @@ after_success:
   docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER ;
   docker push $REPO ;
   fi
+- ./deploy.sh $SSH_KEY $STAGING_SERVER
 notifications:
   email:
     on_success: never

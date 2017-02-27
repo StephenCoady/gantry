@@ -16,34 +16,37 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
-describe('#network', () => {
+let volume = {};
+
+describe('#volume', () => {
 
   describe('#list', () => {
 
-    it('should list networks', (done) => {
+    it('should list volumes', (done) => {
       request(app)
-        .get('/api/networks/')
+        .get('/api/volumes/')
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
+          volume = res.body.volumes.Volumes[0];
           done();
         });
     });
 
-    it('should list specific network', (done) => {
+    it('should list specific volume', (done) => {
       request(app)
-        .get('/api/networks/bridge')
+        .get('/api/volumes/' + volume.Name)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
-					expect(res.body.network.Name).to.be.equal('bridge');
+					expect(res.body.volume.Name).to.be.equal(volume.Name);
           done();
         });
     });
 
-    it('should not list non-existent network', (done) => {
+    it('should not list non-existent volume', (done) => {
       request(app)
-        .get('/api/networks/madeUpNetwork')
+        .get('/api/volumes/madeUpNetwork')
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(404);
@@ -53,13 +56,13 @@ describe('#network', () => {
   });
   
   describe('#remove', () => {
-    it('network should not be removed', (done) => {
+    it('volume should not be removed', (done) => {
       request(app)
-        .delete('/api/networks/madeUpNetwork')
+        .delete('/api/volumes/madeUpVolume')
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(409);
-          expect(res.body.message).to.equal("Network cannot be removed");
+          expect(res.body.message).to.equal("Volume cannot be removed");
           done();
         });
     });

@@ -100,7 +100,6 @@ exports.tagImage = (req, res) => {
   const id = req.params.id;
   const image = docker.getImage(id);
   const tag = req.body;
-  console.log(req.body);
 
   image.tag(tag, (err, data) => {
     if (data === null) {
