@@ -35,20 +35,21 @@ function DashCtrl($scope, $http, $route, $location, containerApi, imageApi, netw
 
     $scope.containerLabels = ["Running", "Paused", "Stopped"];
     $scope.containerData = [$scope.running, $scope.paused, $scope.stopped];
-    $scope.imageData[1] = ($scope.memTotal - $scope.imageData[0]).toFixed(1);
 
-  }, function(error) {});
-
-  imageApi.getAll().then(function(response) {
-    var size = 0;
-    response.data.images.forEach(function(image) {
-      var size = image.VirtualSize;
-      var sizeMegabytes = size;
-      $scope.imagesSize += Math.round(sizeMegabytes.toString());
-    });
-    $scope.imagesSize = ($scope.imagesSize.toFixed(1) / 1000000000).toString().substring(0, 6);
-    $scope.imageData[0] = $scope.imagesSize;
-  }, function(error) {});
+  }, function(error) {})
+  .then(function() {
+    imageApi.getAll().then(function(response) {
+      var size = 0;
+      response.data.images.forEach(function(image) {
+        var size = image.VirtualSize;
+        var sizeMegabytes = size;
+        $scope.imagesSize += Math.round(sizeMegabytes.toString());
+      });
+      $scope.imagesSize = ($scope.imagesSize.toFixed(1) / 1000000000).toString().substring(0, 6);
+      $scope.imageData[0] = $scope.imagesSize;
+      $scope.imageData[1] = ($scope.memTotal - $scope.imageData[0]).toFixed(1);
+    }, function(error) {});
+  })
 
   networkApi.getAll().then(function(res) {
     $scope.networks = res.data.networks;

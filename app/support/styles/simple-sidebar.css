@@ -77,7 +77,7 @@
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
-    border-left: red 2px solid;
+    border-left: white 2px solid;
 }
  
 .sidebar-nav li a:active,
@@ -102,7 +102,8 @@
 .no-margin{
     margin:0;
 }
- 
+
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 200px;

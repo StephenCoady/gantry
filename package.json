@@ -11,21 +11,7 @@
   "keywords": [],
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.1.1",
-    "eslint-config-xo-space": "^0.15.0",
     "expect.js": "^0.3.1",
-    "grunt": "^1.0.1",
-    "grunt-bower-install": "^1.6.0",
-    "grunt-sonar-runner": "^2.4.8",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^3.0.1",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-inject": "^4.2.0",
-    "gulp-istanbul": "^1.0.0",
-    "gulp-line-ending-corrector": "^1.0.1",
-    "gulp-mocha": "^3.0.1",
-    "gulp-nsp": "^2.1.0",
-    "gulp-plumber": "^1.0.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.3.0",
     "karma-jasmine": "^1.1.0",
@@ -34,12 +20,6 @@
     "node-cmd": "^1.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "supertest": "^2.0.1"
-  },
-  "eslintConfig": {
-    "extends": "xo-space",
-    "env": {
-      "mocha": true
-    }
   },
   "repository": {
     "type": "git",

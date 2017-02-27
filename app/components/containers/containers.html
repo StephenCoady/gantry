@@ -5,15 +5,15 @@
 				<md-tab label="Containers">
 					<md-content class="md-padding">
 						<div class="row">
-							<div class="btn-group-sm col-sm-9 button-wrapper">
+							<div class="btn-group-sm col-sm-9 col-xs-6 button-wrapper">
 								<button type="button" class="btn btn-success btn-responsive" ng-click="start(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Start</span></button>
 								<button type="button" class="btn btn-primary btn-responsive" ng-click="stop(containers)"><i class="fa fa-stop fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Stop</span></button>
 								<button type="button" class="btn btn-primary btn-responsive" ng-click="restart(containers)"><i class="fa fa-refresh fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Restart</span></button>
 								<button type="button" class="btn btn-primary btn-responsive" ng-click="pause(containers)"><i class="fa fa-pause fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Pause</span></button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="unpause(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Unpause</span></button>
+								<button type="button" class="btn btn-primary btn-responsive" ng-click="unpause(containers)"><i class="fa fa-step-forward fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Unpause</span></button>
 								<button type="button" class="btn btn-danger btn-responsive" ng-click="remove(containers)"><i class="fa fa-trash fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3 col-xs-5">
 								<input ng-model="q" id="search" class="form-control" placeholder="Filter">
 							</div>
 						</div>
@@ -28,7 +28,6 @@
 										<th>Status</th>
 										<th>Ports</th>
 										<th>Image</th>
-										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -44,7 +43,6 @@
 											<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{port.IP}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
 										</td>
 										<td>{{container.Image}}</td>
-										<td><a ng-href="#/containers/{{container.Id}}"><i class="fa fa-arrow-circle-o-right fa-1x"></i></a></td>
 									</tr>
 								</tbody>
 							</table>
