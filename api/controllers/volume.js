@@ -5,6 +5,21 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
+// exports.createVolume = (req, res) => {
+//   docker.createVolume((err, data) => {
+//     if (data === null) {
+//       res.status(409).json({
+//         message: 'Volume cannot be removed',
+//         error: err
+//       });
+//     } else {
+//       res.status(200).json({
+//         message: 'Volume removed successfully'
+//       });
+//     }
+//   });
+// };
+
 exports.listVolumes = (req, res) => {
   docker.listVolumes((err, data) => {
     res.status(200).json({
