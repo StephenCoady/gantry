@@ -8,6 +8,8 @@ branches:
   only:
   - master
 before_install:
+- openssl aes-256-cbc -K $encrypted_f06e4d6d6f2c_key -iv $encrypted_f06e4d6d6f2c_iv
+  -in stephen.key.enc -out ~\/.ssh/stephen.key -d
 - nvm install 6.8.1
 - nvm use 6.8.1
 - npm install -g npm@'>=3'
@@ -15,6 +17,7 @@ install:
 - npm install
 addons:
   sonarqube: true
+  ssh_known_hosts: $STAGING_SERVER
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::8}
@@ -29,15 +32,18 @@ script:
 after_success:
 - sonar-scanner -Dsonar.login=$SONAR_TOKEN
 - export REPO=scoady2/lifecycle-management-for-docker
-- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
-- if [ "$TRAVIS_BRANCH" == "master" ]; then
-  docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS;
-  docker build -f Dockerfile -t $REPO:$COMMIT . ;
-  docker tag $REPO:$COMMIT $REPO:$TAG ;
-  docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER ;
-  docker push $REPO ;
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
+  fi`
+- if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]] ; then docker
+  login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS ; docker build -f Dockerfile
+  -t $REPO:$COMMIT . ; docker tag $REPO:$COMMIT $REPO:$TAG ; docker tag $REPO:$COMMIT
+  $REPO:travis-$TRAVIS_BUILD_NUMBER ; docker push $REPO ;
+  openssl aes-256-cbc aes-256-cbc -K $encrypted_f06e4d6d6f2c_key -iv $encrypted_f06e4d6d6f2c_iv -in stephen.key.enc -out /tmp/stephen.key -d ;
+  eval "$(ssh-agent -s)" ;
+  chmod 600 /tmp/stephen.key ;
+  ssh-add /tmp/stephen.key ;
+  ./deploy.sh $STAGING_SERVER;
   fi
-- ./deploy.sh $SSH_KEY $STAGING_SERVER
 notifications:
   email:
     on_success: never

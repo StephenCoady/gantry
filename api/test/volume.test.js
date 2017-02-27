@@ -19,6 +19,19 @@ const docker = new Docker({
 let volume = {};
 
 describe('#volume', () => {
+  
+  describe('#create', () => {
+
+    it('should create a volume', (done) => {
+      request(app)
+        .post('/api/volumes/')
+        .send({Name: "testvolume"})
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(201);
+          done();
+        });
+    });
+  });
 
   describe('#list', () => {
 

@@ -5,20 +5,21 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
-// exports.createVolume = (req, res) => {
-//   docker.createVolume((err, data) => {
-//     if (data === null) {
-//       res.status(409).json({
-//         message: 'Volume cannot be removed',
-//         error: err
-//       });
-//     } else {
-//       res.status(200).json({
-//         message: 'Volume removed successfully'
-//       });
-//     }
-//   });
-// };
+exports.createVolume = (req, res) => {
+  let options = req.body;
+  docker.createVolume(options, (err, data) => {
+    if (data === null) {
+      res.status(409).json({
+        message: 'Volume cannot be created',
+        error: err
+      });
+    } else {
+      res.status(201).json({
+        message: 'Volume created successfully'
+      });
+    }
+  });
+};
 
 exports.listVolumes = (req, res) => {
   docker.listVolumes((err, data) => {

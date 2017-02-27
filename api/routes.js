@@ -35,6 +35,7 @@ router.get('/api/networks/:id', network.listSpecificNetwork);
 router.delete('/api/networks/:id', network.removeNetwork);
 
 /* Volume Routes */
+router.post('/api/volumes', volume.createVolume);
 router.get('/api/volumes', volume.listVolumes);
 router.get('/api/volumes/:id', volume.listSpecificVolume);
 router.delete('/api/volumes/:id', volume.removeVolume);
