@@ -40,7 +40,7 @@
 										<td ng-if="container.State == 'created'"><span class="label label-default">created</span></td>
 										<td>{{container.Status}}</td>
 										<td>
-											<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{port.IP}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
+											<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{base}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
 										</td>
 										<td>{{container.Image}}</td>
 									</tr>

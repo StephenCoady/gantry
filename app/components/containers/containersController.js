@@ -4,6 +4,7 @@ angular.module('uiForDocker')
 ContainersCtrl.$inject = ['$scope', '$http', '$location', 'containerApi', 'imageApi', 'toaster', '$route', '$filter'];
 
 function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaster, $route, $filter) {
+  $scope.base = ($location.$$host);
   $scope.isActive = function(route) {
     return route === $location.path();
   }
