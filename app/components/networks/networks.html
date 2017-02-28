@@ -34,7 +34,7 @@
 							<tr ng-repeat="network in networks | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
 								<th><input type="checkbox" ng-click="networkSelect(network)" ng-model="network.select"></th>
 								<td>{{network.Name}}</td>
-								<td><a ng-href="#/networks/{{network.Id}}">{{network.Id  | limitTo : 15 : 0}}</a></td>
+								<td>{{network.Id  | limitTo : 15 : 0}}</td>
 								<td>{{network.Created | date:'HH:mm dd-MM-yyyy'}}</td>
 								<td>{{network.Driver}}</td>
 								<td>
