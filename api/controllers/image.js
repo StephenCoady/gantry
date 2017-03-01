@@ -69,12 +69,10 @@ exports.imageHistory = (req, res) => {
 
 exports.pullImage = (req, res) => {
   const name = req.body.name;
-  let tag = '';
+  let tag = req.body.tag;
 
-  if (req.body.tag === '') {
+  if (tag === '') {
     tag = 'latest';
-  } else {
-    tag = req.body.tag;
   }
 
   const repoTag = name + ':' + tag;
