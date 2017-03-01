@@ -1,6 +1,9 @@
 # Changelog
 
-### 0.5.2 - 27-02-17 
+### 0.5.3 - 01-03-17 ***Released***
+	- small bug fix
+
+### 0.5.2 - 27-02-17 ***Released***
 	- First skeleton front end application created
 
 ### 0.5.1 - 14-02-17 ***Released***
