@@ -11,12 +11,22 @@
     margin-bottom:5px;
 }
 
-.no-containers {
-    right: 50%;
-    bottom: 50%;
-    transform: translate(50%,50%);
-    position: absolute;
+.card-header {
+background:#F0DFC9;
 }
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #F0DFC9;
+
+}
+
+.table thead th { 
+  color: black;
+  background-color: #FFF8EF;
+
+}
+
 /*
 @media (max-width: 768px) {
   .btn-responsive {
