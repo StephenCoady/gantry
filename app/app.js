@@ -38,6 +38,10 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 
         templateUrl: 'components/volumes/volumes.html',
         controller: 'VolumesCtrl'
       })
+      .when('/volumes/:Id', {
+        templateUrl: 'components/volume/volume.html',
+        controller: 'VolumeCtrl'
+      })
       .when('/host', {
         templateUrl: 'components/host/host.html',
         controller: 'HostCtrl'

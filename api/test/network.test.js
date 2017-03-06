@@ -17,6 +17,28 @@ const docker = new Docker({
 });
 
 describe('#network', () => {
+  
+  describe('#create', () => {
+    
+    it('should not create a network without a name', (done) => {
+      request(app)
+        .post('/api/networks/')
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(500);
+          done();
+        });
+    });
+
+    it('should create a network', (done) => {
+      request(app)
+        .post('/api/networks/')
+        .send({Name: "testNetwork"})
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(201);
+          done();
+        });
+    });
+  });
 
   describe('#list', () => {
 
@@ -53,13 +75,24 @@ describe('#network', () => {
   });
   
   describe('#remove', () => {
-    it('network should not be removed', (done) => {
+    it('non-existent network should not be removed', (done) => {
       request(app)
         .delete('/api/networks/madeUpNetwork')
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(409);
           expect(res.body.message).to.equal("Network cannot be removed");
+          done();
+        });
+    });
+    
+    it('network should be removed', (done) => {
+      request(app)
+        .delete('/api/networks/testNetwork')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(200);
+          expect(res.body.message).to.equal("Network removed successfully");
           done();
         });
     });

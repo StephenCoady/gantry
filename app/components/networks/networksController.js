@@ -29,6 +29,17 @@ function NetworksCtrl($scope, $http, networkApi, $filter, toaster, $route) {
 			network.select = $scope.selectAll;
 		});
 	};
+	
+	$scope.createNetwork = function(network) {
+		networkApi.create(network)
+		.then(function(response) {
+			toaster.pop('success', "Success", "Network " + network.Name + " created.");
+			$route.reload();
+		})
+		.catch(function(e) {
+			toaster.pop('error', "Error", "Network " + network.Name + " cannot be created.");
+		})
+	};
 
 	$scope.remove = function(networks) {
 		for (var i = 0; i < networks.length; i++) {

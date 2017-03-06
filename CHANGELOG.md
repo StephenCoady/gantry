@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.6.0 - 06-03-17 ***Released***
+	- added creation of volumes and networks
+	- added single network and single volume page
+
 ### 0.5.3 - 01-03-17 ***Released***
 	- small bug fix
 

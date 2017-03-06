@@ -12,10 +12,21 @@
 ```
 docker run -d -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock scoady2/lifecycle-management-for-docker
 ```
+
 #### Using Node.js
 Note: The Docker API must be listening on /var/run/docker.sock
 ```
 node index.js
+```
+
+#### Run tests
+```
+npm test
+```
+
+#### Run coverage report
+```
+npm run coverage
 ```
 
 ## Documentation

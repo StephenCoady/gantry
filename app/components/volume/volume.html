@@ -1,0 +1,32 @@
+<div class="col-md-6">
+	<p id='container-name'>volumes > {{volume.Name | limitTo : 15 : 0 }}</p>
+</div>
+<div class="col-md-12">
+	<div class="row panel panel-default table-responsive">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+					Information
+				</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped">
+				<tr>
+					<td>Name</td>
+					<td>{{volume.Name}}</td>
+				</tr>
+				<tr>
+					<td>Mountpoint</td>
+					<td>{{volume.Mountpoint}}</td>
+				</tr>
+				<tr>
+					<td>Driver</td>
+					<td>{{volume.Driver}}</td>
+				</tr>
+				<tr>
+					<td>Scope</td>
+					<td>{{volume.Scope}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

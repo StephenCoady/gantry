@@ -30,6 +30,7 @@ router.post('/api/images/pull/', image.pullImage);
 router.post('/api/images/:id/tag', image.tagImage);
 
 /* Network Routes */
+router.post('/api/networks', network.createNetwork);
 router.get('/api/networks', network.listNetworks);
 router.get('/api/networks/:id', network.listSpecificNetwork);
 router.delete('/api/networks/:id', network.removeNetwork);

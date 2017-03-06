@@ -21,6 +21,16 @@ let volume = {};
 describe('#volume', () => {
   
   describe('#create', () => {
+    
+    it('should not create a volume without a name', (done) => {
+      request(app)
+        .post('/api/volumes/')
+        .send({Name: "my-network-@"})
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(409);
+          done();
+        });
+    });
 
     it('should create a volume', (done) => {
       request(app)
@@ -76,6 +86,17 @@ describe('#volume', () => {
         .end(function(err, res) {
           expect(res.status).to.be.equal(409);
           expect(res.body.message).to.equal("Volume cannot be removed");
+          done();
+        });
+    });
+    
+      it('volume should be removed', (done) => {
+      request(app)
+        .delete('/api/volumes/testvolume')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(200);
+          expect(res.body.message).to.equal("Volume removed successfully");
           done();
         });
     });
