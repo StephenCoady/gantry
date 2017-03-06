@@ -29,6 +29,18 @@ function VolumesCtrl($scope, $http, volumeApi, $filter, toaster, $route) {
 			volume.select = $scope.selectAll;
 		});
 	};
+	
+	$scope.createVolume = function(volume) {
+		volumeApi.create(volume)
+		.then(function(response) {
+			console.log(response);
+			toaster.pop('success', "Success", "Volume " + volume.Name + " created.");
+			$route.reload();
+		})
+		.catch(function(e) {
+			toaster.pop('error', "Error", "Volume " + volume.Name + " cannot be created.");
+		})
+	};
 
 	$scope.remove = function(volumes) {
 		for (var i = 0; i < volumes.length; i++) {

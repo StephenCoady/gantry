@@ -5,6 +5,20 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
+exports.createNetwork = (req, res) => {
+  docker.createNetwork(req.body, (err, data) => {
+    if(data){
+      res.status(201).json({
+        network: data
+      })
+    } else {
+      res.status(500).json({
+        error: err
+      })
+    }
+  });
+}
+
 exports.listNetworks = (req, res) => {
   docker.listNetworks((err, data) => {
     res.status(200).json({

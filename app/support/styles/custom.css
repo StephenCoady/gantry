@@ -10,6 +10,13 @@
 .button-wrapper .btn {
     margin-bottom:5px;
 }
+
+.no-containers {
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%,50%);
+    position: absolute;
+}
 /*
 @media (max-width: 768px) {
   .btn-responsive {

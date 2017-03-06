@@ -14,7 +14,6 @@ function DashCtrl($scope, $http, $route, $location, containerApi, imageApi, netw
       position: "bottom"
     }
   };
-  $scope.containerColours = ['#42B185', '#6BC3ED', '#ED956B'];
   $scope.imageColours = ['#ED956B', '#42B185'];
   
 
@@ -23,9 +22,21 @@ function DashCtrl($scope, $http, $route, $location, containerApi, imageApi, netw
   $scope.netData = [];
 
   dockerApi.getInfo().then(function(res) {
-    $scope.running = res.data.info.ContainersRunning;
-    $scope.stopped = res.data.info.ContainersStopped;
-    $scope.paused = res.data.info.ContainersPaused;
+    if((res.data.info.ContainersRunning + 
+      res.data.info.ContainersStopped + 
+      res.data.info.ContainersPaused) == 0){
+        $scope.containerLabels = ["No Containers on host"];
+        $scope.containerData = [1];
+        $scope.containerColours = ['#EA3A3A'];
+      } else {
+        $scope.containerColours = ['#42B185', '#6BC3ED', '#ED956B'];
+        $scope.containerLabels = ["Running", "Paused", "Stopped"];
+        $scope.containerData = [
+          res.data.info.ContainersRunning, 
+          res.data.info.ContainersStopped, 
+          res.data.info.ContainersPaused
+        ];
+      }
     $scope.images = res.data.info.Images;
     $scope.cpus = res.data.info.NCPU;
     $scope.architecture = res.data.info.Architecture;
@@ -33,8 +44,6 @@ function DashCtrl($scope, $http, $route, $location, containerApi, imageApi, netw
     $scope.memTotal = (res.data.info.MemTotal.toFixed(1) / 1000000000).toString().substring(0, 6);
     $scope.serverVersion = res.data.info.ServerVersion;
 
-    $scope.containerLabels = ["Running", "Paused", "Stopped"];
-    $scope.containerData = [$scope.running, $scope.paused, $scope.stopped];
 
   }, function(error) {})
   .then(function() {

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "This is the API documentation for the lifecycle management for Docker application. ",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "title": "API Docs",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -25,6 +25,10 @@
     {
       "name": "network",
       "description": "Control networks on the host"
+    },
+    {
+      "name": "volume",
+      "description": "Control volumes on the host"
     }
   ],
   "schemes": [
@@ -77,7 +81,7 @@
         }
       }
     },
-    "/containers/{id}": {
+    "/containers/{id}/": {
       "get": {
         "tags": [
           "container"
@@ -275,6 +279,44 @@
         }
       }
     },
+    "/containers/{id}/create": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "summary": "Create a new container on the host",
+        "description": "",
+        "operationId": "createContainer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "container name",
+            "required": true,
+            "type": "string"
+          },
+          {
+          "name": "body",
+          "in": "body",
+          "description": "The container to be created.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/createContainer"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "Container created successfully"
+          },
+          "500": {
+            "description": "Container cannot be created"
+          }
+        }
+      }
+    },
     "/containers/{id}/remove": {
       "delete": {
         "tags": [
@@ -327,7 +369,7 @@
         }
       }
     },
-    "/images/{id}": {
+    "/images/{id}/": {
       "get": {
         "tags": [
           "image"
@@ -459,6 +501,73 @@
         }
       }
     },
+    "/networks/": {
+      "post": {
+        "tags": [
+          "network"
+        ],
+        "summary": "Create a new network on the host",
+        "description": "",
+        "operationId": "createNetwork",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+          "name": "body",
+          "in": "body",
+          "description": "The network to be created.",
+          "required": true,
+          "schema": {
+            "required": [
+              "Name"
+            ],
+            "properties": {
+              "Name": {
+                "type": "string",
+                "example": "my-network"
+              }
+            }          }
+        }],
+        "responses": {
+          "201": {
+            "description": "Network created successfully"
+          },
+          "500": {
+            "description": "Network cannot be created"
+          }
+        }
+      }
+    },
+    "/networks/{id}": {
+      "delete": {
+        "tags": [
+          "network"
+        ],
+        "summary": "Removes a network",
+        "description": "",
+        "operationId": "removeNetwork",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Network id to delete",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
+        "responses": {
+          "200": {
+            "description": "Network removed successfully"
+          },
+          "409": {
+            "description": "Network cannot be removed"
+          }
+        }
+      }
+    },
     "/networks": {
       "get": {
         "tags": [
@@ -482,7 +591,7 @@
         }
       }
     },
-    "/networks/{id}": {
+    "/networks/{id}/": {
       "get": {
         "tags": [
           "network"
@@ -514,6 +623,132 @@
           },
           "404": {
             "description": "No such network"
+          }
+        }
+      }
+    },
+    "/volumes/": {
+      "post": {
+        "tags": [
+          "volume"
+        ],
+        "summary": "Create a new volume on the host",
+        "description": "",
+        "operationId": "createVolume",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+          "name": "body",
+          "in": "body",
+          "description": "The volume to be created.",
+          "required": true,
+          "schema": {
+            "required": [
+              "Name"
+            ],
+            "properties": {
+              "Name": {
+                "type": "string",
+                "example": "my-volume"
+              }
+            }          }
+        }],
+        "responses": {
+          "201": {
+            "description": "Volume created successfully"
+          },
+          "500": {
+            "description": "Volume cannot be created"
+          }
+        }
+      }
+    },
+    "/volumes/{id}": {
+      "delete": {
+        "tags": [
+          "volume"
+        ],
+        "summary": "Removes a volume",
+        "description": "",
+        "operationId": "removeVolume",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Volume id to delete",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
+        "responses": {
+          "200": {
+            "description": "Volume removed successfully"
+          },
+          "409": {
+            "description": "Volume cannot be removed"
+          }
+        }
+      }
+    },
+    "/volumes": {
+      "get": {
+        "tags": [
+          "volume"
+        ],
+        "summary": "List the volumes on the host",
+        "description": "",
+        "operationId": "listVolumes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Volumes"
+            }
+          }
+        }
+      }
+    },
+    "/volumes/{id}/": {
+      "get": {
+        "tags": [
+          "volume"
+        ],
+        "summary": "List a specific volume on the host",
+        "description": "",
+        "operationId": "listSpecificVolume",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "volume ID",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "single"
+        }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "404": {
+            "description": "No such volume"
           }
         }
       }
@@ -899,6 +1134,65 @@
         }
       }
     },
+    "Volumes": {
+      "type": "object",
+      "properties": {
+        "volumes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Driver": {
+                "type": "string"
+              },
+              "Labels": {
+                "type": "string"
+              },
+              "Mountpoint": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "string"
+              },
+              "Options": {
+                "type": "string"
+              },
+              "Scope": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Volume": {
+      "type": "object",
+      "properties": {
+        "volume": {
+          "type": "object",
+          "properties": {
+            "Driver": {
+              "type": "string"
+            },
+            "Labels": {
+              "type": "string"
+            },
+            "Mountpoint": {
+              "type": "string"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "Options": {
+              "type": "string"
+            },
+            "Scope": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
     "PullImage": {
       "required": [
         "repo",
@@ -916,6 +1210,17 @@
         "tag": {
           "type": "string",
           "example": "3.1"
+        }
+      }
+    },
+    "createContainer": {
+      "required": [
+        "Image"
+      ],
+      "properties": {
+        "Image": {
+          "type": "string",
+          "example": "alpine"
         }
       }
     },
