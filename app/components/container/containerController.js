@@ -1,9 +1,9 @@
 angular.module('uiForDocker')
   .controller('ContainerCtrl', ContainerCtrl);
 
-ContainerCtrl.$inject = ['$scope', '$http', '$routeParams', 'containerApi', 'toaster', '$route'];
+ContainerCtrl.$inject = ['$scope', '$http', '$routeParams', 'containerApi', 'toaster', '$route', '$location'];
 
-function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $route) {
+function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $route, $location) {
 
   containerApi.getOne($routeParams.Id).then(function(response) {
     $scope.container = response.data.container;
@@ -65,11 +65,11 @@ function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $rout
       })
   }
 
-  $scope.remove = function(containers) {
+  $scope.remove = function(container) {
     containerApi.remove(container.Id)
       .then(function(response) {
         toaster.pop('success', "Success", "Container " + container.Name + " removed.");
-        $route.reload();
+        $location.path('/containers');
       })
       .catch(function(e) {
         toaster.pop('error', "Error", "Container " + container.Name + " cannot be removed. Is it stopped?");
