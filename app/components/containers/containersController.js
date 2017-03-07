@@ -1,10 +1,11 @@
 angular.module('uiForDocker')
   .controller('ContainersCtrl', ContainersCtrl);
 
-ContainersCtrl.$inject = ['$scope', '$http', '$location', 'containerApi', 'imageApi', 'toaster', '$route', '$filter'];
+ContainersCtrl.$inject = ['$scope', '$http', '$location', 'containerApi', 'imageApi', 'toaster', '$route', '$filter', 'volumeApi'];
 
-function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaster, $route, $filter) {
+function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaster, $route, $filter, volumeApi) {
   $scope.base = ($location.$$host);
+  $scope.volumeOrPath = "path";
   $scope.isActive = function(route) {
     return route === $location.path();
   }
@@ -125,6 +126,10 @@ function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaste
       toaster.pop('error', "Error", "Image " + $scope.options.Image + " cannot be pulled. Is the account named included?");
     })
   };
+  
+  volumeApi.getAll().then(function(response) {
+		$scope.volumes = response.data.volumes.Volumes;
+	}, function(error) {});
 
   containerApi.getAll().then(function(response) {
     $scope.containers = response.data.containers;

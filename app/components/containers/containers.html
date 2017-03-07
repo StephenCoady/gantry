@@ -1,11 +1,9 @@
-<div class="row">
-	<div ng-cloak>
 		<md-content>
 			<md-tabs md-dynamic-height md-border-bottom>
 				<md-tab label="Containers">
 					<md-content class="md-padding">
 						<div class="row">
-							<div class="btn-group-sm col-sm-9 col-xs-6 button-wrapper">
+							<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
 								<button type="button" class="btn btn-success btn-responsive" ng-click="start(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Start</span></button>
 								<button type="button" class="btn btn-primary btn-responsive" ng-click="stop(containers)"><i class="fa fa-stop fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Stop</span></button>
 								<button type="button" class="btn btn-primary btn-responsive" ng-click="restart(containers)"><i class="fa fa-refresh fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Restart</span></button>
@@ -13,51 +11,52 @@
 								<button type="button" class="btn btn-primary btn-responsive" ng-click="unpause(containers)"><i class="fa fa-step-forward fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Unpause</span></button>
 								<button type="button" class="btn btn-danger btn-responsive" ng-click="remove(containers)"><i class="fa fa-trash fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
 							</div>
-							<div class="col-sm-3 col-xs-5">
+							<div class="col-sm-12 col-md-6">
 								<input ng-model="q" id="search" class="form-control" placeholder="Filter">
 							</div>
 						</div>
 						<hr>
-						<div class="panel panel-default table-responsive">
-							<table class="table table-striped">
-								<thead class="thead-inverse">
-									<tr>
-										<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
-										<th>Name</th>
-										<th>State</th>
-										<th>Status</th>
-										<th>Ports</th>
-										<th>Image</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="container in containers | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
-										<th><input type="checkbox" ng-click="containerSelect(container)" ng-model="container.select"></th>
-										<td><a ng-href="#/containers/{{container.Id}}">{{container.Names[0]}}</a></td>
-										<td ng-if="container.State == 'running'"><span class="label label-success">running</span></td>
-										<td ng-if="container.State == 'paused'"><span class="label label-info">paused</span></td>
-										<td ng-if="container.State == 'exited'"><span class="label label-danger">stopped</span></td>
-										<td ng-if="container.State == 'created'"><span class="label label-default">created</span></td>
-										<td>{{container.Status}}</td>
-										<td>
-											<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{base}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
-										</td>
-										<td>{{container.Image}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
 						<div class="row">
-							<div class="col-md-4">
-								<button type="button" class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"> < </button> {{currentPage+1}}/{{numberOfPages()}}
-								<button type="button" class="btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1"> > </button>
+							<div class="col-md-12">
+								<div class="panel panel-default table-responsive">
+									<table class="table table-striped">
+										<thead class="thead-inverse">
+											<tr>
+												<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
+												<th>Name</th>
+												<th>State</th>
+												<th>Status</th>
+												<th>Ports</th>
+												<th>Image</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="container in containers | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+												<th><input type="checkbox" ng-click="containerSelect(container)" ng-model="container.select"></th>
+												<td><a ng-href="#/containers/{{container.Id}}">{{container.Names[0]}}</a></td>
+												<td ng-if="container.State == 'running'"><span class="label label-success">running</span></td>
+												<td ng-if="container.State == 'paused'"><span class="label label-info">paused</span></td>
+												<td ng-if="container.State == 'exited'"><span class="label label-danger">stopped</span></td>
+												<td ng-if="container.State == 'created'"><span class="label label-default">created</span></td>
+												<td>{{container.Status}}</td>
+												<td>
+													<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{base}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
+												</td>
+												<td>{{container.Image}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
+							<div class="col-md-4">
+								<button type="button" class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-arrow-left fa-1x"></i></button> {{currentPage+1}}/{{numberOfPages()}}
+								<button type="button" class="btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1"><i class="fa fa-arrow-right fa-1x"></i></button>
+							</div>
 					</md-content>
 				</md-tab>
 				<md-tab label="Create New">
 					<md-content class="md-padding">
-						<div class="row">
 							<div class="col-md-12">
 								<form class="form-horizontal">
 									<fieldset>
@@ -96,7 +95,7 @@
 											</div>
 											<div class="col-sm-offset-2 col-sm-10 form-inline">
 												<div class="row" ng-repeat="binding in options.HostConfig.PortBindings">
-													<div class="input-group col-sm-4">
+													<div class="input-group col-sm-4 input-group-sm">
 														<span class="input-group-addon">host</span>
 														<input type="text" class="form-control" id="ports" placeholder="host" ng-model="binding.hostPort">
 													</div>
@@ -159,44 +158,61 @@
 															<md-content class="md-padding">
 																<div class="row">
 																	<div class="col-md-12">
-																		<form class="form-horizontal">
-																			<fieldset>
-																				<md-content class="md-padding">
-																					<div class="form-group">
-																						<label for="ports" class="control-label col-sm-2" for="volumes">Volume Mapping: </label>
-																						<div class="col-sm-10">
-																							<span class="label label-success interactive" ng-click="addVolume()">
-																									<i class="fa fa-plus-circle" aria-hidden="true"></i> new
-																								</span>
+																		<fieldset>
+																			<div class="row">
+																				<div class="col-md-2">
+																					<b>Volume Mapping:</b>
+																				</div>
+																				<div class="col-md-10">
+																					<span class="label label-success interactive" ng-click="addVolume()">
+																								<i class="fa fa-plus-circle" aria-hidden="true"></i> new
+																							</span>
+																				</div>
+																			</div>
+																			<div class="row" ng-repeat="volume in form.Volumes">
+																				<div class="col-md-10 col-md-offset-2">
+																					<div class="col-sm-2 form-group">
+																						<div class="checkbox">
+																							<label>
+																									<input type="checkbox" ng-model="volume.readOnly"> Read-only</label>
 																						</div>
-																						<div class="row" ng-repeat="volume in form.Volumes">
-																							<div class="col-sm-offset-2 col-sm-12 form-inline">
-																								<div class="input-group col-sm-1 input-group-sm">
-																									<div class="checkbox">
-																										<label>
-																											<input type="checkbox" ng-model="volume.readOnly"> Read-only</label>
-																									</div>
-																								</div>
-																								<div class="input-group col-sm-4  input-group-sm">
-																									<span class="input-group-addon">host</span>
-																									<input type="text" class="form-control" id="volumes" placeholder="e.g. /host/folder" ng-model="volume.name">
-																								</div>
-																								<div class="input-group col-sm-4  input-group-sm">
-																									<span class="input-group-addon">container</span>
-																									<input type="text" class="form-control" id="volumes" placeholder="e.g. /container/folder" ng-model="volume.containerPath">
-																								</div>
-																								<div class="input-group col-sm-2  input-group-sm">
-																									<span class="input-group-btn">
-																									<button class="btn btn-default" type="button" ng-click="removeVolume($index)">
-																										<i class="fa fa-minus" aria-hidden="true"></i>
-																									</button>
-																								</span>
-																								</div>
+																					</div>
+																					<div class="col-sm-4">
+																						<div class="form-group form-inline">
+																							<div class="input-group">
+																								<select class="form-control" ng-model="volumeOrPath">
+																									<option value="path">path</option>
+																									<option value="volume">volume</option>
+																								</select>
+																							</div>
+																							<div class="input-group" ng-if="volumeOrPath == 'path'">
+																								<input type="text" class="form-control" placeholder="e.g. /host/folder" ng-model="volume.name">
+																							</div>
+																							<div class="input-group" ng-if="volumeOrPath == 'volume'">
+																								<select class="form-control" id="volumes" ng-model="volume.name">
+																											<option ng-repeat="volume in volumes" value="{{ volume.Name }}">{{ volume.Name | limitTo : 15 : 0 }}</option>
+																										</select>
 																							</div>
 																						</div>
 																					</div>
-																				</md-content>
-																			</fieldset>
+																					<div class="col-sm-6">
+																						<div class="form-group">
+																							<div class="input-group">
+																								<span class="input-group-addon">container</span>
+																								<input type="text" class="form-control" id="volumes" placeholder="e.g. /container/folder" ng-model="volume.containerPath">
+																								<span class="input-group-addon">
+																									<span class="input-group-btn">
+																										<button class="btn btn-default btn-xs" ng-click="removeVolume($index)">
+																											<i class="fa fa-minus"></i>
+																										</button>
+																									</span>
+																								</span>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</fieldset>
 																	</div>
 																</div>
 															</md-content>
@@ -218,10 +234,7 @@
 									</fieldset>
 									</form>
 							</div>
-						</div>
 					</md-content>
 				</md-tab>
 			</md-tabs>
 		</md-content>
-	</div>
-</div>

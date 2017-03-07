@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.7.0 - 06-03-17 ***Released***
+	- fh-3203 - added option to add existing volume to container on creation
+
 ### 0.6.0 - 06-03-17 ***Released***
 	- added creation of volumes and networks
 	- added single network and single volume page
