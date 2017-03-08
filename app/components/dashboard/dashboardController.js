@@ -34,7 +34,7 @@ function DashCtrl($scope, $http, $route, $location, containerApi, imageApi, netw
         $scope.containerData = [
           res.data.info.ContainersRunning, 
           res.data.info.ContainersPaused,
-          res.data.info.ContainersStopped, 
+          res.data.info.ContainersStopped 
         ];
       }
     $scope.images = res.data.info.Images;
