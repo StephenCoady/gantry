@@ -27,8 +27,17 @@ function ImageCtrl($scope, $http, imageApi, toaster, $route, $filter, $routePara
   
   $scope.tagImage = function(tag) {
     
-    tag.repo = tag.repo.toLowerCase();
-    tag.tag = tag.tag.toLowerCase();
+    if(!tag.repo){
+      tag.repo = 'emptyTag'
+    } else{
+      tag.repo = tag.repo.toLowerCase();
+    }
+    
+    if(!tag.tag){
+      tag.tag = 'latest';
+    } else {
+      tag.tag = tag.tag.toLowerCase();
+    }
         
     imageApi.tag($scope.image.Id, tag)
       .then(function(response) {

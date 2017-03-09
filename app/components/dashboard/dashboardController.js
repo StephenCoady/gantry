@@ -7,7 +7,7 @@ function DashCtrl($scope, $http, $route, $location, containerApi, imageApi, netw
   $scope.imagesSize = 0;
   $scope.imageLabels = ["Used", "Available"];
   $scope.imageData = [];
-  $scope.height_chart = window.innerHeight * 0.3;
+  $scope.height_chart = '90';
   $scope.options = {
     legend: {
       display: true,

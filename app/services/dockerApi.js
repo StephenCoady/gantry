@@ -10,6 +10,9 @@ angular.module('uiForDocker')
       return $http.get('/api/docker/events');
     };
 
-
+    docker.getLogs = function(id) {
+      return $http.get('/api/docker/logs/' + id);
+    };
+    
     return docker;
   });

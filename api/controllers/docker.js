@@ -31,7 +31,6 @@ exports.getEvents = (req, res) => {
   }
   docker.getEvents(opts, (err, data) => {
     if(err){
-      console.log(err);
       return res.status(500).json({
         error: err
       })

@@ -1,14 +1,21 @@
 angular.module('uiForDocker')
   .controller('ContainerCtrl', ContainerCtrl);
 
-ContainerCtrl.$inject = ['$scope', '$http', '$routeParams', 'containerApi', 'toaster', '$route', '$location'];
+ContainerCtrl.$inject = ['$scope', '$http', '$routeParams', 'containerApi', 'toaster', '$route', '$location', 'dockerApi'];
 
-function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $route, $location) {
+function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $route, $location, dockerApi) {
 
   containerApi.getOne($routeParams.Id).then(function(response) {
     $scope.container = response.data.container;
   }, function(error) {});
 
+  dockerApi.getLogs($routeParams.Id).then(function(response) {
+    // Replace carriage returns with newlines to clean up output
+    var data = response.data.response.replace(/[\r]/g, '\n').substring(8).replace(/\n(.{8})/g, '\n');
+
+    console.log(data);
+    $scope.log = data;
+  }, function(error) {});
 
   $scope.start = function(container) {
     containerApi.start(container.Id)
