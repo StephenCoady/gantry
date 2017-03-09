@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.8.0 - 09-03-17 ***Released***
+	- fh-3205 - host, docker events and container logs added
+
 ### 0.7.0 - 06-03-17 ***Released***
 	- fh-3203 - added option to add existing volume to container on creation
 

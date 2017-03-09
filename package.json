@@ -1,6 +1,6 @@
 {
   "name": "lifecycle-management-for-docker",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "",
   "homepage": "https://github.com/StephenCoady/lifecycle-management-for-docker#readme",
   "author": "Stephen Coady <scoady2@gmail.com>",
@@ -46,10 +46,14 @@
     "angularjs-toaster": "^2.1.0",
     "body-parser": "^1.16.1",
     "chart.js": "^2.5.0",
+    "datejs": "^1.0.0-rc3",
     "dockerode": "^2.3.1",
     "express": "^4.14.0",
+    "json-stringify-safe": "^5.0.1",
     "moment": "^2.17.1",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "stream-json": "^0.4.2",
+    "string_decoder": "^0.10.31"
   },
   "bugs": {
     "url": "https://github.com/StephenCoady/lifecycle-management-for-docker/issues"

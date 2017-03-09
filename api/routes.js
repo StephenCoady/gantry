@@ -44,5 +44,7 @@ router.delete('/api/volumes/:id', volume.removeVolume);
 
 /* Docker System Routes */
 router.get('/api/docker/info', docker.getInfo);
+router.get('/api/docker/events', docker.getEvents);
+router.get('/api/docker/logs/:id', docker.getLogs)
 
 module.exports = router;

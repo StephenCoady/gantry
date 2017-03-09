@@ -19,10 +19,21 @@ const docker = new Docker({
 describe('#docker', () => {
 
   describe('#info', () => {
-
     it('should get host info', (done) => {
       request(app)
         .get('/api/docker/info')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(200);
+          done();
+        });
+    });
+  });
+
+  describe('#events', () => {
+    it('should get docker events', (done) => {
+      request(app)
+        .get('/api/docker/events')
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);

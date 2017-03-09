@@ -42,13 +42,13 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 
         templateUrl: 'components/volume/volume.html',
         controller: 'VolumeCtrl'
       })
-      .when('/host', {
-        templateUrl: 'components/host/host.html',
-        controller: 'HostCtrl'
-      })
       .when('/docker', {
         templateUrl: 'components/docker/docker.html',
         controller: 'DockerCtrl'
+      })
+      .when('/events', {
+        templateUrl: 'components/events/events.html',
+        controller: 'EventsCtrl'
       })
       .when('/settings', {
         templateUrl: 'components/settings/settings.html',
