@@ -59,10 +59,11 @@
 					<li ng-class="{active:isActive('/volumes')}">
 						<a href="#/volumes"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-database fa-stack-1x "></i></span>Volumes</a>
 					</li>
-					<!-- <hr style="border: 1px dashed rgb(120,120,120);" />
-					<li ng-class="{active:isActive('/host')}">
-						<a href="#/host"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span>Host</a>
+					<hr style="border: 1px dashed rgb(120,120,120);" />
+					<li ng-class="{active:isActive('/events')}">
+						<a href="#/events"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar fa-stack-1x "></i></span>Events</a>
 					</li>
+					<!-- 
 					<li ng-class="{active:isActive('/docker')}">
 						<a href="#/docker"><span class="fa-stack fa-lg pull-left"><i class="fa fa-area-chart fa-stack-1x "></i></span>Docker</a>
 					</li>
@@ -115,9 +116,9 @@
 	<script src="components/network/networkController.js"></script>
 	<script src="components/volumes/volumesController.js"></script>
 	<script src="components/volume/volumeController.js"></script>
-	<script src="components/host/hostController.js"></script>
 	<script src="components/settings/settingsController.js"></script>
 	<script src="components/docker/dockerController.js"></script>
+	<script src="components/events/eventsController.js"></script>
 	<script src="services/containerApi.js"></script>
 	<script src="services/imageApi.js"></script>
 	<script src="services/networkApi.js"></script>

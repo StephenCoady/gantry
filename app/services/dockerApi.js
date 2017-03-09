@@ -5,6 +5,11 @@ angular.module('uiForDocker')
     docker.getInfo = function() {
       return $http.get('/api/docker/info');
     };
+    
+    docker.getEvents = function() {
+      return $http.get('/api/docker/events');
+    };
+
 
     return docker;
   });
