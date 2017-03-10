@@ -70,10 +70,14 @@ exports.getLogs = (req, res, next) => {
     } else {
       const StringDecoder = require('string_decoder').StringDecoder;
       const decoder = new StringDecoder('utf8');
-      
+      let responseBody = '';
       data.on('data', function(chunk) {
+        responseBody += decoder.write(chunk);
+      });
+      data.on('end', function() {
+        let response = responseBody.replace(/\\/g, '');
         res.status(200).json({
-          response: decoder.write(chunk)
+          response: response
         })
       });
     }
