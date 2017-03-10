@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.8.1 - 10-03-17 ***Released***
+	- fh-3253 - bug fix in docker logs retrieval
+
 ### 0.8.0 - 09-03-17 ***Released***
 	- fh-3205 - host, docker events and container logs added
 
