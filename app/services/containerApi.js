@@ -14,6 +14,10 @@ angular.module('uiForDocker')
       return $http.get('/api/containers/running');
     };
     
+    containers.getStats = function(id) {
+      return $http.get('/api/containers/' + id + '/stats', {ignoreLoadingBar: true});
+    };
+    
     containers.start = function(id) {
       return $http.post('/api/containers/' + id + '/start');
     };

@@ -165,3 +165,25 @@ exports.createContainer = (req, res) => {
     }
   });
 }
+
+exports.listContainerLogs = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
+  
+  let opts = {
+    stream : false
+  }
+  
+  container.stats(opts, (err, data) => {
+    if (data == null) {
+      res.status(404).json({
+        message: "Container not found",
+        error: err
+      })
+    } else {
+      res.status(200).json({
+        stats: data
+      })
+    }
+  });
+}

@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.9.0 - 11-03-17 ***Released***
+	- fh-3108 - added container metrics page
+
 ### 0.8.1 - 10-03-17 ***Released***
 	- fh-3253 - bug fix in docker logs retrieval
 

@@ -13,7 +13,6 @@ function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $rout
     // Replace carriage returns with newlines to clean up output
     var data = response.data.response.replace(/[\r]/g, '\n').substring(8).replace(/\n(.{8})/g, '\n');
 
-    console.log(data);
     $scope.log = data;
   }, function(error) {});
 
@@ -82,4 +81,8 @@ function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $rout
         toaster.pop('error', "Error", "Container " + container.Name + " cannot be removed. Is it stopped?");
       })
   }
+  
+  $scope.viewContainer = function(container) {
+    $location.path('/containers/' + container.Id + '/stats');
+  };
 }

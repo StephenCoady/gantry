@@ -13,6 +13,7 @@ const router = express.Router();
 router.get('/api/containers/running', container.listRunningContainers);
 router.get('/api/containers/all', container.listContainers);
 router.get('/api/containers/:id/', container.listSpecificContainer);
+router.get('/api/containers/:id/stats', container.listContainerLogs);
 router.post('/api/containers/:id/start', container.startContainer);
 router.post('/api/containers/:id/stop', container.stopContainer);
 router.post('/api/containers/:id/pause', container.pauseContainer);

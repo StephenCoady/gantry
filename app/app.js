@@ -18,6 +18,10 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 
         templateUrl: 'components/container/container.html',
         controller: 'ContainerCtrl'
       })
+      .when('/containers/:Id/stats', {
+        templateUrl: 'components/stats/stats.html',
+        controller: 'StatsCtrl'
+      })
       .when('/images', {
         templateUrl: 'components/images/images.html',
         controller: 'ImagesCtrl'
