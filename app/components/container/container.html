@@ -13,14 +13,14 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<div class="btn-group">
-					<button type="button" class="btn btn-success" ng-click="start(container)" ng-if="!container.State.Running"><i class="fa fa-play fa-1x"></i> Start</button>
-					<button type="button" class="btn btn-primary" ng-click="stop(container)" ng-if="container.State.Running"><i class="fa fa-stop fa-1x"></i> Stop</button>
-					<button type="button" class="btn btn-primary" ng-click="restart(container)"><i class="fa fa-refresh fa-1x"></i> Restart</button>
-					<button type="button" class="btn btn-primary" ng-click="pause(container)" ng-if="container.State.Running"><i class="fa fa-pause fa-1x"></i> Pause</button>
-					<button type="button" class="btn btn-primary" ng-click="unpause(container)" ng-if="container.State.Paused"><i class="fa fa-play fa-1x"></i> Unpause</button>
-					<button type="button" class="btn btn-danger" ng-click="remove(container)" ng-if="!container.State.Running"><i class="fa fa-trash fa-1x"></i> Delete</button>
-					<button type="button" class="btn btn-info" ng-click="viewContainer(container)" <i class="fa fa-line-chart fa-1x"></i>View Stats</button>
+				<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
+					<button type="button" class="btn btn-success" ng-click="start(container)" ng-if="!container.State.Running"><i class="fa fa-play fa-1x"></i><span class="hidden-xs"> Start</span></button>
+					<button type="button" class="btn btn-primary" ng-click="stop(container)" ng-if="container.State.Running"><i class="fa fa-stop fa-1x"></i><span class="hidden-xs"> Stop</span></button>
+					<button type="button" class="btn btn-primary" ng-click="restart(container)"><i class="fa fa-refresh fa-1x"></i><span class="hidden-xs"> Restart</span></button>
+					<button type="button" class="btn btn-primary" ng-click="pause(container)" ng-if="container.State.Running"><i class="fa fa-pause fa-1x"></i><span class="hidden-xs"> Pause</span></button>
+					<button type="button" class="btn btn-primary" ng-click="unpause(container)" ng-if="container.State.Paused"><i class="fa fa-play fa-1x"></i><span class="hidden-xs"> Unpause</span></button>
+					<button type="button" class="btn btn-danger" ng-click="remove(container)" ng-if="!container.State.Running"><i class="fa fa-trash fa-1x"></i><span class="hidden-xs"> Delete</span></button>
+					<button type="button" class="btn btn-info" ng-click="viewContainer(container)"><i class="fa fa-line-chart fa-1x"></i> <span class="hidden-xs"> View Stats</span></button>
 				</div>
 			</div>
 		</div>
