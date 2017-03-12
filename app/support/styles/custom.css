@@ -12,18 +12,18 @@
 }
 
 .card-header {
-background:#F0DFC9;
+background:#93C6D6;
 }
 
 .panel > .panel-heading {
     background-image: none;
-    background-color: #F0DFC9;
+    background-color: #93C6D6;
 
 }
 
 .table thead th { 
   color: black;
-  background-color: #FFF8EF;
+  background-color: #A8E0FF;
 
 }
 

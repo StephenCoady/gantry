@@ -1,55 +1,60 @@
-<div class="col-md-6">
-	<p id='container-name'>networks > {{network.Name | limitTo : 15 : 0 }}</p>
+<div class="row">
+	<div class="col-md-12">
+		<h2><span class="label label-primary">{{network.Name}}</span></h2>
+	</div>
 </div>
-<div class="col-md-12">
-	<div class="row panel panel-default table-responsive">
-		<div class="panel-heading">
-			<h3 class="panel-title">
+<hr>
+<div class="row">
+	<div class="col-md-12">
+		<div class="row panel panel-default table-responsive">
+			<div class="panel-heading">
+				<h3 class="panel-title">
 					<i class="fa fa-info-circle fa-1x"></i> Information
 				</h3>
-		</div>
-		<div class="panel-body">
-			<table class="table table-striped">
-				<tr>
-					<td>Name</td>
-					<td>{{network.Name}}</td>
-				</tr>
-				<tr>
-					<td>Id</td>
-					<td>{{network.Id}}</td>
-				</tr>
-				<tr>
-					<td>Created</td>
-					<td>{{network.Created | date:'HH:mm dd-MM-yyyy'}}</td>
-				</tr>
-				<tr>
-					<td>Driver</td>
-					<td>{{network.Driver}}</td>
-				</tr>
-				<tr>
-					<td>Scope</td>
-					<td>{{network.Scope}}</td>
-				</tr>
-				<tr>
-					<td>IPv6</td>
-					<td>{{network.EnableIPv6}}</td>
-				</tr>
-				<tr>
-					<td>Config</td>
-					<td>
-						<table class="table table-bordered">
-							<tr ng-repeat="config in network.IPAM.Config">
-								<td>Subnet</td>
-								<td>{{config.Subnet}}</td>
-							</tr>
-							<tr ng-repeat="config in network.IPAM.Config">
-								<td>Gateway</td>
-								<td>{{config.Gateway}}</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped">
+					<tr>
+						<td>Name</td>
+						<td>{{network.Name}}</td>
+					</tr>
+					<tr>
+						<td>Id</td>
+						<td>{{network.Id}}</td>
+					</tr>
+					<tr>
+						<td>Created</td>
+						<td>{{network.Created | date:'HH:mm dd-MM-yyyy'}}</td>
+					</tr>
+					<tr>
+						<td>Driver</td>
+						<td>{{network.Driver}}</td>
+					</tr>
+					<tr>
+						<td>Scope</td>
+						<td>{{network.Scope}}</td>
+					</tr>
+					<tr>
+						<td>IPv6</td>
+						<td>{{network.EnableIPv6}}</td>
+					</tr>
+					<tr>
+						<td>Config</td>
+						<td>
+							<table class="table table-bordered">
+								<tr ng-repeat="config in network.IPAM.Config">
+									<td>Subnet</td>
+									<td>{{config.Subnet}}</td>
+								</tr>
+								<tr ng-repeat="config in network.IPAM.Config">
+									<td>Gateway</td>
+									<td>{{config.Gateway}}</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
