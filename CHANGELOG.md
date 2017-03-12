@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.9.1 - 12-03-17 ***Released***
+	- slight css changes
+
 ### 0.9.0 - 11-03-17 ***Released***
 	- fh-3108 - added container metrics page
 
