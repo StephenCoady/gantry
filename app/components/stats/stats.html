@@ -1,18 +1,12 @@
 <div class="col-md-12">
 	<div class="row">
 		<div class="col-md-12">
-			<h2><span class="label label-primary">{{container.Name}}</span></h2>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<p ng-if="container.State.Running && !container.State.Paused"><span class="label label-success">running</span></p>
-			<p ng-if="container.State.Paused"><span class="label label-info">paused</span></p>
-			<p ng-if="!container.State.Running"><span class="label label-danger">stopped</span></p>
+			<a ng-href="#/containers/{{container.Name}}" class="btn btn-default btn-large"><i class="fa fa-arrow-left"></i> Back</a>
+			<hr>
 		</div>
 	</div>
 </div>
-<div class="col-md-12 col-lg-6">
+<div class="col-md-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -31,7 +25,7 @@
 		</div>
 	</div>
 </div>
-<div class="col-md-12 col-lg-6">
+<div class="col-md-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -52,7 +46,7 @@
 		</div>
 	</div>
 </div>
-<div class="col-md-12 col-lg-6">
+<div class="col-md-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">

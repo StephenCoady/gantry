@@ -1,7 +1,7 @@
 # LifeCycle Management For Docker 
 
 
-| Build Status | Dependencies | Version | Docker Image | Coverage | Technical Debt |
+| Build Status  | Dependencies   |  Version  | Docker Image   | Coverage  | Technical Debt   |
 |---|---|---|---|---|---|
 |[![Build][travis-image]][travis-url]|[![Deps!][daviddm-image]][daviddm-url]|[![Tag!][github-image]][github-url]|[![Docker][docker-image]][docker-url]|[![Coverage][coverage-image]][sonar-url]|[![Tech Debt][tech-debt-image]][sonar-url]|
 > This project aims to provide graphical option for managing Docker on a remote host. It will provide container, image and network orchestration through a graphical user interface.

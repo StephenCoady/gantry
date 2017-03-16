@@ -6,7 +6,7 @@ const docker = new Docker({
 });
 
 exports.createVolume = (req, res) => {
-  let options = req.body;
+  const options = req.body;
   docker.createVolume(options, (err, data) => {
     if (data === null) {
       res.status(409).json({
@@ -30,8 +30,8 @@ exports.listVolumes = (req, res) => {
 }
 
 exports.listSpecificVolume = (req, res) => {
-  let id = req.params.id;
-  let volume = docker.getVolume(id);
+  const id = req.params.id;
+  const volume = docker.getVolume(id);
 
   volume.inspect((err, data) => {
 

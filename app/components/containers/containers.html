@@ -42,7 +42,7 @@
 												<td>
 													<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{base}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
 												</td>
-												<td>{{container.Image}}</td>
+												<td>{{container.Image  | limitTo : 25 : 0}}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -60,7 +60,8 @@
 							<div class="col-md-12">
 								<form class="form-horizontal">
 									<fieldset>
-
+										<h3>Details</h3>
+										<hr>
 										<div class="form-group">
 											<label for="name" class="control-label col-sm-2" for="name">Name: </label>
 											<div class="col-sm-10">
@@ -89,9 +90,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">Port mappings: </label>
 											<div class="col-sm-10">
-												<span class="label label-success interactive" ng-click="addPortBinding()"> 
-													<i class="fa fa-plus-circle" aria-hidden="true"></i> new
-												</span>
+												<button class="btn btn-sm btn-success" ng-click="addPortBinding()"><i class="fa fa-plus-circle fa-1x"></i></button>
 											</div>
 											<div class="col-sm-offset-2 col-sm-10 form-inline">
 												<div class="row" ng-repeat="binding in options.HostConfig.PortBindings">
@@ -118,115 +117,95 @@
 											</div>
 										</div>
 										<div class="row">
-											<div ng-cloak>
-												<md-content>
-													<md-tabs md-dynamic-height md-border-bottom>
-														<md-tab label="Commands">
-															<md-content class="md-padding">
-																<div class="row">
-																	<div class="col-md-12">
-																		<form class="form-horizontal">
-																			<fieldset>
-																				<md-content class="md-padding">
-																					<div class="form-group">
-																						<label for="cmd" class="control-label col-sm-2" for="name">CMD: </label>
-																						<div class="col-sm-10">
-																							<input type="text" class="form-control" id="cmd" placeholder="e.g: node app.js" ng-model="options.Cmd">
-																						</div>
-																					</div>
-
-																					<div class="form-group">
-																						<label for="dir" class="control-label col-sm-2" for="name">Working Directory: </label>
-																						<div class="col-sm-10">
-																							<input type="text" class="form-control" id="dir" placeholder="e.g: /code" ng-model="options.WorkingDir">
-																						</div>
-																					</div>
-
-																					<div class="form-group">
-																						<label for="entry" class="control-label col-sm-2" for="name">Entry Point: </label>
-																						<div class="col-sm-10">
-																							<input type="text" class="form-control" id="entry" placeholder="e.g: /bin/sh" ng-model="options.Entrypoint">
-																						</div>
-																					</div>
-																				</md-content>
-																			</fieldset>
+												<div class="col-md-12">
+													<form class="form-horizontal">
+															<h3>Commands</h3>
+															<hr>
+																<div class="form-group">
+																	<label for="cmd" class="control-label col-sm-2" for="name">CMD: </label>
+																	<div class="col-sm-10">
+																		<input type="text" class="form-control" id="cmd" placeholder="e.g: node app.js" ng-model="options.Cmd">
 																	</div>
 																</div>
-															</md-content>
-														</md-tab>
-														<md-tab label="Volumes">
-															<md-content class="md-padding">
-																<div class="row">
-																	<div class="col-md-12">
-																		<fieldset>
-																			<div class="row">
-																				<div class="col-md-2">
-																					<b>Volume Mapping:</b>
-																				</div>
-																				<div class="col-md-10">
-																					<span class="label label-success interactive" ng-click="addVolume()">
-																								<i class="fa fa-plus-circle" aria-hidden="true"></i> new
-																							</span>
-																				</div>
-																			</div>
-																			<div class="row" ng-repeat="volume in form.Volumes">
-																				<div class="col-md-10 col-md-offset-2">
-																					<div class="col-sm-2 form-group">
-																						<div class="checkbox">
-																							<label>
-																									<input type="checkbox" ng-model="volume.readOnly"> Read-only</label>
-																						</div>
-																					</div>
-																					<div class="col-sm-4">
-																						<div class="form-group form-inline">
-																							<div class="input-group">
-																								<select class="form-control" ng-model="volumeOrPath">
-																									<option value="path">path</option>
-																									<option value="volume">volume</option>
-																								</select>
-																							</div>
-																							<div class="input-group" ng-if="volumeOrPath == 'path'">
-																								<input type="text" class="form-control" placeholder="e.g. /host/folder" ng-model="volume.name">
-																							</div>
-																							<div class="input-group" ng-if="volumeOrPath == 'volume'">
-																								<select class="form-control" id="volumes" ng-model="volume.name">
-																											<option ng-repeat="volume in volumes" value="{{ volume.Name }}">{{ volume.Name | limitTo : 15 : 0 }}</option>
-																										</select>
-																							</div>
-																						</div>
-																					</div>
-																					<div class="col-sm-6">
-																						<div class="form-group">
-																							<div class="input-group">
-																								<span class="input-group-addon">container</span>
-																								<input type="text" class="form-control" id="volumes" placeholder="e.g. /container/folder" ng-model="volume.containerPath">
-																								<span class="input-group-addon">
-																									<span class="input-group-btn">
-																										<button class="btn btn-default btn-xs" ng-click="removeVolume($index)">
-																											<i class="fa fa-minus"></i>
-																										</button>
-																									</span>
-																								</span>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</fieldset>
+
+																<div class="form-group">
+																	<label for="dir" class="control-label col-sm-2" for="name">Working Directory: </label>
+																	<div class="col-sm-10">
+																		<input type="text" class="form-control" id="dir" placeholder="e.g: /code" ng-model="options.WorkingDir">
 																	</div>
 																</div>
-															</md-content>
-														</md-tab>
-														<!-- <md-tab label="Networks">
-															<md-content class="md-padding">
-															</md-content>
-														</md-tab> -->
-													</md-tabs>
-												</md-content>
-											</div>
+
+																<div class="form-group">
+																	<label for="entry" class="control-label col-sm-2" for="name">Entry Point: </label>
+																	<div class="col-sm-10">
+																		<input type="text" class="form-control" id="entry" placeholder="e.g: /bin/sh" ng-model="options.Entrypoint">
+																	</div>
+																</div>
+												</div>
+										</div>
+										<div class="row">
+										  <div class="col-md-12">
+												<div class="form-horizontal">
+													<h3>Volumes</h3>
+													<hr>
+													<div class="col-md-2">
+														<b>Volume Mapping:</b>
+													</div>
+													<div class="col-md-10">
+														<button class="btn btn-sm btn-success" ng-click="addVolume()"><i class="fa fa-plus-circle fa-1x"></i></button>
+													</div>
+												</div>
+												<div class="row" ng-repeat="volume in form.Volumes">
+													<div class="col-md-10 col-md-offset-2">
+														<div class="col-sm-2 form-group">
+															<div class="checkbox">
+																<label>
+																		<input type="checkbox" ng-model="volume.readOnly"> Read-only</label>
+															</div>
+														</div>
+														<div class="row">
+														<div class="col-sm-4">
+															<div class="form-group form-inline">
+																<div class="input-group">
+																	<select class="form-control" ng-model="volumeOrPath">
+																		<option value="path">path</option>
+																		<option value="volume">volume</option>
+																	</select>
+																</div>
+																<div class="input-group" ng-if="volumeOrPath == 'path'">
+																	<input type="text" class="form-control" placeholder="e.g. /host/folder" ng-model="volume.name">
+																</div>
+																<div class="input-group" ng-if="volumeOrPath == 'volume'">
+																	<select class="form-control" id="volumes" ng-model="volume.name">
+																				<option ng-repeat="volume in volumes" value="{{ volume.Name }}">{{ volume.Name | limitTo : 15 : 0 }}</option>
+																			</select>
+																</div>
+															</div>
+														</div>
+														<div class="col-sm-6">
+															<div class="form-group">
+																<div class="input-group">
+																	<span class="input-group-addon">container</span>
+																	<input type="text" class="form-control" id="volumes" placeholder="e.g. /container/folder" ng-model="volume.containerPath">
+																	<span class="input-group-addon">
+																		<span class="input-group-btn">
+																			<button class="btn btn-default btn-xs" ng-click="removeVolume($index)">
+																				<i class="fa fa-minus"></i>
+																			</button>
+																		</span>
+																	</span>
+																</div>
+															</div>
+														</div>
+														</div>
+													</div>
+												</div>
+										  </div>
+										</div>
+										<div class="row">
+											<hr>
 											<div class="form-group">
-												<label class="control-label col-sm-2" for="singlebutton"></label>
-												<div class="text-left col-sm-10">
+												<div class="text-left col-sm-10 col-sm-offset-2 btn-group-sm">
 													<button class="btn btn-primary" ng-click="createContainer(options)"><i class="fa fa-plus fa-1x"></i> Create</button>
 												</div>
 											</div>

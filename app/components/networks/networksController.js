@@ -13,7 +13,12 @@ function NetworksCtrl($scope, $http, networkApi, $filter, toaster, $route) {
 			return $filter('filter')($scope.networks, $scope.q)
 		}
 		$scope.numberOfPages = function() {
-			return Math.ceil($scope.getData().length / $scope.pageSize);
+			let pages = Math.ceil($scope.getData().length / $scope.pageSize);
+      if(pages){
+        return pages;
+      } else {
+        return 1;
+      }		
 		}
 
 		$scope.$watch('q', function(newValue, oldValue) {

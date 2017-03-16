@@ -55,6 +55,10 @@
   width: auto;
 }
 
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 0px;
+}
 
 /* Sidebar Styles */
 
@@ -93,13 +97,21 @@
 
 .sidebar-nav .active a { 
   background:#7D8A94!important;
-  text-shadow: 0px 0px 2px white; 
 }
 
 .sidebar-nav>.sidebar-brand {
   height: 65px;
   font-size: 18px;
   line-height: 60px;
+}
+
+#menu-toggle, #menu-toggle-2 {
+  background: none;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: white;
+    background-color: none;
 }
 
 .sidebar-nav>.sidebar-brand a {
@@ -143,9 +155,7 @@
   #wrapper.toggled-2 #sidebar-wrapper {
     width: 50px;
   }
-  /*#wrapper.toggled-2 #sidebar-wrapper:hover {
-        width: 200px;
-    }*/
+  
   #page-content-wrapper {
     padding: 20px;
     position: relative;

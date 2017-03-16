@@ -1,7 +1,8 @@
 "use strict";
-var stringify = require('json-stringify-safe');
+let stringify = require('json-stringify-safe');
 const Docker = require('dockerode');
-var util = require('util');
+let util = require('util');
+
 
 const docker = new Docker({
   socketPath: '/var/run/docker.sock'
@@ -16,13 +17,13 @@ exports.getInfo = (req, res) => {
 }
 
 exports.getEvents = (req, res) => {
-  let time = new Date();
-  var unixTime = Date.parse(time)/1000
-  let hourAgo = new Date();
+  const time = new Date();
+  var unixTime = Date.parse(time.toString())/1000
+  const hourAgo = new Date();
   hourAgo.setHours(hourAgo.getHours()-24);
-  var unixHourAgo = Date.parse(hourAgo)/1000
+  var unixHourAgo = Date.parse(hourAgo.toString())/1000
   
-  let opts = {
+  const opts = {
     since: unixHourAgo, 
     until: unixTime,
     follow: false,
@@ -42,7 +43,7 @@ exports.getEvents = (req, res) => {
         responseBody += decoder.write(chunk);
       });
       data.on('end', function() {
-        let response = responseBody.replace(/\\/g, '');
+        const response = responseBody.replace(/\\/g, '');
         res.status(200).json({
           events: response
         })
@@ -51,11 +52,11 @@ exports.getEvents = (req, res) => {
   });
 }
 
-exports.getLogs = (req, res, next) => {
-  let id = req.params.id;
-  let container = docker.getContainer(id);
+exports.getLogs = (req, res) => {
+  const id = req.params.id;
+  const container = docker.getContainer(id);
 
-  let opts = {
+  const opts = {
     follow: false,
     stdout: true,
     stderr: true
@@ -75,7 +76,7 @@ exports.getLogs = (req, res, next) => {
         responseBody += decoder.write(chunk);
       });
       data.on('end', function() {
-        let response = responseBody.replace(/\\/g, '');
+        const response = responseBody.replace(/\\/g, '');
         res.status(200).json({
           response: response
         })

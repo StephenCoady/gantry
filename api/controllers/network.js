@@ -28,8 +28,8 @@ exports.listNetworks = (req, res) => {
 }
 
 exports.listSpecificNetwork = (req, res) => {
-  let id = req.params.id;
-  let network = docker.getNetwork(id);
+  const id = req.params.id;
+  const network = docker.getNetwork(id);
 
   network.inspect((err, data) => {
 

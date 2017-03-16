@@ -19,8 +19,13 @@ function EventsCtrl($scope, $http, dockerApi, $filter) {
 			return $filter('filter')($scope.events, $scope.q)
 		}
 		$scope.numberOfPages = function() {
-			return Math.ceil($scope.getData().length / $scope.pageSize);
-		}
+      let pages = Math.ceil($scope.getData().length / $scope.pageSize);
+      if(pages){
+        return pages;
+      } else {
+        return 1;
+      }		
+    }
 
 		$scope.$watch('q', function(newValue, oldValue) {
 			if (oldValue != newValue) {
