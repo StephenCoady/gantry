@@ -15,6 +15,10 @@
 background:#93C6D6;
 }
 
+.breadcrumb {
+background:#E3E3E3;
+}
+
 .panel > .panel-heading {
     background-image: none;
     background-color: #93C6D6;

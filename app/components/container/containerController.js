@@ -12,7 +12,6 @@ function ContainerCtrl($scope, $http, $routeParams, containerApi, toaster, $rout
   dockerApi.getLogs($routeParams.Id).then(function(response) {
     // Replace carriage returns with newlines to clean up output
     var data = response.data.response.replace(/[\r]/g, '\n').substring(8).replace(/\n(.{8})/g, '\n');
-
     $scope.log = data;
   }, function(error) {});
 

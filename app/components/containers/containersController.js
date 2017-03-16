@@ -142,7 +142,12 @@ function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaste
       return $filter('filter')($scope.containers, $scope.q)
     }
     $scope.numberOfPages = function() {
-      return Math.ceil($scope.getData().length / $scope.pageSize);
+      let pages = Math.ceil($scope.getData().length / $scope.pageSize);
+      if(pages){
+        return pages;
+      } else {
+        return 1;
+      }
     }
 
     $scope.$watch('q', function(newValue, oldValue) {

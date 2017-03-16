@@ -170,7 +170,7 @@ exports.listContainerLogs = (req, res) => {
   const id = req.params.id;
   const container = docker.getContainer(id);
   
-  let opts = {
+  const opts = {
     stream : false
   }
   

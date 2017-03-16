@@ -32,7 +32,12 @@ function ImagesCtrl($scope, $http, imageApi, toaster, $route, $filter) {
       return $filter('filter')($scope.images, $scope.q)
     }
     $scope.numberOfPages = function() {
-      return Math.ceil($scope.getData().length / $scope.pageSize);
+      let pages = Math.ceil($scope.getData().length / $scope.pageSize);
+      if(pages){
+        return pages;
+      } else {
+        return 1;
+      }    
     }
 
     $scope.$watch('q', function(newValue, oldValue) {

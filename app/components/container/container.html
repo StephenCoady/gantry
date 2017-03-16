@@ -1,75 +1,71 @@
-	<div class="col-md-12">
-		<div class="row">
-			<div class="col-md-12">
-				<h2><span class="label label-primary">{{container.Name}}</span></h2>
-			</div>
+<div class="col-md-12">
+	<div class="row">
+		<div class="col-md-6">
+			<a ng-href="#/containers" class="btn btn-default btn-large"><i class="fa fa-arrow-left"></i> Back</a>
+			<hr>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<p ng-if="container.State.Running && !container.State.Paused"><span class="label label-success">running</span></p>
-				<p ng-if="container.State.Paused"><span class="label label-info">paused</span></p>
-				<p ng-if="!container.State.Running"><span class="label label-danger">stopped</span></p>
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+					<i class="fa fa-gear fa-1x"></i> Actions on {{container.Name}}
+				</h3>
+		</div>
+		<div class="panel-body">
+			<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
+				<button type="button" class="btn btn-success" ng-click="start(container)" ng-if="!container.State.Running"><i class="fa fa-play fa-1x"></i><span class="hidden-xs"> Start</span></button>
+				<button type="button" class="btn btn-primary" ng-click="stop(container)" ng-if="container.State.Running"><i class="fa fa-stop fa-1x"></i><span class="hidden-xs"> Stop</span></button>
+				<button type="button" class="btn btn-primary" ng-click="restart(container)"><i class="fa fa-refresh fa-1x"></i><span class="hidden-xs"> Restart</span></button>
+				<button type="button" class="btn btn-primary" ng-click="pause(container)" ng-if="container.State.Running"><i class="fa fa-pause fa-1x"></i><span class="hidden-xs"> Pause</span></button>
+				<button type="button" class="btn btn-primary" ng-click="unpause(container)" ng-if="container.State.Paused"><i class="fa fa-play fa-1x"></i><span class="hidden-xs"> Unpause</span></button>
+				<button type="button" class="btn btn-danger" ng-click="remove(container)" ng-if="!container.State.Running"><i class="fa fa-trash fa-1x"></i><span class="hidden-xs"> Delete</span></button>
+				<button type="button" class="btn btn-info" ng-click="viewContainer(container)"><i class="fa fa-line-chart fa-1x"></i> <span class="hidden-xs"> View Stats</span></button>
 			</div>
 		</div>
 	</div>
-  <div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<i class="fa fa-gear fa-1x"></i> Actions
-				</h3>
-			</div>
-			<div class="panel-body">
-				<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
-					<button type="button" class="btn btn-success" ng-click="start(container)" ng-if="!container.State.Running"><i class="fa fa-play fa-1x"></i><span class="hidden-xs"> Start</span></button>
-					<button type="button" class="btn btn-primary" ng-click="stop(container)" ng-if="container.State.Running"><i class="fa fa-stop fa-1x"></i><span class="hidden-xs"> Stop</span></button>
-					<button type="button" class="btn btn-primary" ng-click="restart(container)"><i class="fa fa-refresh fa-1x"></i><span class="hidden-xs"> Restart</span></button>
-					<button type="button" class="btn btn-primary" ng-click="pause(container)" ng-if="container.State.Running"><i class="fa fa-pause fa-1x"></i><span class="hidden-xs"> Pause</span></button>
-					<button type="button" class="btn btn-primary" ng-click="unpause(container)" ng-if="container.State.Paused"><i class="fa fa-play fa-1x"></i><span class="hidden-xs"> Unpause</span></button>
-					<button type="button" class="btn btn-danger" ng-click="remove(container)" ng-if="!container.State.Running"><i class="fa fa-trash fa-1x"></i><span class="hidden-xs"> Delete</span></button>
-					<button type="button" class="btn btn-info" ng-click="viewContainer(container)"><i class="fa fa-line-chart fa-1x"></i> <span class="hidden-xs"> View Stats</span></button>
-				</div>
-			</div>
-		</div>
-  </div>
-  <div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">
+</div>
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
 					<i class="fa fa-info-circle fa-1x"></i> Information
 				</h3>
-			</div>
-			<div class="panel-body">
-				<table class="table">
-					<tr>
-						<td>Status</td>
-						<td>{{container.State.Status}}</td>
-					</tr>
-				  <tr>
-				  	<td>Path</td>
-						<td>{{container.Path}}</td>
-				  </tr>
-					<tr>
-						<td>Privileged Mode</td>
-						<td>{{container.HostConfig.Privileged}}</td>
-					</tr>
-					<tr>
-						<td>IP address</td>
-						<td>{{container.NetworkSettings.IPAddress}}</td>
-					</tr>
-				</table>
-			</div>
 		</div>
-  </div>
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">
+		<div class="panel-body">
+			<table class="table">
+				<tr>
+					<td>Status</td>
+					<td ng-if="container.State.Running && !container.State.Paused"><span class="label label-success">running</span></td>
+					<td ng-if="container.State.Paused"><span class="label label-info">paused</span></td>
+					<td ng-if="!container.State.Running"><span class="label label-danger">stopped</span></td>
+				</tr>
+				<tr>
+					<td>Path</td>
+					<td>{{container.Path}}</td>
+				</tr>
+				<tr>
+					<td>Privileged Mode</td>
+					<td>{{container.HostConfig.Privileged}}</td>
+				</tr>
+				<tr>
+					<td>IP address</td>
+					<td>{{container.NetworkSettings.IPAddress}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
 					<i class="fa fa-history fa-1x"></i> Container Logs
 				</h3>
-			</div>
-			<div class="panel-body">
-				<pre>{{log}}</pre>
-			</div>
 		</div>
-  </div>
+		<div class="panel-body">
+			<pre>{{log}}</pre>
+		</div>
+	</div>
+</div>
