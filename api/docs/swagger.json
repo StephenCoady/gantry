@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "This is the API documentation for the lifecycle management for Docker application. ",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "title": "API Docs",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {

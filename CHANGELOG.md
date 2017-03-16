@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.9.2 - 16-03-17 ***Released***
+	- minor bug fix
+
 ### 0.9.1 - 12-03-17 ***Released***
 	- slight css changes
 
