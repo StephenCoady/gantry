@@ -166,7 +166,7 @@ exports.createContainer = (req, res) => {
   });
 }
 
-exports.listContainerLogs = (req, res) => {
+exports.listContainerStats = (req, res) => {
   const id = req.params.id;
   const container = docker.getContainer(id);
   

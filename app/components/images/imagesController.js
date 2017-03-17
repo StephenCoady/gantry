@@ -1,20 +1,42 @@
 angular.module('uiForDocker')
   .controller('ImagesCtrl', ImagesCtrl)
-	.filter('startFrom', function() {
+  .filter('startFrom', function() {
     return function(input, start) {
-      if (input == undefined){
+      if (input == undefined) {
         return
       } else {
         start = +start; //parse to int
-        return input.slice(start);    
+        return input.slice(start);
       }
     }
-});
+  });
 
-ImagesCtrl.$inject = ['$scope', '$http', 'imageApi', 'toaster', '$route', '$filter'];
+ImagesCtrl.$inject = ['$scope', '$http', 'imageApi', 'toaster', '$route', '$filter', 'FileUploader', 'dockerApi'];
 
-function ImagesCtrl($scope, $http, imageApi, toaster, $route, $filter) {
+function ImagesCtrl($scope, $http, imageApi, toaster, $route, $filter, FileUploader, dockerApi) {
 
+  $scope.create = {};
+
+  var uploader = $scope.uploader = new FileUploader({
+    url: '/api/docker/upload'
+  });
+  $scope.uploader.queue = [];
+
+  uploader.onAfterAddingFile = function(fileItem) {
+    $scope.uploader.queue = [];
+    $scope.uploader.queue.push(fileItem);
+    $scope.file = fileItem;
+  };
+  
+  uploader.onSuccessItem = function(fileItem, response, status, headers) {
+    toaster.pop('success', "Success", "Dockerfile uploaded");
+    dockerApi.build($scope.create).then(function(response){
+      toaster.pop('success', "Success", "Image built successfully");
+      $route.reload();
+    });
+};
+  
+  
 
   imageApi.getAll().then(function(response) {
     response.data.images.forEach(function(image) {
@@ -33,11 +55,11 @@ function ImagesCtrl($scope, $http, imageApi, toaster, $route, $filter) {
     }
     $scope.numberOfPages = function() {
       let pages = Math.ceil($scope.getData().length / $scope.pageSize);
-      if(pages){
+      if (pages) {
         return pages;
       } else {
         return 1;
-      }    
+      }
     }
 
     $scope.$watch('q', function(newValue, oldValue) {
@@ -62,19 +84,19 @@ function ImagesCtrl($scope, $http, imageApi, toaster, $route, $filter) {
       }
     }
   }
-  
+
   $scope.pullImage = function(image) {
-    if (image.tag === undefined){
+    if (image.tag === undefined) {
       image.tag = 'latest'
     }
     imageApi.pull(image)
-    .then(function(response) {
-      toaster.pop('success', "Success", "Image " + image.name + "/" + image.tag + " pulled.");
-      $route.reload();
-    })
-    .catch(function(e) {
-      toaster.pop('error', "Error", "Image " + image.name + "/" + image.tag + " cannot be pulled. Is the account named included?");
-    })
+      .then(function(response) {
+        toaster.pop('success', "Success", "Image " + image.name + "/" + image.tag + " pulled.");
+        $route.reload();
+      })
+      .catch(function(e) {
+        toaster.pop('error', "Error", "Image " + image.name + "/" + image.tag + " cannot be pulled. Is the account named included?");
+      })
   }
 
   function removeHandler(image) {
