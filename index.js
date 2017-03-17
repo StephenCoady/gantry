@@ -5,19 +5,21 @@ let bodyParser = require('body-parser');
 let app = express();
 let morgan = require('morgan');
 let path = require('path');
+var multer = require('multer');
 let ENVIRONMENT = process.env.ENV;
 
 app.use((req, res, next) => {
   req.start = Date.now();
   next();
 });
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
 // parse application/json
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(multer({
+  dest: path.join(__dirname, '/uploads/')
+}).any());
 
 app.use(express.static(path.join(__dirname, './app')));
 app.use(routes);

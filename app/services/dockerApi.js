@@ -13,6 +13,14 @@ angular.module('uiForDocker')
     docker.getLogs = function(id) {
       return $http.get('/api/docker/logs/' + id);
     };
+
+    docker.upload = function() {
+      return $http.post('/api/docker/upload/');
+    };
+
+    docker.build = function(options) {
+      return $http.post('/api/docker/build/', options);
+    };
     
     return docker;
   });

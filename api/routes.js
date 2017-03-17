@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/api/containers/running', container.listRunningContainers);
 router.get('/api/containers/all', container.listContainers);
 router.get('/api/containers/:id/', container.listSpecificContainer);
-router.get('/api/containers/:id/stats', container.listContainerLogs);
+router.get('/api/containers/:id/stats', container.listContainerStats);
 router.post('/api/containers/:id/start', container.startContainer);
 router.post('/api/containers/:id/stop', container.stopContainer);
 router.post('/api/containers/:id/pause', container.pauseContainer);
@@ -47,5 +47,7 @@ router.delete('/api/volumes/:id', volume.removeVolume);
 router.get('/api/docker/info', docker.getInfo);
 router.get('/api/docker/events', docker.getEvents);
 router.get('/api/docker/logs/:id', docker.getLogs);
+router.post('/api/docker/upload', docker.upload);
+router.post('/api/docker/build', docker.build);
 
 module.exports = router;

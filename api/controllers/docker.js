@@ -2,6 +2,8 @@
 let stringify = require('json-stringify-safe');
 const Docker = require('dockerode');
 let util = require('util');
+let path = require('path');
+const fs = require('fs');
 
 
 const docker = new Docker({
@@ -18,20 +20,20 @@ exports.getInfo = (req, res) => {
 
 exports.getEvents = (req, res) => {
   const time = new Date();
-  var unixTime = Date.parse(time.toString())/1000
+  var unixTime = Date.parse(time.toString()) / 1000
   const hourAgo = new Date();
-  hourAgo.setHours(hourAgo.getHours()-24);
-  var unixHourAgo = Date.parse(hourAgo.toString())/1000
-  
+  hourAgo.setHours(hourAgo.getHours() - 24);
+  var unixHourAgo = Date.parse(hourAgo.toString()) / 1000
+
   const opts = {
-    since: unixHourAgo, 
+    since: unixHourAgo,
     until: unixTime,
     follow: false,
     stdout: true,
     stderr: true
   }
   docker.getEvents(opts, (err, data) => {
-    if(err){
+    if (err) {
       return res.status(500).json({
         error: err
       })
@@ -79,6 +81,50 @@ exports.getLogs = (req, res) => {
         const response = responseBody.replace(/\\/g, '');
         res.status(200).json({
           response: response
+        })
+      });
+    }
+  });
+}
+
+exports.upload = (req, res) => {
+  fs.readFile(req.files[0].path, function (err, data) {
+    var path = require('path');
+    var savePath = path.dirname(require.main.filename);
+    savePath += '/uploads/Dockerfile';
+    
+    fs.writeFile(savePath, data, function (err) {
+      res.status(201).json({
+        response: 'File saved'
+      });
+    });
+  });
+}
+
+exports.build = (req, res) => {
+  console.log(req.body);
+  const name = req.body.name.toLowerCase();
+  let appDir = path.dirname(require.main.filename);
+  appDir += '/uploads';
+  
+  docker.buildImage({
+    context: appDir,
+    src: ['Dockerfile']
+  }, {t: name}, function(error, data) {
+    if (error) {
+      res.status(500).json({
+        error: error
+      });
+    } else {
+      const StringDecoder = require('string_decoder').StringDecoder;
+      const decoder = new StringDecoder('utf8');
+      let responseBody = '';
+      data.on('data', function(chunk) {
+        responseBody += decoder.write(chunk);
+      });
+      data.on('end', function() {
+        res.status(200).json({
+          response: responseBody
         })
       });
     }

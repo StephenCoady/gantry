@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.9.3 - 17-03-17 ***Released***
+	- fh-3051 - added Dockerfile upload and build process
+
 ### 0.9.2 - 16-03-17 ***Released***
 	- minor bug fix
 

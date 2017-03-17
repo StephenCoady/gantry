@@ -15,20 +15,22 @@ const docker = new Docker({
   socketPath: '/var/run/docker.sock'
 });
 
+let TEST_CONTAINER = {
+  Image: 'ubuntu',
+  AttachStdin: false,
+  AttachStdout: true,
+  AttachStderr: true,
+  Tty: true,
+  Cmd: ['/bin/bash', '-c', 'tail -f /var/log/dmesg'],
+  OpenStdin: false,
+  StdinOnce: false
+};
+
 describe('#container', function () {
   var testContainer;
 
   before(function (done) {
-    docker.createContainer({
-      Image: 'ubuntu',
-      AttachStdin: false,
-      AttachStdout: true,
-      AttachStderr: true,
-      Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /var/log/dmesg'],
-      OpenStdin: false,
-      StdinOnce: false
-    }, function (err, container) {
+    docker.createContainer(TEST_CONTAINER, function (err, container) {
       if (err) {
         done(err);
       }
@@ -353,5 +355,90 @@ describe('#container', function () {
     });
   })
 
+  describe('#create', () => {
+    let container_id = '';
+    
+    it('container should not be created without data', (done) => {
+      request(app)
+        .post('/api/containers/create')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(500);
+          expect(res.body.message).to.equal("Container cannot be created");
+          done();
+        });
+    });
+
+    it('container should be created', (done) => {
+      request(app)
+        .post('/api/containers/create')
+        .send(TEST_CONTAINER)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(201);
+          container_id = res.body.data.id;
+          expect(res.body.message).to.equal("Container created successfully");
+          done();
+        });
+    });
+    
+    it('container should be removed', (done) => {
+      request(app)
+        .delete('/api/containers/' + container_id + '/remove')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(200);
+          expect(res.body.message).to.equal("Container removed successfully");
+          done();
+        });
+    });
+  })
+  
+  describe('#stats', () => {
+    let container_id = '';
+    
+    it('stats should not be retrieved for non-existent container', (done) => {
+      request(app)
+        .get('/api/containers/madeUpContainer/stats')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(404);
+          expect(res.body.message).to.equal("Container not found");
+          done();
+        });
+    });
+
+    it('container should be created', (done) => {
+      request(app)
+        .post('/api/containers/create')
+        .send(TEST_CONTAINER)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(201);
+          container_id = res.body.data.id;
+          expect(res.body.message).to.equal("Container created successfully");
+          done();
+        });
+    });
+    
+    it('stats should be returned for container', (done) => {
+      request(app)
+        .get('/api/containers/' + container_id + '/stats')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(200);
+          done();
+        });
+    });
+    
+    it('container should be removed', (done) => {
+      request(app)
+        .delete('/api/containers/' + container_id + '/remove')
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          expect(res.status).to.be.equal(200);
+          expect(res.body.message).to.equal("Container removed successfully");
+          done();
+        });
+    });
+  })
 
 });
