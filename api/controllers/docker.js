@@ -102,7 +102,6 @@ exports.upload = (req, res) => {
 }
 
 exports.build = (req, res) => {
-  console.log(req.body);
   const name = req.body.name.toLowerCase();
   let appDir = path.dirname(require.main.filename);
   appDir += '/uploads';
