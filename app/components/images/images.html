@@ -1,123 +1,125 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
 						<i class="fa fa-download fa-1x"></i> Pull Image
 					</h3>
-						</div>
-						<div class="panel-body">
-							<form class="form-horizontal">
-								<div class="col-md-12">
-									<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<label for="image" class="control-label">Image:  </label>
-										<input type="text" class="form-control" id="image" placeholder="e.g: ubuntu" ng-model="pull.name">
-									</div>
-									<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<label for="tag" class="control-label">Tag:  </label>
-										<input type="text" class="form-control" id="tag" placeholder="e.g: latest" ng-model="pull.tag">
-									</div>
-									<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-group-sm">
-										<button type="button" class="btn btn-primary" ng-click="pullImage(pull)"><i class="fa fa-download fa-1x"></i> Pull</button>
-										<p class="help-block">Note: If tag is left empty then latest will be used.</p>
-									</div>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal">
+							<div class="col-md-12">
+								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<label for="image" class="control-label">Image:  </label>
+									<input type="text" class="form-control" id="image" placeholder="e.g: ubuntu" ng-model="pull.name">
 								</div>
-							</form>
-						</div>
+								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<label for="tag" class="control-label">Tag:  </label>
+									<input type="text" class="form-control" id="tag" placeholder="e.g: latest" ng-model="pull.tag">
+								</div>
+								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-group-sm">
+									<button type="button" class="btn btn-primary" ng-click="pullImage(pull)"><i class="fa fa-download fa-1x"></i> Pull</button>
+									<p class="help-block">Note: If tag is left empty then latest will be used.</p>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
 						<i class="fa fa-upload fa-1x"></i> Create an Image from a Dockerfile
 					</h3>
-						</div>
-						<div class="panel-body">
-							<form class="form-horizontal">
-								<div class="col-md-12">
-									<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<label for="image" class="control-label">Name:  </label>
-										<input type="text" class="form-control" id="image" placeholder="e.g: my-image" ng-model="create.name">
-									</div>
-									<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<label for="tag" class="control-label">File:  </label>
-										<input type="file" nv-file-select="" uploader="uploader" ng-model="file" />
-									</div>
-									<div class="form-group col-xs-12">
-										<div ng-show="uploader.isHTML5">
-											<div nv-file-drop="" uploader="uploader">
-												<div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
-													<p ng-if="uploader.queue.length == 0">Or drop the Dockerfile here!</p>
-													<p ng-if="uploader.queue.length > 0">{{uploader.queue[0].file.name}}</p>
-												</div>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal">
+							<div class="col-md-12">
+								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<label for="image" class="control-label">Name:  </label>
+									<input type="text" class="form-control" id="image" placeholder="e.g: my-image" ng-model="create.name">
+								</div>
+								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<label for="tag" class="control-label">File:  </label>
+									<input type="file" nv-file-select="" uploader="uploader" ng-model="file" />
+								</div>
+								<div class="form-group col-xs-12">
+									<div ng-show="uploader.isHTML5">
+										<div nv-file-drop="" uploader="uploader">
+											<div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+												<p ng-if="uploader.queue.length == 0">Or drop the Dockerfile here!</p>
+												<p ng-if="uploader.queue.length > 0">{{uploader.queue[0].file.name}}</p>
 											</div>
 										</div>
 									</div>
-									<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-group-sm">
-										<button type="button" class="btn btn-primary" ng-click="uploader.queue[0].upload()"><i class="fa fa-upload fa-1x"></i> Create</button>
-									</div>
 								</div>
-							</form>
-						</div>
+								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-group-sm">
+									<button type="button" class="btn btn-primary" ng-click="uploader.queue[0].upload()"><i class="fa fa-upload fa-1x"></i> Create</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
+			</div>
 		</div>
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
 						<i class="fa fa-file-code-o fa-1x"></i> Images
 					</h3>
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<div class="row">
-							<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
-								<button type="button" class="btn btn-danger" ng-click="remove(images)"><i class="fa fa-trash fa-1x"></i> Remove</button>
-							</div>
-							<div class="col-md-6 col-sm-12">
-								<input ng-model="q" id="search" class="form-control" placeholder="Filter">
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-default table-responsive">
-									<table class="table table-striped">
-										<thead class="thead-inverse">
-											<tr>
-												<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
-												<th>Id</th>
-												<th>Created</th>
-												<th>Tags</th>
-												<th>Size</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr ng-repeat="image in images | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
-												<th><input type="checkbox" ng-click="imageSelect(image)" ng-model="image.select"></th>
-												<td><a ng-href="#/images/{{image.Id}}">{{image.Id  | limitTo : 15 : 0}}</a></td>
-												<td>{{image.Created * 1000 | date:'HH:mm dd-MM-yyyy'}}</td>
-												<td>
-													<p ng-repeat="tag in image.RepoTags">{{tag}}</p>
-												</td>
-												<td>{{image.VirtualSize}} MB</td>
-											</tr>
-										</tbody>
-									</table>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
+									<button type="button" class="btn btn-danger" ng-click="remove(images)"><i class="fa fa-trash fa-1x"></i> Remove</button>
 								</div>
-								<div class="row">
-									<div class="col-md-4">
-										<button type="button" class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-arrow-left fa-1x"></i></button> {{currentPage+1}}/{{numberOfPages()}}
-										<button type="button" class="btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1"><i class="fa fa-arrow-right fa-1x"></i></button>
+								<div class="col-md-6 col-sm-12">
+									<input ng-model="q" id="search" class="form-control" placeholder="Filter">
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="panel panel-default table-responsive">
+										<table class="table table-striped">
+											<thead class="thead-inverse">
+												<tr>
+													<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
+													<th>Id</th>
+													<th>Created</th>
+													<th>Tags</th>
+													<th>Size</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="image in images | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+													<th><input type="checkbox" ng-click="imageSelect(image)" ng-model="image.select"></th>
+													<td><a ng-href="#/images/{{image.Id}}">{{image.Id  | limitTo : 15 : 0}}</a></td>
+													<td>{{image.Created * 1000 | date:'HH:mm dd-MM-yyyy'}}</td>
+													<td>
+														<p ng-repeat="tag in image.RepoTags">{{tag}}</p>
+													</td>
+													<td>{{image.VirtualSize}} MB</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<button type="button" class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-arrow-left fa-1x"></i></button> {{currentPage+1}}/{{numberOfPages()}}
+											<button type="button" class="btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1"><i class="fa fa-arrow-right fa-1x"></i></button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
+						</div>
 					</div>
 				</div>
 			</div>
