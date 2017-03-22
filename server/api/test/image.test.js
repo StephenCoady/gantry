@@ -1,7 +1,7 @@
 'use strict';
 
 let request = require('supertest');
-let app = require('../../index');
+let app = require('../../../index');
 let chai = require('chai');
 process.env.NODE_ENV = 'dev';
 
@@ -13,23 +13,48 @@ let image = {
   tag: '3.1'
 };
 
+let login = {
+  name: 'admin',
+  password: 'admin'
+}
+
+let token;
+
 describe('#image', () => {
+
+  before(function(done) {
+    request(app)
+      .post('/api/users/authenticate/')
+      .send(login)
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        token = res.body.token;
+        done();
+      });
+  });
+
   describe('#pull', () => {
     // one image with one tag
     it('should pull image from remote source', done => {
       request(app)
         .post('/api/images/pull')
+        .set('x-access-token', token)
         .send(image)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
         });
     }).timeout(120000);
-    
+
     it('should pull image from remote source without a tag', done => {
       request(app)
         .post('/api/images/pull')
-        .send({repo: 'library', name: 'alpine', tag: ''})
+        .set('x-access-token', token)
+        .send({
+          repo: 'library',
+          name: 'alpine',
+          tag: ''
+        })
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
@@ -40,6 +65,7 @@ describe('#image', () => {
     it('should list images', done => {
       request(app)
         .get('/api/images/')
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
@@ -50,6 +76,7 @@ describe('#image', () => {
     it('should list specific image', done => {
       request(app)
         .get('/api/images/' + image.name + ':' + image.tag)
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           image.Id = res.body.image.Id;
@@ -62,6 +89,7 @@ describe('#image', () => {
     it('should not list non-existent image', done => {
       request(app)
         .get('/api/images/madeUpImage')
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(404);
@@ -73,6 +101,7 @@ describe('#image', () => {
     it('should list history of image', done => {
       request(app)
         .get('/api/images/' + image.name + ':' + image.tag + '/history')
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
@@ -83,6 +112,7 @@ describe('#image', () => {
     it('should not list history of non-existent image', done => {
       request(app)
         .get('/api/images/madeUpImage/history')
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(404);
@@ -90,31 +120,40 @@ describe('#image', () => {
         });
     });
   });
-  
+
   describe('#tag', () => {
     it('should not tag non-existent image', done => {
       request(app)
         .post('/api/images/madeUpImage/tag')
-        .send({repo: 'nginx', tag: 'latest'})
+        .set('x-access-token', token)
+        .send({
+          repo: 'nginx',
+          tag: 'latest'
+        })
         .end(function(err, res) {
           expect(res.status).to.be.equal(404);
           done();
         });
     });
-    
+
     it('should tag image', done => {
       request(app)
         .post('/api/images/' + image.Id + '/tag')
-        .send({repo: 'test-repo', tag: 'test-tag'})
+        .set('x-access-token', token)
+        .send({
+          repo: 'test-repo',
+          tag: 'test-tag'
+        })
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
         });
     });
-    
+
     it('should list specific image', done => {
       request(app)
         .get('/api/images/' + image.name + ':' + image.tag)
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
@@ -122,13 +161,14 @@ describe('#image', () => {
           done();
         });
     });
-    
+
   });
 
   describe('#remove', () => {
     it('should not remove non-existent image', done => {
       request(app)
         .delete('/api/images/madeUpImage')
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(409);
@@ -139,16 +179,18 @@ describe('#image', () => {
     it('should remove image', done => {
       request(app)
         .delete('/api/images/' + image.name + ':' + image.tag)
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
           done();
         });
     }).timeout(10000);
-    
+
     it('should remove image tagged latest', done => {
       request(app)
         .delete('/api/images/' + image.name + ':latest')
+        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);

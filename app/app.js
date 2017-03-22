@@ -1,10 +1,29 @@
-angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 'angular-loading-bar', 'chart.js', 'angularFileUpload'])
-  .controller('LandingCtrl', function($scope, $route, $location) {
+angular.module('uiForDocker', [
+    'ngRoute',
+    'toaster',
+    'ngCookies',
+    'ngAnimate',
+    'ngMaterial',
+    'angular-loading-bar',
+    'chart.js',
+    'angularFileUpload'
+  ])
+  .controller('LandingCtrl', function($scope, $route, $location, $cookieStore, authentication, $rootScope) {
     $scope.isActive = function(route) {
       return route === $location.path();
     }
+    
+    $rootScope.isLoggedIn = false;
+  
+    $scope.logout = function() {
+      $cookieStore.remove('Gantry');
+      authentication.setIslogged(false);
+      $rootScope.isLoggedIn = false;
+      $location.path('/login');
+    };
   })
   .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+
     $routeProvider
       .when('/', {
         templateUrl: 'components/dashboard/dashboard.html',
@@ -58,8 +77,31 @@ angular.module('uiForDocker', ['ngRoute', 'toaster', 'ngAnimate', 'ngMaterial', 
         templateUrl: 'components/settings/settings.html',
         controller: 'SettingsCtrl'
       })
+      .when('/login', {
+        templateUrl: 'components/login/login.html',
+        controller: 'LoginCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
-      $locationProvider.hashPrefix('');
+    $locationProvider.hashPrefix('');
+  }])
+  .run(['$rootScope', '$location', '$route', 'authentication', '$cookieStore', function($rootScope, $location, $route, authentication, $cookieStore) {
+    $rootScope.$on('$routeChangeStart', function(event) {
+      if (typeof $cookieStore.get('Gantry') !== 'undefined') {
+        authentication.setIslogged(true);
+        $rootScope.isLoggedIn = true;
+      }
+      var path = $location.path();
+      if (!authentication.isLoggedIn()) {
+        console.log('DENY on route: ', $location.path());
+        if (path !== "/login") {
+          $rootScope.isLoggedIn = false;
+          $location.path('/login');
+        }
+      } else {
+        $rootScope.isLoggedIn = true;
+        console.log('ALLOW on route: ', $location.path());
+      }
+    });
   }]);

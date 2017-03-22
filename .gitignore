@@ -2,3 +2,5 @@ node_modules/
 .sonar
 coverage/
 npm-debug.log
+db/
+uploads/

@@ -1,6 +1,9 @@
 const express	= require('express');
 const controllers = require('./controllers');
+const jwt = require('jsonwebtoken');
+let config = require('./config');
 
+const user = controllers.user;
 const container = controllers.container;
 const image = controllers.image;
 const network = controllers.network;
@@ -8,6 +11,35 @@ const volume = controllers.volume;
 const docker = controllers.docker;
 
 const router = express.Router();
+
+/* User Routes */
+router.post('/api/users/authenticate', user.authenticate);
+
+router.use(function(req, res, next) {
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+    jwt.verify(token, config.TOKEN_SECRET, function(err, decoded) {      
+      if (err) {
+        return res.status(401).json({ success: false, message: 'Failed to authenticate token.' });    
+      } else {
+        req.decoded = decoded;    
+        next();
+      }
+    });
+
+  } else {
+
+    return res.status(403).send({ 
+        success: false, 
+        message: 'No token provided.' 
+    });
+    
+  }
+});
+
 
 /* Container Routes */
 router.get('/api/containers/running', container.listRunningContainers);
