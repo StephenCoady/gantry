@@ -25,24 +25,31 @@
 		<nav class="navbar navbar-default no-margin navbar-fixed-top">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header fixed-brand">
+				<button type="button" ng-click="logout()" class="navbar-toggle collapsed" data-toggle="collapse">
+					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout
+				</button>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
-                      <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
-                    </button>
-				<a class="navbar-brand" href="#/"><i class="fa fa-rocket fa-4"></i> Docker</a>
+          <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+        </button>
+				<a class="navbar-brand"><i class="fa fa-rocket fa-4"></i> Gantry</a>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button></li>
 					</ul>
 				</div>
 			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="isLoggedIn">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><button class="navbar-toggle collapse in logout" ng-click="logout()" id="menu-toggle-3"> <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</button></li>
+				</ul>
+			</div>
 			<!-- navbar-header-->
-
 
 			<!-- bs-example-navbar-collapse-1 -->
 		</nav>
 		<div id="wrapper">
 			<!-- Sidebar -->
-			<div id="sidebar-wrapper">
+			<div id="sidebar-wrapper" ng-if="isLoggedIn">
 				<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
 					<li ng-class="{active:isActive('/')}">
 						<a href="#/"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
@@ -89,7 +96,6 @@
 		</div>
 		<!-- /#wrapper -->
 
-
 	</div>
 	<script src="support/scripts/jquery-3.1.1.min.js"></script>
 	<script src="support/scripts/bootstrap.min.js"></script>
@@ -105,6 +111,7 @@
 	<script src="node_modules/chart.js/dist/Chart.min.js"></script>
 	<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
 	<script src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
+	<script src="node_modules/angular-cookies/angular-cookies.min.js"></script>
 
 
 	<script src="app.js"></script>
@@ -121,11 +128,13 @@
 	<script src="components/settings/settingsController.js"></script>
 	<script src="components/docker/dockerController.js"></script>
 	<script src="components/events/eventsController.js"></script>
+	<script src="components/login/loginController.js"></script>
 	<script src="services/containerApi.js"></script>
 	<script src="services/imageApi.js"></script>
 	<script src="services/networkApi.js"></script>
 	<script src="services/volumeApi.js"></script>
 	<script src="services/dockerApi.js"></script>
+	<script src="services/authentication.js"></script>
 
 </body>
 

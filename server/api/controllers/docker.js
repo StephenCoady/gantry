@@ -1,5 +1,4 @@
 "use strict";
-let stringify = require('json-stringify-safe');
 const Docker = require('dockerode');
 let util = require('util');
 let path = require('path');
@@ -88,28 +87,36 @@ exports.getLogs = (req, res) => {
 }
 
 exports.upload = (req, res) => {
-  fs.readFile(req.files[0].path, function (err, data) {
-    var path = require('path');
-    var savePath = path.dirname(require.main.filename);
-    savePath += '/uploads/Dockerfile';
-    
-    fs.writeFile(savePath, data, function (err) {
-      res.status(201).json({
-        response: 'File saved'
+  if (req.files) {
+    fs.readFile(req.files[0].path, function(err, data) {
+      var path = require('path');
+      var savePath = path.dirname(require.main.filename);
+      savePath += '/uploads/Dockerfile';
+
+      fs.writeFile(savePath, data, function(err) {
+        res.status(201).json({
+          response: 'File saved'
+        });
       });
     });
-  });
+  } else {
+    res.status(500).json({
+      error: "No file found in request"
+    })
+  }
 }
 
 exports.build = (req, res) => {
   const name = req.body.name.toLowerCase();
   let appDir = path.dirname(require.main.filename);
   appDir += '/uploads';
-  
+
   docker.buildImage({
     context: appDir,
     src: ['Dockerfile']
-  }, {t: name}, function(error, data) {
+  }, {
+    t: name
+  }, function(error, data) {
     if (error) {
       res.status(500).json({
         error: error
