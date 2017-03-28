@@ -1,7 +1,7 @@
 "use strict";
 const Docker = require('dockerode');
 let util = require('util');
-let path = require('path');
+const path = require('path');
 const fs = require('fs');
 
 
@@ -93,7 +93,7 @@ exports.upload = (req, res) => {
       var savePath = path.dirname(require.main.filename);
       savePath += '/uploads/Dockerfile';
 
-      fs.writeFile(savePath, data, function(err) {
+      fs.writeFile(savePath, data, function() {
         res.status(201).json({
           response: 'File saved'
         });

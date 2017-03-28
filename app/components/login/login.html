@@ -8,11 +8,11 @@
 				<h4>Welcome back.</h4>
 				<input type="text" class="form-control input-sm chat-input" placeholder="username" ng-model="credentials.name" />
 				</br>
-				<input type="text" class="form-control input-sm chat-input" placeholder="password" ng-model="credentials.password" />
+				<input type="password" class="form-control input-sm chat-input" placeholder="password" ng-model="credentials.password" />
 				</br>
 				<div class="wrapper">
 					<span class="group-btn">     
-						<button class="btn btn-primary btn-md" ng-click="login()">login <i class="fa fa-sign-in"></i></button>
+						<button class="btn btn-primary btn-md" ng-click="login(credentials)">login <i class="fa fa-sign-in"></i></button>
 				</span>
 				</div>
 			</div>

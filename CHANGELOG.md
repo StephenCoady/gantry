@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.11.0 - 28-03-17 ***Released***
+	- fh-3209 - added option to change the users password
+
 ### 0.10.0 - 22-03-17 ***Released***
 	- fh-3207 - added database to provide login feature
 	- fh-3206 - added front page and behaviour to allow for login
@@ -8,7 +11,7 @@
 	- added jwt to all routes on server side which require it
 	- added functionality to allow front end application to authenticate with server side
 
-	### 0.9.3 - 17-03-17 ***Released***
+### 0.9.3 - 17-03-17 ***Released***
 	- fh-3051 - added Dockerfile upload and build process
 
 ### 0.9.2 - 16-03-17 ***Released***
