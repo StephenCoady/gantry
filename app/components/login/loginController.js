@@ -7,10 +7,11 @@ function LoginCtrl($scope, $rootScope, $location, $cookieStore, authentication, 
   
   $scope.credentials = {};
 
-  $scope.login = function(){
+  $scope.login = function(credentials){
+    $scope.credentials = credentials;
     authentication.loginUser({
-      'name': $scope.credentials.name,
-      'password': $scope.credentials.password
+      'name': credentials.name,
+      'password': credentials.password
     })
     .then(function(data) {
       console.log("succ");
@@ -29,13 +30,4 @@ function LoginCtrl($scope, $rootScope, $location, $cookieStore, authentication, 
             });
     });
   };
-
-  
-
-  $scope.signup = function(){
-    $location.path('/signup');  
-  };
-  $scope.resetPassword = function(){
-   $location.path('/forgotpassword');
- };
 }

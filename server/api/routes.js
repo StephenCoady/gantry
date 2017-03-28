@@ -12,7 +12,7 @@ const docker = controllers.docker;
 
 const router = express.Router();
 
-/* User Routes */
+/* User Routes*/
 router.post('/api/users/authenticate', user.authenticate);
 
 router.use(function(req, res, next) {
@@ -40,6 +40,8 @@ router.use(function(req, res, next) {
   }
 });
 
+/* User Routes */
+router.put('/api/users/', user.changePassword);
 
 /* Container Routes */
 router.get('/api/containers/running', container.listRunningContainers);

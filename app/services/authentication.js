@@ -4,6 +4,7 @@ angular.module('uiForDocker')
   .service('authentication', function($http, $cookieStore) {
     var authApi = {};
     var isLogged = false;
+    
 
     authApi.isLoggedIn = function() {
       return isLogged;
@@ -38,6 +39,16 @@ angular.module('uiForDocker')
           'Content-Type': 'application/json'
         }
       });
+    };
+    
+    authApi.changePassword = function(user) {
+      var token = authApi.getToken();
+      var config = {
+        headers: {
+          'x-access-token': token
+        }
+      };
+      return $http.put('api/users/', user, config);
     };
 
     return authApi;
