@@ -83,5 +83,6 @@ router.get('/api/docker/events', docker.getEvents);
 router.get('/api/docker/logs/:id', docker.getLogs);
 router.post('/api/docker/upload', docker.upload);
 router.post('/api/docker/build', docker.build);
+router.post('/api/docker/search', docker.search);
 
 module.exports = router;

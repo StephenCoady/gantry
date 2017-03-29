@@ -86,19 +86,23 @@ function ImagesCtrl($scope, $http, imageApi, toaster, $route, $filter, FileUploa
   }
 
   $scope.pullImage = function(image) {
-    if (image.tag === undefined) {
-      image.tag = 'latest'
-    }
-    imageApi.pull(image)
+    image.tag = "latest";
+      imageApi.pull(image)
       .then(function(response) {
-        toaster.pop('success', "Success", "Image " + image.name + "/" + image.tag + " pulled.");
+        toaster.pop('success', "Success", "Image " + image.name + " pulled.");
         $route.reload();
       })
       .catch(function(e) {
-        toaster.pop('error', "Error", "Image " + image.name + "/" + image.tag + " cannot be pulled. Is the account named included?");
+        toaster.pop('error', "Error", "Image " + image.name + " cannot be pulled.");
       })
   }
-
+  
+  $scope.search = function(search) {
+    dockerApi.search(search)
+    .then(function(response){
+      $scope.foundImages = response.data.data;
+    })
+  }
   function removeHandler(image) {
     imageApi.remove(image.Id)
       .then(function(response) {

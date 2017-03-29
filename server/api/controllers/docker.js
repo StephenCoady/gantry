@@ -136,3 +136,23 @@ exports.build = (req, res) => {
     }
   });
 }
+
+exports.search = (req, res) => {
+  const term = req.body.term;
+  const limit = 10;
+  let options = {
+    term: term,
+    limit: limit
+  }
+  docker.searchImages(options, function(err, data){
+    if(err){
+      res.status(500).json({
+        error: err
+      })
+    } else {
+      res.status(200).json({
+        data: data
+      });
+    }
+  })
+}

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -9,26 +9,47 @@
 					</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal">
-							<div class="col-md-12">
+						<form ng-submit="search(body)" class="form-horizontal">
+							<div class="col-md-4">
 								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<label for="image" class="control-label">Image:  </label>
-									<input type="text" class="form-control" id="image" placeholder="e.g: ubuntu" ng-model="pull.name">
-								</div>
-								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<label for="tag" class="control-label">Tag:  </label>
-									<input type="text" class="form-control" id="tag" placeholder="e.g: latest" ng-model="pull.tag">
-								</div>
-								<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-group-sm">
-									<button type="button" class="btn btn-primary" ng-click="pullImage(pull)"><i class="fa fa-download fa-1x"></i> Pull</button>
-									<p class="help-block">Note: If tag is left empty then latest will be used.</p>
-								</div>
+							 <label class="control-label" for="inputGroup">Search Term </label>
+							 		<div class="input-group">
+									 <input type="text" class="form-control" placeholder="Search" id="inputGroup" ng-model="body.term"/>
+									 <span class="input-group-addon"  ng-click="search(body)">
+											 <i class="fa fa-search"></i>
+									 </span>
+							 		</div>
+					 			</div>
 							</div>
 						</form>
+						<div class="col-md-12">
+						<div class="panel panel-default table-responsive" ng-if="foundImages">
+							<table class="table table-striped">
+								<thead class="thead-inverse">
+									<tr>
+										<th>Name</th>
+										<th>Stars</th>
+										<th>Official</th>
+										<th>Description</th>
+										<th>Pull</th>
+									</tr>
+								</thead>
+							<tr ng-repeat="image in foundImages">
+								<td>{{image.name}}</td>
+								<td>{{image.star_count}}</td>
+								<td>{{image.is_official}}</td>
+								<td>{{image.description}}</td>
+								<td><span class="badge" ng-click="pullImage(image)"><i class="fa fa-download fa-1x"></i></span></td>
+							</tr>
+						</table>
+					</div>
+					</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+		</div>
+		<div class="row">
+			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
