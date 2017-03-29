@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.12.0 - 29-03-17 ***Released***
+	- fh-3041 - added search option on images
+
 ### 0.11.0 - 28-03-17 ***Released***
 	- fh-3209 - added option to change the users password
 

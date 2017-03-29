@@ -27,6 +27,10 @@ angular.module('uiForDocker')
     docker.build = function(options) {
       return $http.post('/api/docker/build/', options, config);
     };
+
+    docker.search = function(body) {
+      return $http.post('/api/docker/search/', body, config);
+    };
     
     return docker;
   });
