@@ -14,11 +14,11 @@ const router = express.Router();
 
 /* User Routes*/
 router.post('/api/users/authenticate', user.authenticate);
+router.post('/api/docker/upload', docker.upload);
 
 router.use(function(req, res, next) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
   // decode token
   if (token) {
     jwt.verify(token, config.TOKEN_SECRET, function(err, decoded) {      
@@ -81,7 +81,6 @@ router.delete('/api/volumes/:id', volume.removeVolume);
 router.get('/api/docker/info', docker.getInfo);
 router.get('/api/docker/events', docker.getEvents);
 router.get('/api/docker/logs/:id', docker.getLogs);
-router.post('/api/docker/upload', docker.upload);
 router.post('/api/docker/build', docker.build);
 router.post('/api/docker/search', docker.search);
 
