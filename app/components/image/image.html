@@ -20,7 +20,7 @@
               <table class="table table-responsive">
                 <tr ng-repeat="tag in image.RepoTags">
                   <td><b>{{$index + 1}}</b></td>
-                  <td>{{tag}} <span class="badge"><i class="fa fa-upload fa-1x"></i></span> <span class="badge" ng-click="remove(tag)"><i class="fa fa-trash-o fa-1x"></i></span></td>
+                  <td>{{tag}} <span class="badge" ng-click="remove(tag)"><i class="fa fa-trash-o fa-1x"></i></span></td>
                 </tr>
               </table>
             </div>
