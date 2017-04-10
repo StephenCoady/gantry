@@ -1,5 +1,6 @@
-# LifeCycle Management For Docker 
-
+<p align="center">
+  <img title="gantry" src='https://s22.postimg.org/oddz2d4fl/gantry-readme.png' />
+</p>
 
 | Build Status  | Dependencies   |  Version  | Docker Image   | Coverage  | Technical Debt   |
 |---|---|---|---|---|---|

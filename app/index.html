@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>LifeCycle Management For Docker</title>
+	<title>Gantry</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -25,18 +25,18 @@
 		<nav class="navbar navbar-default no-margin navbar-fixed-top">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header fixed-brand">
-				<button type="button" ng-click="logout()" class="navbar-toggle collapsed" data-toggle="collapse">
-					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout
-				</button>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
           <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
         </button>
 				<a class="navbar-brand"><img src="./support/images/gantry.png" class="img-responsive" alt=""></a>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<button type="button" ng-click="logout()" class="navbar-toggle collapsed" data-toggle="collapse">
+					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout
+				</button>
+				<!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></button></li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="isLoggedIn">
 				<ul class="nav navbar-nav navbar-right">

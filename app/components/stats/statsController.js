@@ -73,7 +73,7 @@ function StatsCtrl($scope, $http, $routeParams, containerApi, toaster, $route, $
           position: 'left',
           ticks: {
             min: 0,
-            max: 10
+            max: 100
           },
           scaleLabel: {
             display: true,
