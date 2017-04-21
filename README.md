@@ -20,6 +20,14 @@ Note: The Docker API must be listening on /var/run/docker.sock
 node index.js
 ```
 
+#### Credentials
+By default the credentials are as follows:
+```
+user: admin
+
+pw: admin
+```
+
 #### Run tests
 ```
 npm test
