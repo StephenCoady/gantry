@@ -1,219 +1,249 @@
-		<md-content>
-			<md-tabs md-dynamic-height md-border-bottom>
-				<md-tab label="Containers">
-					<md-content class="md-padding">
-						<div class="row">
-							<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
-								<button type="button" class="btn btn-success btn-responsive" ng-click="start(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Start</span></button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="stop(containers)"><i class="fa fa-stop fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Stop</span></button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="restart(containers)"><i class="fa fa-refresh fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Restart</span></button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="pause(containers)"><i class="fa fa-pause fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Pause</span></button>
-								<button type="button" class="btn btn-primary btn-responsive" ng-click="unpause(containers)"><i class="fa fa-step-forward fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Unpause</span></button>
-								<button type="button" class="btn btn-danger btn-responsive" ng-click="remove(containers)"><i class="fa fa-trash fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
-							</div>
-							<div class="col-sm-12 col-md-6">
-								<input ng-model="q" id="search" class="form-control" placeholder="Filter">
-							</div>
+<md-content>
+	<md-tabs md-dynamic-height md-border-bottom>
+		<md-tab label="Containers">
+			<md-content class="md-padding">
+				<div class="row">
+					<div class="btn-group-sm col-sm-12 button-wrapper col-md-6">
+						<button type="button" class="btn btn-success btn-responsive" ng-click="start(containers)"><i class="fa fa-play fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Start</span></button>
+						<button type="button" class="btn btn-primary btn-responsive" ng-click="stop(containers)"><i class="fa fa-stop fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Stop</span></button>
+						<button type="button" class="btn btn-primary btn-responsive" ng-click="restart(containers)"><i class="fa fa-refresh fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Restart</span></button>
+						<button type="button" class="btn btn-primary btn-responsive" ng-click="pause(containers)"><i class="fa fa-pause fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Pause</span></button>
+						<button type="button" class="btn btn-primary btn-responsive" ng-click="unpause(containers)"><i class="fa fa-step-forward fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Unpause</span></button>
+						<button type="button" class="btn btn-danger btn-responsive" ng-click="remove(containers)"><i class="fa fa-trash fa-1x space-right" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
+					</div>
+					<div class="col-sm-12 col-md-6">
+						<input ng-model="q" id="search" class="form-control" placeholder="Filter">
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default table-responsive">
+							<table class="table table-striped">
+								<thead class="thead-inverse">
+									<tr>
+										<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
+										<th>Name</th>
+										<th>State</th>
+										<th>Status</th>
+										<th>Ports</th>
+										<th>Image</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="container in containers | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+										<th><input type="checkbox" ng-click="containerSelect(container)" ng-model="container.select"></th>
+										<td><a ng-href="#/containers/{{container.Id}}">{{container.Names[0]}}</a></td>
+										<td ng-if="container.State == 'running'"><span class="label label-success">running</span></td>
+										<td ng-if="container.State == 'paused'"><span class="label label-info">paused</span></td>
+										<td ng-if="container.State == 'exited'"><span class="label label-danger">stopped</span></td>
+										<td ng-if="container.State == 'created'"><span class="label label-default">created</span></td>
+										<td>{{container.Status}}</td>
+										<td>
+											<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{base}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
+										</td>
+										<td>{{container.Image | limitTo : 25 : 0}}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
-						<hr>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-default table-responsive">
-									<table class="table table-striped">
-										<thead class="thead-inverse">
-											<tr>
-												<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()" /></th>
-												<th>Name</th>
-												<th>State</th>
-												<th>Status</th>
-												<th>Ports</th>
-												<th>Image</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr ng-repeat="container in containers | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
-												<th><input type="checkbox" ng-click="containerSelect(container)" ng-model="container.select"></th>
-												<td><a ng-href="#/containers/{{container.Id}}">{{container.Names[0]}}</a></td>
-												<td ng-if="container.State == 'running'"><span class="label label-success">running</span></td>
-												<td ng-if="container.State == 'paused'"><span class="label label-info">paused</span></td>
-												<td ng-if="container.State == 'exited'"><span class="label label-danger">stopped</span></td>
-												<td ng-if="container.State == 'created'"><span class="label label-default">created</span></td>
-												<td>{{container.Status}}</td>
-												<td>
-													<p ng-repeat="port in container.Ports" ng-if="port.PrivatePort != null && port.PublicPort != null"><a ng-href="http://{{base}}:{{port.PublicPort}}" target="_blank">{{port.PrivatePort}}:{{port.PublicPort}} <i class="fa fa-external-link-square fa-1x"></i></a></p>
-												</td>
-												<td>{{container.Image  | limitTo : 25 : 0}}</td>
-											</tr>
-										</tbody>
-									</table>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<button type="button" class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-arrow-left fa-1x"></i></button> {{currentPage+1}}/{{numberOfPages()}}
+					<button type="button" class="btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1"><i class="fa fa-arrow-right fa-1x"></i></button>
+				</div>
+			</md-content>
+		</md-tab>
+		<md-tab label="Create New">
+			<md-content class="md-padding">
+				<div class="col-md-12">
+					<form class="form-horizontal">
+						<fieldset>
+							<h3>Details</h3>
+							<hr>
+							<div class="form-group">
+								<label for="name" class="control-label col-sm-2" for="name">Name: </label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="name" placeholder="e.g: my-container" ng-model="options.name">
 								</div>
 							</div>
-						</div>
-							<div class="col-md-4">
-								<button type="button" class="btn" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><i class="fa fa-arrow-left fa-1x"></i></button> {{currentPage+1}}/{{numberOfPages()}}
-								<button type="button" class="btn" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1"><i class="fa fa-arrow-right fa-1x"></i></button>
+
+							<div class="form-group">
+								<label for="image" class="control-label col-sm-2" for="image">Image: </label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" id="image" placeholder="e.g: ubuntu" ng-model="options.Image">
+								</div>
+								<label for="tag" class="control-label col-sm-1" for="image">Tag: </label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" id="tag" placeholder="e.g: latest" ng-model="options.tag">
+								</div>
 							</div>
-					</md-content>
-				</md-tab>
-				<md-tab label="Create New">
-					<md-content class="md-padding">
-							<div class="col-md-12">
-								<form class="form-horizontal">
-									<fieldset>
-										<h3>Details</h3>
-										<hr>
-										<div class="form-group">
-											<label for="name" class="control-label col-sm-2" for="name">Name: </label>
-											<div class="col-sm-10">
-												<input type="text" class="form-control" id="name" placeholder="e.g: my-container" ng-model="options.name">
-											</div>
-										</div>
 
-										<div class="form-group">
-											<label for="image" class="control-label col-sm-2" for="image">Image: </label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control" id="image" placeholder="e.g: ubuntu" ng-model="options.Image">
-											</div>
-											<label for="tag" class="control-label col-sm-1" for="image">Tag: </label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control" id="tag" placeholder="e.g: latest" ng-model="options.tag">
-											</div>
-										</div>
+							<div class="form-group">
+								<label for="radios" class="control-label col-sm-2">Privileged Mode: </label>
+								<div class=" col-sm-10">
+									<input type="checkbox" ng-model="options.HostConfig.Privileged">
+								</div>
+							</div>
 
-										<div class="form-group">
-											<label for="radios" class="control-label col-sm-2">Privileged Mode: </label>
-											<div class=" col-sm-10">
-												<input type="checkbox" ng-model="options.HostConfig.Privileged">
-											</div>
-										</div>
+							<div class="form-group">
+								<label for="console_radios" class="control-label col-sm-2">Console: </label>
+								<div class="col-sm-10">
+									<div class="col-sm-3">
+										<label class="radio-inline">
+													<input type="radio" name="console_radios" ng-model="formValues.Console" value="both">
+															Interactive & TTY <span class="text-muted">(-i -t)</span>
+														</label>
+									</div>
+									<div class="col-sm-3">
+										<label class="radio-inline">
+															<input type="radio" name="console_radios" ng-model="formValues.Console" value="interactive">
+															Interactive <span class="text-muted">(-i)</span>
+														</label>
+									</div>
+									<div class="col-sm-3">
+										<label class="radio-inline">
+															<input type="radio" name="console_radios" ng-model="formValues.Console" value="tty">
+															TTY <span class="text-muted">(-t)</span>
+														</label>
+									</div>
+									<div class="col-sm-3">
+										<label class="radio-inline">
+															<input type="radio" name="console_radios" ng-model="formValues.Console" value="none">
+															No Console
+														</label>
+									</div>
+								</div>
+							</div>
 
-										<div class="form-group">
-											<label class="col-sm-2 control-label">Port mappings: </label>
-											<div class="col-sm-10">
-												<button class="btn btn-sm btn-success" ng-click="addPortBinding()"><i class="fa fa-plus-circle fa-1x"></i></button>
-											</div>
-											<div class="col-sm-offset-2 col-sm-10 form-inline">
-												<div class="row" ng-repeat="binding in options.HostConfig.PortBindings">
-													<div class="input-group col-sm-4 input-group-sm">
-														<span class="input-group-addon">host</span>
-														<input type="text" class="form-control" id="ports" placeholder="host" ng-model="binding.hostPort">
-													</div>
-													<div class="input-group col-sm-4  input-group-sm">
-														<span class="input-group-addon">container</span>
-														<input type="text" class="form-control" id="ports" placeholder="container" ng-model="binding.containerPort">
-													</div>
-													<div class="input-group col-sm-2 input-group-sm">
-														<select class="form-control" ng-model="portBinding.protocol">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Port mappings: </label>
+								<div class="col-sm-10">
+									<button class="btn btn-sm btn-success" ng-click="addPortBinding()"><i class="fa fa-plus-circle fa-1x"></i></button>
+								</div>
+								<div class="col-sm-offset-3 col-sm-10 form-inline">
+									<div class="row" ng-repeat="binding in options.HostConfig.PortBindings">
+										<div class="input-group col-sm-4 input-group-sm">
+											<span class="input-group-addon">host</span>
+											<input type="text" class="form-control" id="ports" placeholder="host" ng-model="binding.hostPort">
+										</div>
+										<div class="input-group col-sm-4  input-group-sm">
+											<span class="input-group-addon">container</span>
+											<input type="text" class="form-control" id="ports" placeholder="container" ng-model="binding.containerPort">
+										</div>
+										<div class="input-group col-sm-2 input-group-sm">
+											<select class="form-control" ng-model="portBinding.protocol">
 															<option value="tcp">tcp</option>
 															<option value="udp">udp</option>
 														</select>
-														<span class="input-group-btn">
+											<span class="input-group-btn">
 														<button class="btn btn-default" type="button" ng-click="removePortBinding($index)">
 															<i class="fa fa-minus" aria-hidden="true"></i>
 														</button>
 													</span>
-													</div>
-												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<form class="form-horizontal">
+										<h3>Commands</h3>
+										<hr>
+										<div class="form-group">
+											<label for="cmd" class="control-label col-sm-2" for="name">CMD: </label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="cmd" placeholder="e.g: node app.js" ng-model="options.Cmd">
 											</div>
 										</div>
-										<div class="row">
-												<div class="col-md-12">
-													<form class="form-horizontal">
-															<h3>Commands</h3>
-															<hr>
-																<div class="form-group">
-																	<label for="cmd" class="control-label col-sm-2" for="name">CMD: </label>
-																	<div class="col-sm-10">
-																		<input type="text" class="form-control" id="cmd" placeholder="e.g: node app.js" ng-model="options.Cmd">
-																	</div>
-																</div>
 
-																<div class="form-group">
-																	<label for="dir" class="control-label col-sm-2" for="name">Working Directory: </label>
-																	<div class="col-sm-10">
-																		<input type="text" class="form-control" id="dir" placeholder="e.g: /code" ng-model="options.WorkingDir">
-																	</div>
-																</div>
-
-																<div class="form-group">
-																	<label for="entry" class="control-label col-sm-2" for="name">Entry Point: </label>
-																	<div class="col-sm-10">
-																		<input type="text" class="form-control" id="entry" placeholder="e.g: /bin/sh" ng-model="options.Entrypoint">
-																	</div>
-																</div>
-												</div>
+										<div class="form-group">
+											<label for="dir" class="control-label col-sm-2" for="name">Working Directory: </label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="dir" placeholder="e.g: /code" ng-model="options.WorkingDir">
+											</div>
 										</div>
-										<div class="row">
-										  <div class="col-md-12">
-												<div class="form-horizontal">
-													<h3>Volumes</h3>
-													<hr>
-													<div class="col-md-2">
-														<b>Volume Mapping:</b>
-													</div>
-													<div class="col-md-10">
-														<button class="btn btn-sm btn-success" ng-click="addVolume()"><i class="fa fa-plus-circle fa-1x"></i></button>
-													</div>
-												</div>
-												<div class="row" ng-repeat="volume in form.Volumes">
-													<div class="col-md-10 col-md-offset-2">
-														<div class="col-sm-2 form-group">
-															<div class="checkbox">
-																<label>
+
+										<div class="form-group">
+											<label for="entry" class="control-label col-sm-2" for="name">Entry Point: </label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="entry" placeholder="e.g: /bin/sh" ng-model="options.Entrypoint">
+											</div>
+										</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-horizontal">
+										<h3>Volumes</h3>
+										<hr>
+										<div class="col-md-2">
+											<b>Volume Mapping:</b>
+										</div>
+										<div class="col-md-10">
+											<button class="btn btn-sm btn-success" ng-click="addVolume()"><i class="fa fa-plus-circle fa-1x"></i></button>
+										</div>
+									</div>
+									<div class="row" ng-repeat="volume in form.Volumes">
+										<div class="col-md-10 col-md-offset-2">
+											<div class="col-sm-2 form-group">
+												<div class="checkbox">
+													<label>
 																		<input type="checkbox" ng-model="volume.readOnly"> Read-only</label>
-															</div>
-														</div>
-														<div class="row">
-														<div class="col-sm-4">
-															<div class="form-group form-inline">
-																<div class="input-group">
-																	<select class="form-control" ng-model="volumeOrPath">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4">
+													<div class="form-group form-inline">
+														<div class="input-group">
+															<select class="form-control" ng-model="volumeOrPath">
 																		<option value="path">path</option>
 																		<option value="volume">volume</option>
 																	</select>
-																</div>
-																<div class="input-group" ng-if="volumeOrPath == 'path'">
-																	<input type="text" class="form-control" placeholder="e.g. /host/folder" ng-model="volume.name">
-																</div>
-																<div class="input-group" ng-if="volumeOrPath == 'volume'">
-																	<select class="form-control" id="volumes" ng-model="volume.name">
+														</div>
+														<div class="input-group" ng-if="volumeOrPath == 'path'">
+															<input type="text" class="form-control" placeholder="e.g. /host/folder" ng-model="volume.name">
+														</div>
+														<div class="input-group" ng-if="volumeOrPath == 'volume'">
+															<select class="form-control" id="volumes" ng-model="volume.name">
 																				<option ng-repeat="volume in volumes" value="{{ volume.Name }}">{{ volume.Name | limitTo : 15 : 0 }}</option>
 																			</select>
-																</div>
-															</div>
 														</div>
-														<div class="col-sm-6">
-															<div class="form-group">
-																<div class="input-group">
-																	<span class="input-group-addon">container</span>
-																	<input type="text" class="form-control" id="volumes" placeholder="e.g. /container/folder" ng-model="volume.containerPath">
-																	<span class="input-group-addon">
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<div class="input-group">
+															<span class="input-group-addon">container</span>
+															<input type="text" class="form-control" id="volumes" placeholder="e.g. /container/folder" ng-model="volume.containerPath">
+															<span class="input-group-addon">
 																		<span class="input-group-btn">
 																			<button class="btn btn-default btn-xs" ng-click="removeVolume($index)">
 																				<i class="fa fa-minus"></i>
 																			</button>
 																		</span>
-																	</span>
-																</div>
-															</div>
-														</div>
+															</span>
 														</div>
 													</div>
 												</div>
-										  </div>
-										</div>
-										<div class="row">
-											<hr>
-											<div class="form-group">
-												<div class="text-left col-sm-10 col-sm-offset-2 btn-group-sm">
-													<button class="btn btn-primary" ng-click="createContainer(options)"><i class="fa fa-plus fa-1x"></i> Create</button>
-												</div>
 											</div>
 										</div>
-									</fieldset>
-									</form>
+									</div>
+								</div>
 							</div>
-					</md-content>
-				</md-tab>
-			</md-tabs>
-		</md-content>
+							<div class="row">
+								<hr>
+								<div class="form-group">
+									<div class="text-left col-sm-10 col-sm-offset-2 btn-group-sm">
+										<button class="btn btn-primary" ng-click="createContainer(options)"><i class="fa fa-plus fa-1x"></i> Create</button>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						</form>
+				</div>
+			</md-content>
+		</md-tab>
+	</md-tabs>
+</md-content>
