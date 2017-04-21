@@ -116,11 +116,11 @@ function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaste
 		} else {
 			image.tag = $scope.options.tag;
 		}
-		imageApi.pull(image)
-			.then(function(response) {
-				toaster.pop('success', "Success", "Image " + $scope.options.Image + " pulled.");
-			})
-			.then(function(response) {
+		// imageApi.pull(image)
+		// 	.then(function(response) {
+		// 		toaster.pop('success', "Success", "Image " + $scope.options.Image + " pulled.");
+		// 	})
+		// 	.then(function(response) {
 				containerApi.create($scope.options)
 					.then(function(response) {
 						toaster.pop('success', "Success", "Container " + $scope.options.name + " created.");
@@ -137,7 +137,7 @@ function ContainersCtrl($scope, $http, $location, containerApi, imageApi, toaste
 								toaster.pop('error', "Error", "Container " + $scope.options.name + " cannot be started.");
 							})
 					})
-			})
+			// })
 			.catch(function(e) {
 				toaster.pop('error', "Error", "Image " + $scope.options.Image + " cannot be pulled. Is the account named included?");
 			})
