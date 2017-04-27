@@ -9,6 +9,18 @@
 
 ## Usage
 
+Clone down this repository through your preferred means and navigate to the projects root folder. Please run:
+
+```
+npm install
+```
+
+NOTE: The project uses aspects of ES6 and might necessitate running your node process in strict mode to build correctly. Therefore in any documentation referenced within this repository you might need to swap in --use-strict as the case may be.
+
+```
+node --use-strict
+```
+
 #### Docker Container
 ```
 docker run -d -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock scoady2/lifecycle-management-for-docker
@@ -19,6 +31,7 @@ Note: The Docker API must be listening on /var/run/docker.sock
 ```
 node index.js
 ```
+You should now be able to navigate to http://<hostname>:3000
 
 #### Credentials
 By default the credentials are as follows:
