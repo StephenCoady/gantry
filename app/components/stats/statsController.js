@@ -89,6 +89,9 @@ function StatsCtrl($scope, $http, $routeParams, containerApi, toaster, $route, $
           id: 'y-axis-1',
           type: 'linear',
           position: 'left',
+          ticks: {
+            min: 0
+          },
           scaleLabel: {
             display: true,
             labelString: 'GB'
@@ -102,7 +105,11 @@ function StatsCtrl($scope, $http, $routeParams, containerApi, toaster, $route, $
         yAxes: [{
           id: 'y-axis-1',
           type: 'linear',
-          position: 'left'
+          position: 'left',
+          scaleLabel: {
+            display: true,
+            labelString: 'KB'
+          }
         }]
       },
       legend: {
