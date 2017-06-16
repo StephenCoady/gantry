@@ -59,8 +59,8 @@ To view the API documentation for the application navigate to http://`<hostname>
 MIT © [Stephen Coady]()
 
 
-[travis-image]: https://img.shields.io/travis/StephenCoady/lifecycle-management-for-docker.svg?branch=master
-[travis-url]: https://travis-ci.org/StephenCoady/lifecycle-management-for-docker
+[travis-image]: https://img.shields.io/travis/StephenCoady/gantry.svg?branch=master
+[travis-url]: https://travis-ci.org/StephenCoady/gantry
 [daviddm-image]: https://img.shields.io/david/StephenCoady/lifecycle-management-for-docker.svg
 [daviddm-url]: https://david-dm.org/StephenCoady/lifecycle-management-for-docker
 [github-image]: https://img.shields.io/github/tag/StephenCoady/lifecycle-management-for-docker.svg
