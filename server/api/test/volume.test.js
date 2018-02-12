@@ -1,49 +1,31 @@
 'use strict';
 
-var assert = require('assert'),
-  request = require('supertest'),
-  controllers = require('../controllers'),
-  app = require('../../../index'),
-  chai = require('chai');
+const request = require('supertest');
+const app = require('../../../index');
+const chai = require('chai');
 
 process.env.NODE_ENV = 'dev';
 
 const expect = chai.expect;
 
-const Docker = require('dockerode');
-
-const docker = new Docker({
-  socketPath: '/var/run/docker.sock'
-});
+// const Docker = require('dockerode');
+// const docker = new Docker({
+//   socketPath: '/var/run/docker.sock'
+// });
 
 let volume = {};
-
-let login = {
-  name: 'admin',
-  password: 'admin'
-}
-
-let token;
 
 describe('#volume', () => {
 
   before(function(done) {
-    request(app)
-      .post('/api/users/authenticate/')
-      .send(login)
-      .end(function(err, res) {
-        expect(res.status).to.be.equal(200);
-        token = res.body.token;
-        done();
-      });
+    done();
   });
 
   describe('#create', () => {
 
-    it('should not create a volume without a name', (done) => {
+    it('should not create a volume without a name', done => {
       request(app)
         .post('/api/volumes/')
-        .set('x-access-token', token)
         .send({
           Name: "my-network-@"
         })
@@ -53,10 +35,9 @@ describe('#volume', () => {
         });
     });
 
-    it('should create a volume', (done) => {
+    it('should create a volume', done => {
       request(app)
         .post('/api/volumes/')
-        .set('x-access-token', token)
         .send({
           Name: "testvolume"
         })
@@ -69,10 +50,9 @@ describe('#volume', () => {
 
   describe('#list', () => {
 
-    it('should list volumes', (done) => {
+    it('should list volumes', done => {
       request(app)
         .get('/api/volumes/')
-        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
@@ -81,10 +61,9 @@ describe('#volume', () => {
         });
     });
 
-    it('should list specific volume', (done) => {
+    it('should list specific volume', done => {
       request(app)
-        .get('/api/volumes/' + volume.Name)
-        .set('x-access-token', token)
+        .get(`/api/volumes/${volume.Name}`)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);
@@ -93,10 +72,9 @@ describe('#volume', () => {
         });
     });
 
-    it('should not list non-existent volume', (done) => {
+    it('should not list non-existent volume', done => {
       request(app)
         .get('/api/volumes/madeUpNetwork')
-        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(404);
@@ -106,10 +84,9 @@ describe('#volume', () => {
   });
 
   describe('#remove', () => {
-    it('volume should not be removed', (done) => {
+    it('volume should not be removed', done => {
       request(app)
         .delete('/api/volumes/madeUpVolume')
-        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(409);
@@ -118,10 +95,9 @@ describe('#volume', () => {
         });
     });
 
-    it('volume should be removed', (done) => {
+    it('volume should be removed', done => {
       request(app)
         .delete('/api/volumes/testvolume')
-        .set('x-access-token', token)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           expect(res.status).to.be.equal(200);

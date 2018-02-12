@@ -25,9 +25,9 @@ exports.listVolumes = (req, res) => {
   docker.listVolumes((err, data) => {
     res.status(200).json({
       volumes: data
-    })
+    });
   });
-}
+};
 
 exports.listSpecificVolume = (req, res) => {
   const id = req.params.id;
@@ -39,14 +39,14 @@ exports.listSpecificVolume = (req, res) => {
       res.status(404).json({
         volume: "Volume not found",
         error: err
-      })
+      });
     } else {
       res.status(200).json({
         volume: data
-      })
+      });
     }
   });
-}
+};
 
 exports.removeVolume = (req, res) => {
   const id = req.params.id;

@@ -75,7 +75,7 @@ exports.pullImage = (req, res) => {
     tag = 'latest';
   }
 
-  const repoTag = name + ':' + tag;
+  const repoTag = `${name}:${tag}`;
   docker.pull(repoTag, (err, stream) => {
     docker.modem.followProgress(stream, onFinished);
 
