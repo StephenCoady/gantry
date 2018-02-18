@@ -7,6 +7,9 @@ const morgan = require('morgan');
 const path = require('path');
 const multer = require('multer');
 const ENVIRONMENT = process.env.ENV;
+const cors = require('cors');
+
+app.use(cors());
 
 app.use((req, res, next) => {
   req.start = Date.now();
