@@ -1,7 +1,5 @@
 sudo: required
-language: java
-jdk:
-- oraclejdk8
+language: bash
 services:
 - docker
 branches:
@@ -10,43 +8,9 @@ branches:
 before_install:
 - nvm install 6.8.1
 - nvm use 6.8.1
-- npm install -g npm@'>=3'
+- npm install -g yarn npm@'>=3'
 install:
-- npm install
-addons:
-  sonarqube: true
-  ssh_known_hosts: $STAGING_SERVER
-env:
-  global:
-  - COMMIT=${TRAVIS_COMMIT::8}
-  - secure: c2rxbjWjpd7Jvjon1+mMY/oMLwjBgBF/1x/+3q3FXREjzShJ6fMSPt0Pfep5gWr7xGPrGbIqQ9zvQ4wT5I6ro61C6uJj8oVNh3BxyudbLspFuM2j6RrrKIr7mXRcXEBGLPWJgIpJZZ3kF5y99WYRiHPMO8QykDWu8txWunGYRvs2gezJJsqIgJ0MwLe5/vci9NGYTz1CBS6cTQWgoeHxAySY9lI8m/tJHQNbYwa0Cm9wvcJ2wJcxfplmTraNcD6djfmbN1fUk5GhMW3YQPPuetMgeXPmkcPKV1IjoOgJmxKciGCSW19oBVRtvCKRGQNgoIltM6jbbS61v1Yhia8VRFT6L7ZtsA1URiEjnX1t4f/2xWr7DLBXpv2+TKNSg/uxqsElIpvEy9kII8N3nQnR2CLorIP3VZqLxJsSceyTkx2kIljuHyJfb6egoMVfuqhyDBhHuIQQTJRpgyBKZbUaz5wB/lGB7ASGqAZCptS+JEJjIUkMW5h6O93L+jqzi5iim8Uq/dZyKW69FzH5xZzIn90R2/2sIL5oqGstTwB7xpu/9jT9L+x5YQB4e5w9n+cGzqluCsf+c0x/fFPVoy9NFs0azyTVRxOiKG+TT6bc1M/GWP0jTYxgtQBH4aavqxYmw6VR173Ye3HUEwhkB/ZP2Rq0GzzBRQHH4l+EhzzhiYw=
-  - secure: BTgMPl0ycLP8K9zXIKktTy7c/1xnE6VigI2gBYhCf8yBokQnUo4DAcKrJbO8wMcOlO3deD4+C7/rem/O2NGSCd8YpA3npdR9BjXzCccEg9K8mYpTLCeWmszU5hWYUzop6gUrlBaQQbUcJ0Qpk7Uaz5biK73n0t/3AyBfAGIkWmp57UJcpWcHOiF8J8wjfuJFk4LGZd7TXdS1fQLVhiLbidb/m3cB///jQO20EyfWMYwXn4D71VMQAKKWtSLjlUg8zD9qoiW4+joTNd2U2f5wCsmvb/rcS13FgQ/qZnWNWo7aQ5vEZ4Bo0WOPvX/KoDySLYwjowQKCchqTTDL8aWDbd0BDqzGnIx8nvEJMBpPujNh6d9hPolx3lX743/Hig9RO9ArseASDAWQ0OUifuyfHD+rhxJCuNqUWjZ+h7mqwPTB8SbJ8Kn+LmXlDbBbod84jDxjg+puB4UcNeUXkkeIJ+jsON0hXXxpxFjIPRV9z4euF2HiEjgLS/wwX4d6/bSyqJNYK+mXMF5sJ+Bmf5GnEcSdCLMmrgB6kiCXMP1V6PMz5Z+UvBhScHv5GR8Z4oL2j8UCN94Peo5H+N8nl0kxHkse/n2T/o2SIqTCPNOLRkVHjfe7/+rBYJRkhokTMWlnDW/24nQzsm1DFppEDVoi7BHzwbOxAh5PbcBCMKoO6Tg=
-  - secure: Hu5xs0fiOD2AA92mG4536CJml0FmL0swUBdpavZjXCFrf07A+uayGPaf/eg0/0waYjBfdOKgvLa5eh9VPeLUuLm4hkmr3nDxRJHDe5GQFZrtHOJZMk3X5yWQW3NOB1H9FogjjVTe7MZu41d2r5aqGghZ4CQauEbDd/YeTtnUu5GF1GXIWA56LUz9uhlhF+js8/wnAIl5K/eKCGJYctRZIGDkF3WV+tV3Q/OF8Y4mzqJD6ZGN2nRSBX9M46gUYM6EmMc5lt6C1S1uMG/4cCPQ2xxeoaQ3ZrSQ9zrmIZEDrShXtOtFH3xVEsZ0iyxTEV5Y+zvr4+m554+XiGA0C6Knb5Q/q42omm9n0yaW8XoWjgwW5uIBQ8PgxaP8WJlN4PT2hBw9jm7Tzp0zDU/3fM4h3HTgvxWKIA6ZPGnNzIbNCtt5yAOvPLQwcmjpDug/vqoWCgGqz30UEkawFzOTWYB3ZSLjWMBUP46no4PlfeNlaqWquHXx5pmIKWR+OpJCccOpOQdQf3aiP97mIJPkyMbJjCCa5vJrtMpVwLRe08lvgb57coSXSQqcBXb56MmLIbacdtfrPUxauEpbELSQkj4G0FbOu53ofQJfHnJp02uczIqhVoGXerI42Z8UQ6SRNdp0mICCCXChz3+RrFxx4sPL3DcCmqP9VE2DPYDiIYAqIjc=
-  - secure: Kp6ina+boGJ8UJmVuwz28qBi124Y3eWfgy+AEm2X8eutQqE6VeNbL6qVkrfUbtsXXZAFjzt05FYn8+TKA08tc7YdzRUNdpON5YdcC21wCRqotP+KqHoG/FTNm5tJJ55UlmrtJfxFw33suSrw95HHUNV0dYE8uSJd7aCrJN482hWfN0usNF2ew8XDdFLtqvux1tBSF29b66MZIbH6/S7k180P1xjfNl7Ah5nnrqUgWB2glSsMi/qPwuGKZTIasKiNm/qVUkiLCY2mMPk9e2C4Wh9EfcL4hJBkjTzBanyiBAgVs244geWqeQ/KBUTZuQzz9tQFH7UyUge6MADw0C+Bb4mBhIWtAhSokS9nsGvFWIKZuPJgO1waDc5TStEXXZYyDvaCiibfBVCFyf51dmIJ174gvE+CxlZ+uVOSafoBdOaAcHP+AyG9mP6YRZHZYYVPiyrXHqyGYlf9WnTzA5U1xK1MPca2Nr4PJpt9IYnZ6QsJIYYpe+E4stNGxH59z0oUx5psjfC2pFVP4lG7IMDcHWfOmJen0ZXbLJrSDe7yhijzXIBkF3YgW4Meysfa6164GTd0hPvW4zjIkVe54z1r3FtpXxccAdvBiolY+UqhRe7H+AOXyORn5eYZ0FPt3OhPARjYB3YWwgxRDuo0+uWNQ5/ZmVaqQbrbFlTKQB2A3/c=
+- yarn install
 script:
 - docker pull ubuntu:latest
 - npm run coverage
-after_success:
-- sonar-scanner -Dsonar.login=$SONAR_TOKEN
-- export REPO=scoady2/lifecycle-management-for-docker
-- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
-  fi`
-- if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]] ; then docker
-  login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS ; docker build -f Dockerfile
-  -t $REPO:$COMMIT . ; docker tag $REPO:$COMMIT $REPO:$TAG ; docker tag $REPO:$COMMIT
-  $REPO:travis-$TRAVIS_BUILD_NUMBER ; docker push $REPO ;
-  openssl aes-256-cbc -K $encrypted_f06e4d6d6f2c_key -iv $encrypted_f06e4d6d6f2c_iv -in stephen.key.enc -out /tmp/stephen.key -d ;
-  eval "$(ssh-agent -s)" ;
-  chmod 600 /tmp/stephen.key ;
-  ssh-add /tmp/stephen.key ;
-  ./deploy.sh $STAGING_SERVER;
-  fi
-notifications:
-  email:
-    on_success: never
-    on_failure: always
-  slack:
-    on_success: always
-    on_failure: always
-    on_start: always
-    secure: ZeX5tBf787syAtvLXEfhVzEt246zQMjskEodvFl52grK8lCvcoFCCY0UYRGAN2bb01odwNPbkrdcnrvH/UaIqIvw831lDq5PKXOgjyMmDWWH7j8qSkrH+5YpjhSumdfQa1KLfwrzLsgTPc/tJAOzW/vx0v55kYag349a5FPJIUZGCVgbnt0d5e93xv4pcnzb5I43/+lRZXbNCanuCt0rKB7vahNP673Rydy+41GJ0BosZtGXpoG4Kr2rt6S4dfpWy5x7Lao5ELVzoY5b3D3PIBh7hLUiqmC3axAqThuyTM9Df+QM3MQaqmH6IKWX3DmaVvfSRQrQ2fMyYJNt6HbK9EtFiNeNEVGluiYRiBE9/ch/VbLcZjw8wLX0NJ1rVzIx63sqJQzybCqMaxOWngEJCx9i3vYXAcNIUGooRpqbijp3LixFhmk1CpJ+jLK2/8jVr5KfoQUmS5tS5lP4fi2+h9JOjOTlAvh8oO0HdNqzlyowrvxAIiyDm1pHen9cDRaVhg9k6eq2BimNQc+8Bb8fUVv7f6ItaMMs1HWVz7ulXyu8pHbzzfExbwWYUobqgkdo+SqIStDfE1ECdU8y+i26f0VOemTo7+N1Fj56pyeMXBjLEazdIAaaBDNRE89TGGC7XOAb63fBCrimYGoylA3Tew5/Dz90iUUhFH9O/ALpMrI=
