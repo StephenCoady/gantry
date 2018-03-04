@@ -1,7 +1,6 @@
 const express	= require('express');
 const controllers = require('./controllers');
-// const jwt = require('jsonwebtoken');
-
+const jwtAuthenticate = require('../middleware/jwt-authenticate').jwtAuthenticate;
 const container = controllers.container;
 const image = controllers.image;
 const network = controllers.network;
@@ -10,28 +9,13 @@ const docker = controllers.docker;
 
 const router = express.Router();
 
-// router.use(function(req, res, next) {
-//   // check header or url parameters or post parameters for token
-//   var token = req.body.token || req.query.token || req.headers['x-access-token'];
-//   // decode token
-//   if (token) {
-//     jwt.verify(token, config.TOKEN_SECRET, function(err, decoded) {      
-//       if (err) {
-//         return res.status(401).json({ success: false, message: 'Failed to authenticate token.' });    
-//       } else {
-//         req.decoded = decoded;    
-//         next();
-//       }
-//     });
+require('dotenv').config();
 
-//   } else {
+if (process.env.GANTRY_SECRET) {
+  console.log('Using secret from dotenv');
+}
 
-//     return res.status(403).send({ 
-//         success: false, 
-//         message: 'No token provided.' 
-//     });
-//   }
-// });
+router.use(jwtAuthenticate({ secret: process.env.GANTRY_SECRET || 'secret' }));
 
 /* Container Routes */
 router.get('/api/containers/running', container.listRunningContainers);
