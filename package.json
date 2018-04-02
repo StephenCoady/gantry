@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "dev": "IGNORE_AUTH=TRUE node index.js",
     "coverage": "./node_modules/.bin/nyc --reporter=text ./node_modules/.bin/_mocha --timeout 20000 --exit --recursive ./server/**/*.test.js",
     "test": "mocha ./server/api/test --timeout 20000"
   },

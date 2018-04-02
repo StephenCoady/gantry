@@ -15,7 +15,14 @@ if (process.env.GANTRY_SECRET) {
   console.log('Using secret from dotenv');
 }
 
-router.use(jwtAuthenticate({ secret: process.env.GANTRY_SECRET || 'secret' }));
+if (process.env.IGNORE_AUTH === 'TRUE') {
+  console.log('Dev mode, not using JWT middleware');
+} else {
+  if (process.env.DD_AGENT_SECRET) {
+    console.log('Using secret from dotenv');
+  }
+  router.use(jwtAuthenticate({ secret: process.env.GANTRY_SECRET || 'secret' }));
+}
 
 /* Container Routes */
 router.get('/api/containers/running', container.listRunningContainers);
