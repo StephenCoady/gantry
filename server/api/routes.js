@@ -43,6 +43,7 @@ router.get('/api/images/:id', image.listSpecificImage);
 router.delete('/api/images/:id', image.removeImage);
 router.get('/api/images/:id/history', image.imageHistory);
 router.post('/api/images/pull/', image.pullImage);
+router.post('/api/images/push/:id', image.pushImage);
 router.post('/api/images/:id/tag', image.tagImage);
 
 /* Network Routes */
