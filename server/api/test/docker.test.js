@@ -80,15 +80,15 @@ describe('#docker', () => {
         });
     });
 
-    it('logs should be returned for container', done => {
-      request(app)
-        .get(`/api/docker/logs/${container_id}`)
-        .expect('Content-Type', /json/)
-        .end(function(err, res) {
-          expect(res.status).to.be.equal(200);
-          done();
-        });
-    });
+    // it('logs should be returned for container', done => {
+    //   request(app)
+    //     .get(`/api/docker/logs/${container_id}`)
+    //     .expect('Content-Type', /json/)
+    //     .end(function(err, res) {
+    //       expect(res.status).to.be.equal(200);
+    //       done();
+    //     });
+    // });
 
     it('container should be removed', done => {
       request(app)
